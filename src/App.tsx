@@ -1,12 +1,11 @@
-// App.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import type { RestaurantConfig } from './types';
-import { SplashScreen } from '../src/components/SplashScreen';
-import { DishCard } from '../src/components/DishCard';
-import { LazyImage } from '../src/components/LazyImage';
-import { Watermark } from '../src/components/Watermark';
-import { CategoryNav } from '../src/components/CategoryNav';
+import { SplashScreen } from './components/SplashScreen';
+import { DishCard } from './components/DishCard';
+import { LazyImage } from './components/LazyImage';
+import { Watermark } from './components/Watermark';
+import { CategoryNav } from './components/CategoryNav';
 import { useRestaurant } from './hooks/useRestaurant';
 
 function App() {

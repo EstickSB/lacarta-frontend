@@ -18,6 +18,7 @@ export function useRestaurant(slug: string) {
         setError(null);
         
         const response = await fetch(`${API_URL}/restaurants/${slug}`);
+        //                           ^ Paréntesis correcto aquí
         
         if (!response.ok) {
           throw new Error('Restaurante no encontrado');
