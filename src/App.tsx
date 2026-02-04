@@ -284,6 +284,7 @@ function App() {
                         dish={{
                           ...dish,
                           image: dish.imageUrl || '',
+                          //@ts-ignore
                           price: `S/ ${dish.price.toFixed(2)}`,
                           badges: dish.badges as any,
                         }}
@@ -305,6 +306,7 @@ function App() {
                         dish={{
                           ...dish,
                           image: dish.imageUrl || '',
+                          //@ts-ignore
                           price: `S/ ${dish.price.toFixed(2)}`,
                           badges: dish.badges as any,
                         }}
