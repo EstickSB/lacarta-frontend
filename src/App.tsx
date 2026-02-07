@@ -10,7 +10,7 @@ import { useRestaurant } from './hooks/useRestaurant';
 
 function App() {
   // Extraer slug del pathname: /res/pepitas/menu -> pepitas
-  const slug = window.location.pathname.split('/')[2] || 'pepitas';
+  const slug = window.location.pathname.split('/')[2];
   
   const { restaurant, loading: apiLoading, error } = useRestaurant(slug);
   const [showSplash, setShowSplash] = useState(true);
