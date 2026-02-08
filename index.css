@@ -2,19 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;600&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  color-scheme: dark;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Outfit', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #000;
+  background-color: #09090b;
+  color: #f4f4f5;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  /* Native app feel - prevent pull to refresh if desired */
 }
 
+/* Typography Overrides */
+h1,
+h2,
+h3,
+.font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Native App Feel - Scrollbars */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -22,4 +42,59 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Custom Scroll behavior */
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+/* Animations Helpers */
+.blur-load {
+  filter: blur(20px);
+  scale: 1.1;
+  transition: filter 0.5s ease-out, scale 0.5s ease-out;
+}
+
+.blur-load.loaded {
+  filter: blur(0);
+  scale: 1;
+}
+
+/* Custom Scrollbar for Sidebar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Scroll Primary - Dynamic Color Scrollbar */
+.scroll-primary::-webkit-scrollbar {
+  width: 3px;
+}
+
+.scroll-primary::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+
+.scroll-primary::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-color, rgba(255, 255, 255, 0.1));
+  border-radius: 10px;
+}
+
+.scroll-primary::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.2);
 }

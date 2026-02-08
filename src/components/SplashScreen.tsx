@@ -3,10 +3,7 @@ import { motion } from 'framer-motion';
 import { RestaurantConfig } from '../types';
 
 interface SplashScreenProps {
-  config: RestaurantConfig & {
-    logo?: string;
-    coverImage?: string;
-  };
+  config: RestaurantConfig;
   onComplete: () => void;
 }
 

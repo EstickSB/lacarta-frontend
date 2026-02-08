@@ -10,6 +10,8 @@ export interface Dish {
   badges: string[];
   isAvailable: boolean;
   order: number;
+  isGlobal?: boolean; // Nuevo: si es visible en todos los turnos
+  shiftIds?: string[]; // Nuevo: IDs de turnos donde es visible
   // Para compatibilidad con DishCard existente
   image?: string;
 }
@@ -20,6 +22,17 @@ export interface Category {
   type: 'food' | 'drink';
   order: number;
   dishes: Dish[];
+  isGlobal?: boolean; // Nuevo
+  shiftIds?: string[]; // Nuevo
+}
+
+export interface MenuShift {
+  id: string;
+  name: string;
+  startTime: string; // HH:mm
+  endTime: string; // HH:mm
+  label?: string;
+  shortLabel?: string;
 }
 
 export interface RestaurantConfig {
@@ -27,12 +40,15 @@ export interface RestaurantConfig {
   slug: string;
   name: string;
   description: string | null;
+  address?: string; // Nuevo
+  phone?: string; // Nuevo
   logoUrl: string | null; // Backend usa logoUrl
   coverUrl: string | null; // Backend usa coverUrl
   primaryColor: string;
   backgroundColor: string;
   fontFamily: string;
   categories: Category[];
+  shifts?: MenuShift[]; // Nuevo
   // Para compatibilidad con SplashScreen existente
   logo?: string;
   coverImage?: string;
