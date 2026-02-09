@@ -8,16 +8,17 @@ interface CategoryNavProps {
   onSelect: (id: string) => void;
   primaryColor: string;
   fontFamily: string;
+  textColor?: string;
 }
 
-export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, onSelect, primaryColor, fontFamily }) => {
+export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, onSelect, primaryColor, fontFamily, textColor = '#fff' }) => {
   return (
     <nav className="w-full py-3 lg:py-0">
       <div
         className="
-          flex overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar px-6 gap-6 items-center justify-start 
+          flex overflow-x-auto overflow-y-hidden whitespace-nowrap px-6 gap-6 items-center justify-start 
           lg:flex-col lg:items-start lg:gap-4 lg:px-0 lg:whitespace-normal lg:overflow-y-auto 
-          lg:max-h-[320px] lg:pr-4 scroll-primary
+          lg:max-h-[260px] lg:pr-4 scroll-primary [scrollbar-width:none] lg:[scrollbar-width:auto]
         "
         style={{
           // @ts-ignore
@@ -49,7 +50,7 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, 
                     ${isActive ? 'opacity-100' : 'opacity-50 group-hover:opacity-80'}
                   `}
                   style={{
-                    color: isActive ? primaryColor : '#fff',
+                    color: isActive ? primaryColor : textColor,
                     fontFamily
                   }}
                 >

@@ -4,26 +4,51 @@ import { Category, Dish } from '../types';
  * Filtra las categorías y platos basados en el turno activo y la visibilidad global.
  * Si los campos no existen (fallback), se muestra todo.
  */
+/**
+ * Filtra las categorías y platos basados en el turno activo y la visibilidad global.
+ */
 export const filterMenuByShift = (categories: Category[], activeShiftId: string) => {
+    // Si no hay un ID de turno activo, devolvemos todo por seguridad
     if (!activeShiftId) return categories;
 
-    return categories
-        .filter(category => {
-            // Si no tiene lógica de turnos, es visible por defecto (fallback)
-            if (category.isGlobal === undefined && !category.shiftIds) return true;
+    const filtered = categories
+        .map(category => {
+            // Decidir si la categoría es visible
+            const isCategoryVisible =
+                category.isGlobal ||
+                (category.shiftIds && category.shiftIds.length > 0 && category.shiftIds.includes(activeShiftId)) ||
+                (!category.shiftIds || category.shiftIds.length === 0); // Si no tiene turnos definidos, se muestra
 
-            // Lógica de visibilidad
-            return category.isGlobal || (category.shiftIds && category.shiftIds.includes(activeShiftId));
+            if (!isCategoryVisible) return null;
+
+            // Filtrar los platos dentro de la categoría
+            const filteredDishes = category.dishes.filter(dish => {
+                return (
+                    dish.isGlobal ||
+                    (dish.shiftIds && dish.shiftIds.length > 0 && dish.shiftIds.includes(activeShiftId)) ||
+                    (!dish.shiftIds || dish.shiftIds.length === 0)
+                );
+            });
+
+            // Si la categoría tiene platos que pasaron el filtro, la devolvemos con esos platos
+            if (filteredDishes.length > 0) {
+                return {
+                    ...category,
+                    dishes: filteredDishes
+                };
+            }
+
+            return null;
         })
-        .map(category => ({
-            ...category,
-            dishes: category.dishes.filter(dish => {
-                // Fallback: si no hay campos de turno, visible por defecto
-                if (dish.isGlobal === undefined && !dish.shiftIds) return true;
+        .filter((cat): cat is Category => cat !== null);
 
-                // Lógica de visibilidad
-                return dish.isGlobal || (dish.shiftIds && dish.shiftIds.includes(activeShiftId));
-            })
-        }))
-        .filter(category => category.dishes.length > 0); // Ocultar categorías vacías tras el filtrado
+    // MÁXIMA SEGURIDAD: Si después de filtrar no queda NADA, 
+    // pero sabemos que hay categorías originales, devolvemos las originales
+    // para evitar que el usuario vea una página vacía por un error de desfase horario.
+    if (filtered.length === 0 && categories.length > 0) {
+        console.warn("⚠️ El filtro de turnos ocultó todo el menú. Devolviendo menú completo como fallback.");
+        return categories;
+    }
+
+    return filtered;
 };

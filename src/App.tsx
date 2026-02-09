@@ -12,7 +12,7 @@ import { useCurrentShift } from './hooks/useCurrentShift';
 import { filterMenuByShift } from './utils/menuFilters';
 
 function App() {
-  const slug = window.location.pathname.split('/')[2];
+  const slug = window.location.pathname.split('/')[2] || 'pepitas';
   const { restaurant, loading: apiLoading, error } = useRestaurant(slug);
   const [showSplash, setShowSplash] = useState(true);
 
@@ -74,7 +74,6 @@ function App() {
     }
   };
 
-  const textColor = '#F5F5F7';
   const viewVariants: Variants = {
     hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
     visible: {
@@ -93,6 +92,20 @@ function App() {
 
   const isLoading = apiLoading || showSplash;
 
+  // Fallback config to prevent crashes during loading
+  const fallbackConfig: any = {
+    name: "La Martina",
+    description: "Restobar & Grill",
+    primaryColor: "#E60026",
+    backgroundColor: "#09090b",
+    fontFamily: "Inter",
+    logoUrl: "",
+    coverUrl: "",
+    shifts: []
+  };
+
+  const config = restaurant || fallbackConfig;
+
   if (!isLoading && (error || !restaurant)) {
     return (
       <div className="flex min-h-screen w-full items-center justify-center bg-zinc-950 text-gray-100 px-6">
@@ -105,45 +118,57 @@ function App() {
     );
   }
 
-  if (!restaurant) return null;
+  const isLightBackground = (hex: string) => {
+    if (!hex || hex.length < 7) return false;
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.5;
+  };
 
-  const config = restaurant;
+  const isLight = isLightBackground(config.backgroundColor);
+  const textColor = isLight ? '#18181b' : '#F5F5F7';
+  const secondaryTextColor = isLight ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.7)';
 
-  // Header/Info Subcomponent
-  const RestaurantInfo = ({ className = "", isMobile = false }) => (
-    <div className={`flex flex-col items-center text-center ${className}`}>
-      <div className={`relative z-20 ${isMobile ? '-mt-12 mb-4' : 'mb-4 lg:mb-6'}`}>
+  // Header/Info Subcomponent - Strictly Centered
+  const RestaurantInfo = ({ isMobile = false }) => (
+    <div className="flex flex-col items-center text-center w-full">
+      <div className={`relative z-20 ${isMobile ? '-mt-12 mb-4' : 'mb-6'}`}>
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className={`rounded-full overflow-hidden bg-zinc-900 shadow-2xl ${isMobile ? 'w-24 h-24 border-2' : 'w-24 h-24 lg:w-32 lg:h-32 border-[1px] lg:border-2 lg:mx-auto'}`}
+          className={`rounded-full overflow-hidden bg-zinc-900 shadow-2xl ${isMobile ? 'w-24 h-24 border-2' : 'w-24 h-24 lg:w-32 lg:h-32 border-2 lg:mx-auto'}`}
           style={{ borderColor: config.primaryColor }}
         >
-          <img src={config.logoUrl || ''} alt={config.name} className="w-full h-full object-cover" />
+          {config.logoUrl && <img src={config.logoUrl} alt={config.name} className="w-full h-full object-cover" />}
         </motion.div>
       </div>
 
-      <h1 className={`font-serif tracking-wide mb-2 ${isMobile ? 'text-3xl font-medium' : 'text-2xl lg:text-3xl lg:mb-4'}`} style={{ color: textColor }}>
+      <h1 className="font-bold tracking-tight mb-2 text-2xl lg:text-4xl" style={{ color: textColor }}>
         {config.name}
       </h1>
 
-      <p className={`font-sans font-light opacity-80 leading-relaxed uppercase tracking-widest mx-auto ${isMobile ? 'text-[10px] max-w-[280px] mb-4' : 'text-[10px] lg:text-xs lg:tracking-[0.2em] max-w-xs'}`} style={{ color: textColor }}>
+      <p className="text-sm opacity-70 leading-relaxed max-w-[280px] lg:max-w-md mx-auto" style={{ color: secondaryTextColor }}>
         {config.description}
       </p>
 
       {(config.address || config.phone) && (
-        <div className={`flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mt-1 opacity-70 mb-5 lg:mb-0 ${isMobile ? 'text-xs' : 'text-[10px] lg:text-xs lg:mt-3'}`}>
-          {config.address && (
-            <div className="flex items-center gap-1.5">
-              <MapPin size={10} className="text-white" />
-              <span>{config.address}</span>
+        <div
+          className="flex flex-col gap-y-2 mt-4 mb-2 opacity-60 items-center text-center"
+          style={{ color: secondaryTextColor }}
+        >
+          {config.phone && (
+            <div className="flex items-center gap-2">
+              <Phone size={11} style={{ color: config.primaryColor }} />
+              <span className="text-[11px] tracking-wide font-medium">{config.phone}</span>
             </div>
           )}
-          {config.address && config.phone && <span className="hidden lg:block w-1 h-1 rounded-full bg-white/30" />}
-          {config.phone && (
-            <div className="flex items-center gap-1.5">
-              <Phone size={10} className="text-white" />
-              <span>{config.phone}</span>
+
+          {config.address && (
+            <div className="flex items-start gap-2 max-w-[240px]">
+              <MapPin size={11} className="mt-0.5 shrink-0" style={{ color: config.primaryColor }} />
+              <span className="text-[11px] leading-tight font-medium">{config.address}</span>
             </div>
           )}
         </div>
@@ -151,8 +176,11 @@ function App() {
     </div>
   );
 
+  // Get active category data
+  const currentCategory = filteredCategories.find(c => c.id === activeCategory) || filteredCategories[0];
+
   return (
-    <div className="flex min-h-screen w-full bg-zinc-950 text-gray-100 overflow-x-hidden" style={{ fontFamily: config.fontFamily }}>
+    <div className="flex min-h-screen w-full text-gray-100 overflow-x-hidden" style={{ fontFamily: config.fontFamily, backgroundColor: config.backgroundColor }}>
       <AnimatePresence mode="wait">
         {isLoading && (
           <SplashScreen
@@ -162,18 +190,18 @@ function App() {
         )}
       </AnimatePresence>
 
-      <div className={`relative w-full transition-opacity duration-700 lg:grid lg:grid-cols-[400px_1fr] lg:h-screen lg:overflow-hidden ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+      <div className={`relative w-full transition-opacity duration-700 lg:grid lg:grid-cols-[380px_1fr] lg:h-screen lg:overflow-hidden ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
 
         {/* MOBILE HEADER */}
         <header className="lg:hidden relative w-full mb-2">
-          <div className="relative h-[38vh] w-full overflow-hidden">
+          <div className="relative h-[30vh] w-full overflow-hidden">
             <LazyImage src={config.coverUrl || ''} alt="Cover" className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-zinc-950" />
+            <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, transparent, ${config.backgroundColor})` }} />
           </div>
           <div className="relative px-6 -mt-4 pb-4">
             <RestaurantInfo isMobile={true} />
             {config.shifts && config.shifts.length > 0 && (
-              <div className="mt-2">
+              <div className="mt-6">
                 <ShiftSwitcher
                   shifts={config.shifts}
                   activeShiftId={activeShiftId}
@@ -186,26 +214,28 @@ function App() {
         </header>
 
         {/* DESKTOP SIDEBAR */}
-        <aside className="hidden lg:flex flex-col relative h-full bg-zinc-950 border-r border-white/5 z-30">
-          <div className="absolute inset-0 z-0 opacity-30">
+        <aside className="hidden lg:flex flex-col relative h-screen border-r border-white/5 z-30 overflow-hidden" style={{ backgroundColor: config.backgroundColor }}>
+          <div className="absolute inset-0 z-0 opacity-10">
             <LazyImage src={config.coverUrl || ''} alt="Cover" className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-black/60" />
+            <div className="absolute inset-0 bg-black/80" />
           </div>
-          <div className="relative z-10 flex flex-col h-full p-8 lg:p-10 overflow-y-auto custom-scrollbar">
-            <div className="mt-4">
-              <RestaurantInfo className="!items-start !text-left" />
+
+          <div className="relative z-10 flex flex-col h-full px-8 py-12">
+            <div className="shrink-0 mb-10">
+              <RestaurantInfo />
+              {config.shifts && config.shifts.length > 0 && (
+                <div className="mt-8 flex justify-center">
+                  <ShiftSwitcher
+                    shifts={config.shifts}
+                    activeShiftId={activeShiftId}
+                    onShiftChange={handleShiftChange}
+                    primaryColor={config.primaryColor}
+                  />
+                </div>
+              )}
             </div>
-            {config.shifts && config.shifts.length > 0 && (
-              <div className="mt-8 w-full flex justify-start">
-                <ShiftSwitcher
-                  shifts={config.shifts}
-                  activeShiftId={activeShiftId}
-                  onShiftChange={handleShiftChange}
-                  primaryColor={config.primaryColor}
-                />
-              </div>
-            )}
-            <div className="mt-8 grow">
+
+            <div className="flex-none overflow-y-auto scroll-primary pr-2 lg:max-h-[280px] scroll-smooth">
               <CategoryNav
                 categories={filteredCategories}
                 activeId={activeCategory}
@@ -213,9 +243,6 @@ function App() {
                 primaryColor={config.primaryColor}
                 fontFamily={config.fontFamily}
               />
-            </div>
-            <div className="pt-12 pb-4">
-              <Watermark />
             </div>
           </div>
         </aside>
@@ -223,76 +250,61 @@ function App() {
         {/* MAIN CONTENT AREA */}
         <main
           ref={mainContentRef}
-          className="flex-1 relative bg-zinc-950 scroll-smooth lg:overflow-y-auto lg:h-full lg:no-scrollbar"
+          className="flex-1 relative lg:overflow-y-auto lg:h-full custom-scrollbar"
+          style={{ backgroundColor: config.backgroundColor }}
         >
-          {/* Mobile Sticky Nav */}
-          <div className="sticky top-0 z-40 lg:hidden w-full">
-            <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-xl border-b border-white/5 shadow-lg" />
-            <div className="relative">
-              <CategoryNav
-                categories={filteredCategories}
-                activeId={activeCategory}
-                onSelect={scrollToCategory}
-                primaryColor={config.primaryColor}
-                fontFamily={config.fontFamily}
-              />
-            </div>
+          {/* Mobile Category Tabs */}
+          <div className="sticky top-0 z-40 lg:hidden w-full backdrop-blur-md border-b border-white/5" style={{ backgroundColor: `${config.backgroundColor}dd` }}>
+            <CategoryNav
+              categories={filteredCategories}
+              activeId={activeCategory}
+              onSelect={scrollToCategory}
+              primaryColor={config.primaryColor}
+              fontFamily={config.fontFamily}
+            />
           </div>
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeShiftId}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              variants={contentTransitionVariants}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="px-5 py-8 pb-32 lg:px-16 lg:py-20 min-h-[50vh]"
+              key={`${activeShiftId}-${activeCategory}`}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="px-4 py-8 pb-10 lg:px-12 lg:py-16 min-h-[50vh]"
             >
-              {filteredCategories.map((category) => (
-                <div
-                  key={category.id}
-                  ref={el => { categoryRefs.current[category.id] = el; }}
-                  className="mb-12 last:mb-0 scroll-mt-36 lg:mb-40 lg:scroll-mt-24"
-                >
-                  <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={viewVariants}
-                    className="flex items-center gap-4 mb-6 lg:mb-12"
-                  >
-                    <div className="h-8 w-1 lg:hidden rounded-full" style={{ backgroundColor: config.primaryColor }} />
-                    <h2 className="text-2xl font-serif italic lg:text-4xl" style={{ color: config.primaryColor }}>
-                      {category.title}
-                    </h2>
-                    <div className="hidden lg:block h-[1px] w-full bg-white/10 ml-4" />
-                  </motion.div>
-
-                  <div className={`grid gap-4 ${category.type === 'drink' ? 'grid-cols-2 lg:grid-cols-4' : 'grid-cols-1 lg:grid-cols-2'}`}>
-                    {category.dishes.map((dish, index) => (
+              {currentCategory ? (
+                <div className="max-w-6xl mx-auto">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-6">
+                    {currentCategory.dishes.map((dish, index) => (
                       <DishCard
                         key={dish.id}
                         dish={dish}
                         primaryColor={config.primaryColor}
                         textColor={textColor}
                         index={index}
-                        layout={category.type === 'drink' ? 'compact' : 'standard'}
                       />
                     ))}
                   </div>
+
+                  {currentCategory.dishes.length === 0 && (
+                    <div className="flex flex-col items-center justify-center py-20 opacity-40">
+                      <span className="text-4xl mb-4">🍽️</span>
+                      <p className="text-center">No hay platos disponibles en esta categoría</p>
+                    </div>
+                  )}
                 </div>
-              ))}
-              {filteredCategories.length === 0 && (
+              ) : (
                 <div className="flex flex-col items-center justify-center py-20 opacity-40">
                   <span className="text-4xl mb-4">🌙</span>
-                  <p className="text-center font-serif italic">No hay platos disponibles en este turno</p>
+                  <p className="text-center font-serif italic text-xl">Selecciona una categoría para comenzar</p>
                 </div>
               )}
             </motion.div>
           </AnimatePresence>
 
-          <div className="lg:hidden">
+          {/* Watermark exclusivo para móvil con visibilidad corregida */}
+          <div className="lg:hidden pb-12 flex justify-center w-full">
             <Watermark />
           </div>
         </main>
