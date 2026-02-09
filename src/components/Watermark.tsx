@@ -11,7 +11,7 @@ export const Watermark: React.FC<WatermarkProps> = ({ textColor = 'white' }) => 
         className="text-[10px] uppercase tracking-[0.3em] font-sans font-medium"
         style={{ color: textColor }}
       >
-        LACARTA<span className="text-red-500 text-lg leading-none">.</span>
+        LaCarta<span className="text-red-500 text-lg leading-none">.</span>
       </span>
     </div>
   );
