@@ -98,7 +98,7 @@ function App() {
       primaryColor={theme.primaryColor}
       fontFamily={theme.fontFamily}
     >
-      <div className="flex min-h-screen w-full text-gray-100 overflow-x-hidden" style={{ fontFamily: theme.fontFamily, backgroundColor: theme.backgroundColor }}>
+      <div className="flex min-h-screen w-full text-gray-100" style={{ fontFamily: theme.fontFamily, backgroundColor: theme.backgroundColor }}>
         <AnimatePresence mode="wait">
           {showSplash && (
             <SplashScreen
@@ -161,19 +161,19 @@ function App() {
             </div>
           </aside>
 
+          <div className="lg:hidden sticky top-0 z-50 w-full backdrop-blur-md border-b border-white/5" style={{ backgroundColor: `${theme.backgroundColor}dd` }}>
+            <CategoryNav
+              categories={filteredCategories}
+              activeId={activeCategory}
+              onSelect={scrollToCategory}
+            />
+          </div>
+
           <main
             ref={mainContentRef}
             className="flex-1 relative lg:overflow-y-auto lg:h-full custom-scrollbar"
             style={{ backgroundColor: theme.backgroundColor }}
           >
-            <div className="sticky top-0 z-40 lg:hidden w-full backdrop-blur-md border-b border-white/5" style={{ backgroundColor: `${theme.backgroundColor}dd` }}>
-              <CategoryNav
-                categories={filteredCategories}
-                activeId={activeCategory}
-                onSelect={scrollToCategory}
-              />
-            </div>
-
             <AnimatePresence mode="wait">
               <motion.div
                 key={`${activeShiftId}-${activeCategory}`}
