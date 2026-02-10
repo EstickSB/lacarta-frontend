@@ -2,20 +2,22 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
 import { MenuShift } from '../types';
+import { useTheme } from '../contexts/ThemeContext';
+import { isLightBackground } from '../utils/colorUtils';
 
 interface ShiftSwitcherProps {
     shifts: MenuShift[];
     activeShiftId: string;
     onShiftChange: (id: string) => void;
-    primaryColor: string;
 }
 
 export const ShiftSwitcher: React.FC<ShiftSwitcherProps> = ({
     shifts,
     activeShiftId,
-    onShiftChange,
-    primaryColor
+    onShiftChange
 }) => {
+    const { primaryColor } = useTheme();
+
     if (!shifts || shifts.length === 0) return null;
 
     return (
@@ -24,7 +26,6 @@ export const ShiftSwitcher: React.FC<ShiftSwitcherProps> = ({
                 {shifts.map((shift) => {
                     const isActive = activeShiftId === shift.id;
 
-                    // Lógica mejorada: Buscamos palabras clave de día o almuerzo
                     const searchName = (shift.name || "").toLowerCase();
                     const searchId = (shift.id || "").toLowerCase();
 
@@ -42,16 +43,7 @@ export const ShiftSwitcher: React.FC<ShiftSwitcherProps> = ({
                         searchId.includes('lunch') ||
                         searchName.includes('lunch');
 
-                    // Helper para contraste (en línea para simplicidad)
-                    const isPrimaryLight = (hex: string) => {
-                        if (!hex || hex.length < 7) return false;
-                        const r = parseInt(hex.slice(1, 3), 16);
-                        const g = parseInt(hex.slice(3, 5), 16);
-                        const b = parseInt(hex.slice(5, 7), 16);
-                        return ((r * 299 + g * 587 + b * 114) / 1000) > 155;
-                    };
-
-                    const activeTextColor = isPrimaryLight(primaryColor) ? 'text-zinc-950' : 'text-white';
+                    const activeTextColor = isLightBackground(primaryColor) ? 'text-zinc-950' : 'text-white';
 
                     return (
                         <button
@@ -72,7 +64,6 @@ export const ShiftSwitcher: React.FC<ShiftSwitcherProps> = ({
                             )}
 
                             <span className="relative z-20 flex items-center gap-2">
-                                {/* Ahora sí mostrará el Sol si encuentra "Almuerzo" */}
                                 {isDay ? (
                                     <Sun size={14} className={`transition-transform duration-300 ${isActive ? activeTextColor : 'text-current'}`} strokeWidth={2.5} />
                                 ) : (

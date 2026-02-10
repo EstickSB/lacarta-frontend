@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { MenuShift } from '../types';
+import { SHIFT_UPDATE_INTERVAL } from '../constants/ui';
 
 export const useCurrentShift = (shifts: MenuShift[] = []) => {
     const [activeShiftId, setActiveShiftId] = useState<string>('');
@@ -19,10 +20,8 @@ export const useCurrentShift = (shifts: MenuShift[] = []) => {
                 const endTotal = endHours * 60 + endMinutes;
 
                 if (startTotal <= endTotal) {
-                    // Turno normal (ej: 08:00 a 20:00)
                     return currentMinutes >= startTotal && currentMinutes < endTotal;
                 } else {
-                    // Turno que cruza la medianoche (ej: 20:00 a 04:00)
                     return currentMinutes >= startTotal || currentMinutes < endTotal;
                 }
             });
@@ -32,10 +31,9 @@ export const useCurrentShift = (shifts: MenuShift[] = []) => {
 
         setActiveShiftId(getCurrentShift());
 
-        // Opcional: Actualizar cada minuto
         const interval = setInterval(() => {
             setActiveShiftId(getCurrentShift());
-        }, 60000);
+        }, SHIFT_UPDATE_INTERVAL);
 
         return () => clearInterval(interval);
     }, [shifts]);

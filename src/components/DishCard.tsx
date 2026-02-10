@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { Dish, DietaryBadge } from '../types';
 import { LazyImage } from './LazyImage';
-import { Flame, Leaf, WheatOff, Star, ChevronDown, ChevronUp } from 'lucide-react';
+import { Flame, Leaf, WheatOff, Star } from 'lucide-react';
+import { normalizeDish } from '../mappers/dishMapper';
+import { useTheme } from '../contexts/ThemeContext';
+import { ANIMATION_STAGGER_DELAY } from '../constants/ui';
 
 interface DishCardProps {
   dish: Dish;
-  primaryColor: string;
-  textColor: string;
   index: number;
-  layout?: 'standard' | 'compact';
 }
 
 const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -30,18 +30,16 @@ const BadgeIcon: React.FC<{ type: DietaryBadge; color: string }> = ({ type, colo
   }
 };
 
-export const DishCard: React.FC<DishCardProps> = ({ dish, primaryColor, textColor, index }) => {
-  // Adaptación de datos
-  const imageSrc = dish.imageUrl || dish.image || '';
-  const priceDisplay = typeof dish.price === 'string' ? dish.price : `S/ ${dish.price.toFixed(2)}`;
-  const description = dish.description || '';
+export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
+  const { primaryColor, textColor } = useTheme();
+  const { imageSrc, priceDisplay, description } = normalizeDish(dish);
 
   const cardVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, delay: index * 0.05, ease: "easeOut" }
+      transition: { duration: 0.4, delay: index * ANIMATION_STAGGER_DELAY, ease: "easeOut" }
     }
   };
 
@@ -53,7 +51,6 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, primaryColor, textColo
       viewport={{ once: true, margin: "-10%" }}
       variants={cardVariants}
     >
-      {/* Portada del Plato - Centrado en la parte superior */}
       <div className="relative aspect-square w-full overflow-hidden bg-zinc-900">
         <LazyImage
           src={imageSrc}
@@ -61,7 +58,6 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, primaryColor, textColo
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
 
-        {/* Badges Flotantes */}
         <div className="absolute top-2 right-2 flex flex-col gap-1 z-10 scale-75 origin-top-right">
           {dish.badges?.map((badge, idx) => (
             <BadgeIcon key={idx} type={badge as DietaryBadge} color={primaryColor} />
@@ -69,7 +65,6 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, primaryColor, textColo
         </div>
       </div>
 
-      {/* Contenido del Plato */}
       <div className="flex flex-col p-3 lg:p-4 flex-1">
         <h3
           className="text-sm font-bold leading-tight mb-1 lg:text-base line-clamp-2"

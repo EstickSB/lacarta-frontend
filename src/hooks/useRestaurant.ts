@@ -1,7 +1,6 @@
-// src/hooks/useRestaurant.ts
 import { useState, useEffect } from 'react';
 import type { RestaurantConfig } from '../types';
-//@ts-ignore
+
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 export function useRestaurant(slug: string) {
@@ -16,16 +15,15 @@ export function useRestaurant(slug: string) {
       try {
         setLoading(true);
         setError(null);
-        
+
         const response = await fetch(`${API_URL}/restaurants/${slug}`);
-        //                           ^ Paréntesis correcto aquí
-        
+
         if (!response.ok) {
           throw new Error('Restaurante no encontrado');
         }
-        
+
         const data = await response.json();
-        
+
         if (isMounted) {
           setRestaurant(data);
         }

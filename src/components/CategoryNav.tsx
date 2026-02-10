@@ -1,17 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Category } from '../types';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface CategoryNavProps {
   categories: Category[];
   activeId: string;
   onSelect: (id: string) => void;
-  primaryColor: string;
-  fontFamily: string;
-  textColor?: string;
 }
 
-export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, onSelect, primaryColor, fontFamily, textColor = '#fff' }) => {
+export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, onSelect }) => {
+  const { primaryColor, fontFamily, textColor } = useTheme();
+
   return (
     <nav className="w-full py-3 lg:py-0">
       <div
@@ -34,7 +34,6 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, 
               className="relative shrink-0 flex flex-col items-center justify-center cursor-pointer group lg:items-start lg:w-full lg:text-left"
             >
               <div className="flex items-center gap-3 w-full">
-                {/* Desktop Indicator Line */}
                 <motion.div
                   className="hidden lg:block shrink-0 w-6 h-[1px] bg-white/20 transition-all duration-300 group-hover:w-10"
                   animate={{
@@ -58,7 +57,6 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, 
                 </span>
               </div>
 
-              {/* Mobile Active Dot */}
               {isActive && (
                 <motion.div
                   layoutId="activeTabMobile"
@@ -69,7 +67,6 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, 
             </button>
           );
         })}
-        {/* Spacer for right side padding on mobile scroll */}
         <div className="w-2 shrink-0 lg:hidden" />
       </div>
     </nav>
