@@ -90,7 +90,10 @@ function App() {
     );
   }
 
-  const currentCategory = filteredCategories.find(c => c.id === activeCategory) || filteredCategories[0];
+  const currentCategory = useMemo(() => {
+    if (filteredCategories.length === 0) return null;
+    return filteredCategories.find(c => String(c.id) === String(activeCategory)) || filteredCategories[0];
+  }, [filteredCategories, activeCategory]);
 
   return (
     <ThemeProvider
@@ -188,7 +191,7 @@ function App() {
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-6">
                       {currentCategory.dishes.map((dish, index) => (
                         <DishCard
-                          key={dish.id}
+                          key={`${dish.id}-${activeShiftId}`}
                           dish={dish}
                           index={index}
                         />

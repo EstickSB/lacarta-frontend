@@ -26,7 +26,7 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, 
         }}
       >
         {categories.map((category) => {
-          const isActive = activeId === category.id;
+          const isActive = String(activeId) === String(category.id);
           return (
             <button
               key={category.id}

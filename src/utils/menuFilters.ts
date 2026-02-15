@@ -16,7 +16,7 @@ export const filterMenuByShift = (categories: Category[], activeShiftId: number 
             // Decidir si la categoría es visible
             const isCategoryVisible =
                 category.isGlobal ||
-                (category.shiftIds && category.shiftIds.length > 0 && category.shiftIds.includes(Number(activeShiftId))) ||
+                (category.shiftIds && category.shiftIds.length > 0 && category.shiftIds.some(id => String(id) === String(activeShiftId))) ||
                 (!category.shiftIds || category.shiftIds.length === 0); // Si no tiene turnos definidos, se muestra
 
             if (!isCategoryVisible) return null;
@@ -25,7 +25,7 @@ export const filterMenuByShift = (categories: Category[], activeShiftId: number 
             const filteredDishes = category.dishes.filter(dish => {
                 return (
                     dish.isGlobal ||
-                    (dish.shiftIds && dish.shiftIds.length > 0 && dish.shiftIds.includes(Number(activeShiftId))) ||
+                    (dish.shiftIds && dish.shiftIds.length > 0 && dish.shiftIds.some(id => String(id) === String(activeShiftId))) ||
                     (!dish.shiftIds || dish.shiftIds.length === 0)
                 );
             });
