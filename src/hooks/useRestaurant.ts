@@ -3,7 +3,7 @@ import type { RestaurantConfig } from '../types';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
-export function useRestaurant(slug: string) {
+export function useRestaurant(slug: string, shiftId?: number | string | null) {
   const [restaurant, setRestaurant] = useState<RestaurantConfig | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -16,7 +16,8 @@ export function useRestaurant(slug: string) {
         setLoading(true);
         setError(null);
 
-        const response = await fetch(`${API_URL}/restaurants/${slug}`);
+        const url = shiftId ? `${API_URL}/restaurants/${slug}?shift=${shiftId}` : `${API_URL}/restaurants/${slug}`;
+        const response = await fetch(url);
 
         if (!response.ok) {
           throw new Error('Restaurante no encontrado');
@@ -43,7 +44,7 @@ export function useRestaurant(slug: string) {
     return () => {
       isMounted = false;
     };
-  }, [slug]);
+  }, [slug, shiftId]);
 
   return { restaurant, loading, error };
 }

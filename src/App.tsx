@@ -17,10 +17,18 @@ import { MOBILE_SCROLL_OFFSET, DESKTOP_BREAKPOINT } from './constants/ui';
 
 function App() {
   const { slug, initialName } = useRouting();
-  const { restaurant, loading: apiLoading, error } = useRestaurant(slug);
+  const [activeShiftId, setActiveShiftId] = useState<number | string | null>(null);
+  const { restaurant, loading: apiLoading, error } = useRestaurant(slug, activeShiftId);
   const [showSplash, setShowSplash] = useState(true);
 
-  const { activeShiftId, setActiveShiftId } = useCurrentShift(restaurant?.shifts || []);
+  // Sincronizar activeShiftId inicial si es null
+  const { activeShiftId: currentDefaultShiftId } = useCurrentShift(restaurant?.shifts || []);
+
+  useEffect(() => {
+    if (!activeShiftId && currentDefaultShiftId) {
+      setActiveShiftId(currentDefaultShiftId);
+    }
+  }, [currentDefaultShiftId]);
 
   const filteredCategories = useMemo(() => {
     if (!restaurant) return [];
