@@ -7,7 +7,7 @@ import { Category, Dish } from '../types';
 /**
  * Filtra las categorías y platos basados en el turno activo y la visibilidad global.
  */
-export const filterMenuByShift = (categories: Category[], activeShiftId: string) => {
+export const filterMenuByShift = (categories: Category[], activeShiftId: number | string) => {
     // Si no hay un ID de turno activo, devolvemos todo por seguridad
     if (!activeShiftId) return categories;
 
@@ -16,7 +16,7 @@ export const filterMenuByShift = (categories: Category[], activeShiftId: string)
             // Decidir si la categoría es visible
             const isCategoryVisible =
                 category.isGlobal ||
-                (category.shiftIds && category.shiftIds.length > 0 && category.shiftIds.includes(activeShiftId)) ||
+                (category.shiftIds && category.shiftIds.length > 0 && category.shiftIds.includes(Number(activeShiftId))) ||
                 (!category.shiftIds || category.shiftIds.length === 0); // Si no tiene turnos definidos, se muestra
 
             if (!isCategoryVisible) return null;
@@ -25,7 +25,7 @@ export const filterMenuByShift = (categories: Category[], activeShiftId: string)
             const filteredDishes = category.dishes.filter(dish => {
                 return (
                     dish.isGlobal ||
-                    (dish.shiftIds && dish.shiftIds.length > 0 && dish.shiftIds.includes(activeShiftId)) ||
+                    (dish.shiftIds && dish.shiftIds.length > 0 && dish.shiftIds.includes(Number(activeShiftId))) ||
                     (!dish.shiftIds || dish.shiftIds.length === 0)
                 );
             });

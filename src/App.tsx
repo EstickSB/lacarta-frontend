@@ -27,9 +27,9 @@ function App() {
     return filterMenuByShift(restaurant.categories, activeShiftId);
   }, [restaurant, activeShiftId]);
 
-  const [activeCategory, setActiveCategory] = useState('');
+  const [activeCategory, setActiveCategory] = useState<number | null>(null);
 
-  const categoryRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const categoryRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
   const mainContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function App() {
     }
   }, [restaurant]);
 
-  const handleShiftChange = (newShiftId: string) => {
+  const handleShiftChange = (newShiftId: string | number) => {
     if (newShiftId === activeShiftId) return;
     setActiveShiftId(newShiftId);
 
@@ -56,7 +56,7 @@ function App() {
     }
   };
 
-  const scrollToCategory = (id: string) => {
+  const scrollToCategory = (id: number) => {
     setActiveCategory(id);
     const element = categoryRefs.current[id];
 

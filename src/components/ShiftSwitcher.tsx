@@ -7,8 +7,8 @@ import { isLightBackground } from '../utils/colorUtils';
 
 interface ShiftSwitcherProps {
     shifts: MenuShift[];
-    activeShiftId: string;
-    onShiftChange: (id: string) => void;
+    activeShiftId: number | string;
+    onShiftChange: (id: number) => void;
 }
 
 export const ShiftSwitcher: React.FC<ShiftSwitcherProps> = ({
@@ -24,10 +24,10 @@ export const ShiftSwitcher: React.FC<ShiftSwitcherProps> = ({
         <div className="flex justify-center w-full">
             <div className="bg-white/10 backdrop-blur-md rounded-full p-1 flex relative">
                 {shifts.map((shift) => {
-                    const isActive = activeShiftId === shift.id;
+                    const isActive = String(activeShiftId) === String(shift.id);
 
                     const searchName = (shift.name || "").toLowerCase();
-                    const searchId = (shift.id || "").toLowerCase();
+                    const searchId = String(shift.id).toLowerCase();
 
                     const isDay =
                         searchName.includes('dia') ||

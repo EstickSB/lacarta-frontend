@@ -1,7 +1,7 @@
 export type DietaryBadge = 'spicy' | 'vegan' | 'gluten-free' | 'chef-choice';
 
 export interface Dish {
-  id: string;
+  id: number;
   name: string;
   description: string | null;
   price: number;
@@ -10,22 +10,22 @@ export interface Dish {
   isAvailable: boolean;
   order: number;
   isGlobal?: boolean;
-  shiftIds?: string[];
+  shiftIds?: number[];
   image?: string;
 }
 
 export interface Category {
-  id: string;
+  id: number;
   title: string;
   type: 'food' | 'drink';
   order: number;
   dishes: Dish[];
   isGlobal?: boolean;
-  shiftIds?: string[];
+  shiftIds?: number[];
 }
 
 export interface MenuShift {
-  id: string;
+  id: number;
   name: string;
   startTime: string;
   endTime: string;
@@ -34,7 +34,7 @@ export interface MenuShift {
 }
 
 export interface RestaurantConfig {
-  id: string;
+  id: number;
   slug: string;
   name: string;
   description: string | null;

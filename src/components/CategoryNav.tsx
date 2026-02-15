@@ -5,8 +5,8 @@ import { useTheme } from '../contexts/ThemeContext';
 
 interface CategoryNavProps {
   categories: Category[];
-  activeId: string;
-  onSelect: (id: string) => void;
+  activeId: number | null;
+  onSelect: (id: number) => void;
 }
 
 export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, onSelect }) => {

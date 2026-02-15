@@ -3,7 +3,7 @@ import { MenuShift } from '../types';
 import { SHIFT_UPDATE_INTERVAL } from '../constants/ui';
 
 export const useCurrentShift = (shifts: MenuShift[] = []) => {
-    const [activeShiftId, setActiveShiftId] = useState<string>('');
+    const [activeShiftId, setActiveShiftId] = useState<number | string>('');
 
     useEffect(() => {
         if (!shifts || shifts.length === 0) return;
@@ -26,7 +26,7 @@ export const useCurrentShift = (shifts: MenuShift[] = []) => {
                 }
             });
 
-            return current ? current.id : (shifts[0]?.id || '');
+            return current ? current.id : (shifts[0]?.id ?? '');
         };
 
         setActiveShiftId(getCurrentShift());
