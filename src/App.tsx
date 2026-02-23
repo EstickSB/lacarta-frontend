@@ -83,7 +83,11 @@ function App() {
   const theme = useThemeColors(
     restaurant?.backgroundColor,
     restaurant?.primaryColor,
-    restaurant?.fontFamily
+    restaurant?.fontFamily,
+    restaurant?.titleColor,
+    restaurant?.descriptionColor,
+    restaurant?.descriptionDishColor,
+    restaurant?.borderLogo
   );
 
   if (isAppReady && (error || !restaurant)) {
