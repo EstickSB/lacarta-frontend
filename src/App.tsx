@@ -196,6 +196,28 @@ function App() {
               >
                 {currentCategory ? (
                   <div className="max-w-6xl mx-auto">
+                    {/* Category description card — only rendered when description exists and is non-empty */}
+                    {currentCategory.description?.trim() && (
+                      <div
+                        className="mb-6 rounded-xl px-4 py-4 lg:px-6 lg:py-5 border-l-4"
+                        style={{
+                          backgroundColor: 'rgba(255,255,255,0.05)',
+                          borderLeftColor: theme.primaryColor,
+                          backdropFilter: 'blur(8px)',
+                        }}
+                      >
+                        <p
+                          className="text-sm lg:text-base leading-relaxed opacity-80"
+                          style={{
+                            whiteSpace: 'pre-wrap',
+                            wordBreak: 'break-word',
+                          }}
+                        >
+                          {currentCategory.description}
+                        </p>
+                      </div>
+                    )}
+
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-6">
                       {currentCategory.dishes.map((dish, index) => (
                         <DishCard
@@ -228,7 +250,7 @@ function App() {
           </main>
         </div>
       </div>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
 

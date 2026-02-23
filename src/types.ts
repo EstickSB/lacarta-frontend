@@ -17,6 +17,7 @@ export interface Dish {
 export interface Category {
   id: number;
   title: string;
+  description?: string | null;
   type: 'food' | 'drink';
   order: number;
   dishes: Dish[];
