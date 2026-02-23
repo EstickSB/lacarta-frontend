@@ -7,6 +7,10 @@ interface ThemeContextValue {
     fontFamily: string;
     textColor: string;
     secondaryTextColor: string;
+    titleColor: string;
+    descriptionColor: string;
+    descriptionDishColor: string;
+    borderLogo: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
@@ -15,6 +19,10 @@ interface ThemeProviderProps {
     backgroundColor?: string;
     primaryColor?: string;
     fontFamily?: string;
+    titleColor?: string;
+    descriptionColor?: string;
+    descriptionDishColor?: string;
+    borderLogo?: boolean;
     children: ReactNode;
 }
 
@@ -22,9 +30,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     backgroundColor,
     primaryColor,
     fontFamily,
+    titleColor,
+    descriptionColor,
+    descriptionDishColor,
+    borderLogo,
     children
 }) => {
-    const theme = useThemeColors(backgroundColor, primaryColor, fontFamily);
+    const theme = useThemeColors(backgroundColor, primaryColor, fontFamily, titleColor, descriptionColor, descriptionDishColor, borderLogo);
 
     return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>;
 };

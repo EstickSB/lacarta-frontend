@@ -105,9 +105,13 @@ function App() {
 
   return (
     <ThemeProvider
-      backgroundColor={theme.backgroundColor}
-      primaryColor={theme.primaryColor}
-      fontFamily={theme.fontFamily}
+      backgroundColor={restaurant?.backgroundColor}
+      primaryColor={restaurant?.primaryColor}
+      fontFamily={restaurant?.fontFamily}
+      titleColor={restaurant?.titleColor}
+      descriptionColor={restaurant?.descriptionColor}
+      descriptionDishColor={restaurant?.descriptionDishColor}
+      borderLogo={restaurant?.borderLogo}
     >
       <div className="flex min-h-screen w-full text-gray-100" style={{ fontFamily: theme.fontFamily, backgroundColor: theme.backgroundColor }}>
         <AnimatePresence mode="wait">

@@ -45,6 +45,10 @@ export interface RestaurantConfig {
   coverUrl: string | null;
   primaryColor: string;
   backgroundColor: string;
+  titleColor?: string;
+  descriptionColor?: string;
+  descriptionDishColor?: string;
+  borderLogo?: boolean;
   fontFamily: string;
   categories: Category[];
   shifts?: MenuShift[];
