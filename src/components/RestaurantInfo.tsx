@@ -10,7 +10,7 @@ interface RestaurantInfoProps {
 }
 
 export const RestaurantInfo: React.FC<RestaurantInfoProps> = ({ restaurant, isMobile = false }) => {
-    const { primaryColor, titleColor, descriptionColor, borderLogo } = useTheme();
+    const { primaryColor, titleColor, descriptionColor, borderLogo, roundedLogo } = useTheme();
 
     return (
         <div className="flex flex-col items-center text-center w-full">
@@ -18,10 +18,16 @@ export const RestaurantInfo: React.FC<RestaurantInfoProps> = ({ restaurant, isMo
                 <motion.div
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className={`rounded-full overflow-hidden bg-zinc-900 shadow-2xl ${isMobile ? 'w-24 h-24 border-2' : 'w-24 h-24 lg:w-32 lg:h-32 border-2 lg:mx-auto'}`}
+                    className={`overflow-hidden bg-transparent ${isMobile ? 'w-24 h-24' : 'w-24 h-24 lg:w-32 lg:h-32 lg:mx-auto'} ${roundedLogo ? 'rounded-full' : 'rounded-xl'} ${borderLogo ? 'border-2' : ''}`}
                     style={{ borderColor: borderLogo ? primaryColor : 'transparent' }}
                 >
-                    {restaurant?.logoUrl && <img src={restaurant.logoUrl} alt={restaurant.name} className="w-full h-full object-cover" />}
+                    {restaurant?.logoUrl && (
+                        <img
+                            src={restaurant.logoUrl}
+                            alt={restaurant.name}
+                            className={`w-full h-full object-cover ${roundedLogo ? 'rounded-full' : 'rounded-xl'}`}
+                        />
+                    )}
                 </motion.div>
             </div>
 

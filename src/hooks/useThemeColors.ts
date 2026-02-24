@@ -10,7 +10,10 @@ interface ThemeColors {
     titleColor: string;
     descriptionColor: string;
     descriptionDishColor: string;
+    titleDishColor: string;
+    descriptionCategoryColor: string;
     borderLogo: boolean;
+    roundedLogo: boolean;
 }
 
 export const useThemeColors = (
@@ -20,7 +23,10 @@ export const useThemeColors = (
     titleColor?: string,
     descriptionColor?: string,
     descriptionDishColor?: string,
-    borderLogo?: boolean
+    titleDishColor?: string,
+    descriptionCategoryColor?: string,
+    borderLogo?: boolean,
+    roundedLogo?: boolean
 ): ThemeColors => {
     return useMemo(() => {
         const bg = backgroundColor || '#09090b';
@@ -36,7 +42,10 @@ export const useThemeColors = (
             titleColor: titleColor || getContrastTextColor(bg),
             descriptionColor: descriptionColor || getSecondaryTextColor(bg),
             descriptionDishColor: descriptionDishColor || getContrastTextColor(bg),
-            borderLogo: borderLogo ?? true
+            titleDishColor: titleDishColor || getContrastTextColor(bg),
+            descriptionCategoryColor: descriptionCategoryColor || getContrastTextColor(bg),
+            borderLogo: borderLogo === true,
+            roundedLogo: roundedLogo === true
         };
-    }, [backgroundColor, primaryColor, fontFamily, titleColor, descriptionColor, descriptionDishColor, borderLogo]);
+    }, [backgroundColor, primaryColor, fontFamily, titleColor, descriptionColor, descriptionDishColor, titleDishColor, descriptionCategoryColor, borderLogo, roundedLogo]);
 };

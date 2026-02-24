@@ -31,7 +31,7 @@ const BadgeIcon: React.FC<{ type: DietaryBadge; color: string }> = ({ type, colo
 };
 
 export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
-  const { primaryColor, titleColor, descriptionDishColor } = useTheme();
+  const { primaryColor, titleDishColor, descriptionDishColor } = useTheme();
   const { imageSrc, priceDisplay, description } = normalizeDish(dish);
 
   const cardVariants: Variants = {
@@ -68,7 +68,7 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
       <div className="flex flex-col p-3 lg:p-4 flex-1">
         <h3
           className="text-sm font-bold leading-tight mb-1 lg:text-base line-clamp-2"
-          style={{ color: titleColor }}
+          style={{ color: titleDishColor }}
         >
           {dish.name}
         </h3>

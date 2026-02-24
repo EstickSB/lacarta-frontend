@@ -10,7 +10,10 @@ interface ThemeContextValue {
     titleColor: string;
     descriptionColor: string;
     descriptionDishColor: string;
+    titleDishColor: string;
+    descriptionCategoryColor: string;
     borderLogo: boolean;
+    roundedLogo: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
@@ -22,7 +25,10 @@ interface ThemeProviderProps {
     titleColor?: string;
     descriptionColor?: string;
     descriptionDishColor?: string;
+    titleDishColor?: string;
+    descriptionCategoryColor?: string;
     borderLogo?: boolean;
+    roundedLogo?: boolean;
     children: ReactNode;
 }
 
@@ -33,10 +39,24 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     titleColor,
     descriptionColor,
     descriptionDishColor,
+    titleDishColor,
+    descriptionCategoryColor,
     borderLogo,
+    roundedLogo,
     children
 }) => {
-    const theme = useThemeColors(backgroundColor, primaryColor, fontFamily, titleColor, descriptionColor, descriptionDishColor, borderLogo);
+    const theme = useThemeColors(
+        backgroundColor,
+        primaryColor,
+        fontFamily,
+        titleColor,
+        descriptionColor,
+        descriptionDishColor,
+        titleDishColor,
+        descriptionCategoryColor,
+        borderLogo,
+        roundedLogo
+    );
 
     return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>;
 };

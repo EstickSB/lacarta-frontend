@@ -87,7 +87,10 @@ function App() {
     restaurant?.titleColor,
     restaurant?.descriptionColor,
     restaurant?.descriptionDishColor,
-    restaurant?.borderLogo
+    restaurant?.titleDishColor,
+    restaurant?.descriptionCategoryColor,
+    restaurant?.borderLogo,
+    restaurant?.roundedLogo
   );
 
   if (isAppReady && (error || !restaurant)) {
@@ -115,7 +118,10 @@ function App() {
       titleColor={restaurant?.titleColor}
       descriptionColor={restaurant?.descriptionColor}
       descriptionDishColor={restaurant?.descriptionDishColor}
+      titleDishColor={restaurant?.titleDishColor}
+      descriptionCategoryColor={restaurant?.descriptionCategoryColor}
       borderLogo={restaurant?.borderLogo}
+      roundedLogo={restaurant?.roundedLogo}
     >
       <div className="flex min-h-screen w-full text-gray-100" style={{ fontFamily: theme.fontFamily, backgroundColor: theme.backgroundColor }}>
         <AnimatePresence mode="wait">
@@ -177,6 +183,10 @@ function App() {
                   onSelect={scrollToCategory}
                 />
               </div>
+
+              <div className="mt-auto pt-8 flex justify-center">
+                <Watermark textColor={theme.descriptionColor} />
+              </div>
             </div>
           </aside>
 
@@ -217,6 +227,7 @@ function App() {
                         <p
                           className="text-sm lg:text-base leading-relaxed opacity-80"
                           style={{
+                            color: theme.descriptionCategoryColor,
                             whiteSpace: 'pre-wrap',
                             wordBreak: 'break-word',
                           }}
@@ -253,7 +264,7 @@ function App() {
             </AnimatePresence>
 
             <div className="lg:hidden pb-12 flex justify-center w-full">
-              <Watermark />
+              <Watermark textColor={theme.descriptionColor} />
             </div>
           </main>
         </div>

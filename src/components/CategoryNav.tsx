@@ -10,7 +10,7 @@ interface CategoryNavProps {
 }
 
 export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, onSelect }) => {
-  const { primaryColor, fontFamily, textColor } = useTheme();
+  const { primaryColor, fontFamily } = useTheme();
 
   return (
     <nav className="w-full py-3 lg:py-0">
@@ -37,19 +37,19 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, 
                 <motion.div
                   className="hidden lg:block shrink-0 w-6 h-[1px] bg-white/20 transition-all duration-300 group-hover:w-10"
                   animate={{
-                    backgroundColor: isActive ? primaryColor : 'rgba(255,255,255,0.2)',
+                    backgroundColor: isActive ? primaryColor : 'rgba(255, 255, 255, 0.33)',
                     width: isActive ? 40 : 24
                   }}
                 />
 
                 <span
                   className={`
-                    text-xs uppercase tracking-[0.2em] font-medium transition-colors duration-300
-                    lg:text-[13px] lg:tracking-[0.2em] lg:leading-snug lg:block
-                    ${isActive ? 'opacity-100' : 'opacity-50 group-hover:opacity-80'}
-                  `}
+                        text-xs uppercase tracking-[0.2em] font-medium transition-colors duration-300
+                        lg:text-[13px] lg:tracking-[0.2em] lg:leading-snug lg:block
+                        ${isActive ? 'opacity-100' : 'opacity-80 group-hover:opacity-100'}
+                      `}
                   style={{
-                    color: isActive ? primaryColor : textColor,
+                    color: isActive ? primaryColor : '#656363ff',
                     fontFamily
                   }}
                 >
