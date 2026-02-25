@@ -14,6 +14,7 @@ import { useRouting } from './hooks/useRouting';
 import { useThemeColors } from './hooks/useThemeColors';
 import { filterMenuByShift } from './utils/menuFilters';
 import { MOBILE_SCROLL_OFFSET, DESKTOP_BREAKPOINT } from './constants/ui';
+import { Info } from 'lucide-react';
 
 function App() {
   const { slug, initialName } = useRouting();
@@ -214,27 +215,63 @@ function App() {
               >
                 {currentCategory ? (
                   <div className="max-w-6xl mx-auto">
-                    {/* Category description card — only rendered when description exists and is non-empty */}
+                    {/* Category description card — Light & Wide Redesign */}
                     {currentCategory.description?.trim() && (
-                      <div
-                        className="mb-6 rounded-xl px-4 py-4 lg:px-6 lg:py-5 border-l-4"
-                        style={{
-                          backgroundColor: 'rgba(255,255,255,0.05)',
-                          borderLeftColor: theme.primaryColor,
-                          backdropFilter: 'blur(8px)',
+                      <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 100,
+                          damping: 20,
+                          delay: 0.1
                         }}
+                        className="mb-12 mx-auto w-full"
                       >
-                        <p
-                          className="text-sm lg:text-base leading-relaxed opacity-80"
-                          style={{
-                            color: theme.descriptionCategoryColor,
-                            whiteSpace: 'pre-wrap',
-                            wordBreak: 'break-word',
-                          }}
-                        >
-                          {currentCategory.description}
-                        </p>
-                      </div>
+                        {/* Glassmorphism Container with White Background */}
+                        <div className="relative group p-[1px] rounded-[1.5rem] overflow-hidden shadow-xl">
+                          {/* Sutil Border */}
+                          <div
+                            className="absolute inset-0 rounded-[1.5rem]"
+                            style={{
+                              background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.05), transparent)',
+                              padding: '1px'
+                            }}
+                          />
+
+                          {/* Main Body - White Background */}
+                          <div
+                            className="relative bg-white/95 backdrop-blur-md rounded-[1.5rem] p-5 lg:p-7 shadow-lg flex flex-col sm:flex-row items-center sm:items-start gap-4 lg:gap-6"
+                          >
+                            {/* Decorative Icon Box */}
+                            <div className="shrink-0">
+                              <div
+                                className="flex items-center justify-center w-11 h-11 rounded-xl bg-gray-50 border border-gray-100 shadow-sm"
+                                style={{ color: theme.primaryColor }}
+                              >
+                                <Info size={20} />
+                              </div>
+                            </div>
+
+                            <div className="flex-1 text-center sm:text-left">
+                              {/* Small context label */}
+                              <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold mb-1 block">
+                                Información de categoría
+                              </span>
+
+                              <p
+                                className="text-[14px] lg:text-[15px] leading-relaxed text-gray-700 font-medium"
+                                style={{
+                                  whiteSpace: 'pre-wrap',
+                                  wordBreak: 'break-word',
+                                }}
+                              >
+                                {currentCategory.description?.replace(/\\n/g, '\n')}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
                     )}
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-6">

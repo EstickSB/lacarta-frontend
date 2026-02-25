@@ -50,10 +50,11 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, 
                       `}
                   style={{
                     color: isActive ? primaryColor : '#656363ff',
-                    fontFamily
+                    fontFamily,
+                    whiteSpace: 'pre-wrap'
                   }}
                 >
-                  {category.title}
+                  {category.title?.replace(/\\n/g, '\n')}
                 </span>
               </div>
 

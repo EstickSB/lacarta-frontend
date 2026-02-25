@@ -35,8 +35,14 @@ export const RestaurantInfo: React.FC<RestaurantInfoProps> = ({ restaurant, isMo
                 {restaurant?.name}
             </h1>
 
-            <p className="text-sm opacity-70 leading-relaxed max-w-[280px] lg:max-w-md mx-auto" style={{ color: descriptionColor }}>
-                {restaurant?.description}
+            <p
+                className="text-sm opacity-70 leading-relaxed max-w-[280px] lg:max-w-md mx-auto"
+                style={{
+                    color: descriptionColor,
+                    whiteSpace: 'pre-wrap'
+                }}
+            >
+                {restaurant?.description?.replace(/\\n/g, '\n')}
             </p>
 
             {(restaurant?.address || restaurant?.phone) && (

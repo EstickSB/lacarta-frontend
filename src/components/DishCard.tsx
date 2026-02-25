@@ -75,9 +75,12 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
 
         <p
           className="text-[11px] lg:text-xs leading-relaxed mb-3 grow italic opacity-70"
-          style={{ color: descriptionDishColor }}
+          style={{
+            color: descriptionDishColor,
+            whiteSpace: 'pre-wrap'
+          }}
         >
-          {description}
+          {description?.replace(/\\n/g, '\n')}
         </p>
 
         <div className="mt-auto flex items-center justify-between border-t border-white/10 pt-2">
