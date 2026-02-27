@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
 import { MenuShift } from '../types';
 import { useTheme } from '../contexts/ThemeContext';
@@ -55,7 +55,7 @@ export const ShiftSwitcher: React.FC<ShiftSwitcherProps> = ({
                             `}
                         >
                             {isActive && (
-                                <motion.div
+                                <m.div
                                     layoutId="shiftHighlight"
                                     className="absolute inset-0 rounded-full shadow-lg"
                                     style={{ backgroundColor: primaryColor }}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 interface LazyImageProps {
   src: string;
@@ -18,7 +18,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({ src, alt, className }) => 
       )}
       
       {/* Actual Image */}
-      <motion.img
+      <m.img
         src={src}
         alt={alt}
         loading="lazy"

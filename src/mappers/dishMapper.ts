@@ -1,6 +1,6 @@
 import { Dish } from '../types';
 
-export interface NormalizedDish {
+interface NormalizedDish {
     imageSrc: string;
     priceDisplay: string;
     description: string;

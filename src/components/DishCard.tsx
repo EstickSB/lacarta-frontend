@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, Variants } from 'framer-motion';
+import { m, Variants } from 'framer-motion';
 import { Dish, DietaryBadge } from '../types';
 import { LazyImage } from './LazyImage';
 import { Flame, Leaf, WheatOff, Star } from 'lucide-react';
@@ -44,7 +44,7 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
   };
 
   return (
-    <motion.div
+    <m.div
       className="flex flex-col h-full bg-white/5 rounded-2xl overflow-hidden border border-white/5 shadow-sm group"
       initial="hidden"
       whileInView="visible"
@@ -59,8 +59,8 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
         />
 
         <div className="absolute top-2 right-2 flex flex-col gap-1 z-10 scale-75 origin-top-right">
-          {dish.badges?.map((badge, idx) => (
-            <BadgeIcon key={idx} type={badge as DietaryBadge} color={primaryColor} />
+          {dish.badges?.map((badge) => (
+            <BadgeIcon key={badge} type={badge as DietaryBadge} color={primaryColor} />
           ))}
         </div>
       </div>
@@ -92,6 +92,6 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
           </span>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 };

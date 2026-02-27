@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { MapPin, Phone } from 'lucide-react';
 import { RestaurantConfig } from '../types';
 import { useTheme } from '../contexts/ThemeContext';
@@ -15,7 +15,7 @@ export const RestaurantInfo: React.FC<RestaurantInfoProps> = ({ restaurant, isMo
     return (
         <div className="flex flex-col items-center text-center w-full">
             <div className={`relative z-20 ${isMobile ? '-mt-12 mb-4' : 'mb-6'}`}>
-                <motion.div
+                <m.div
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     className={`overflow-hidden bg-transparent ${isMobile ? 'w-24 h-24' : 'w-24 h-24 lg:w-32 lg:h-32 lg:mx-auto'} ${roundedLogo ? 'rounded-full' : 'rounded-xl'} ${borderLogo ? 'border-2' : ''}`}
@@ -28,7 +28,7 @@ export const RestaurantInfo: React.FC<RestaurantInfoProps> = ({ restaurant, isMo
                             className={`w-full h-full object-cover ${roundedLogo ? 'rounded-full' : 'rounded-xl'}`}
                         />
                     )}
-                </motion.div>
+                </m.div>
             </div>
 
             <h1 className="font-bold tracking-tight mb-2 text-2xl lg:text-4xl" style={{ color: titleColor }}>

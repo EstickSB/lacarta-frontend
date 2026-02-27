@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Category } from '../types';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -34,7 +34,7 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, 
               className="relative shrink-0 flex flex-col items-center justify-center cursor-pointer group lg:items-start lg:w-full lg:text-left"
             >
               <div className="flex items-center gap-3 w-full">
-                <motion.div
+                <m.div
                   className="hidden lg:block shrink-0 w-6 h-[1px] bg-white/20 transition-all duration-300 group-hover:w-10"
                   animate={{
                     backgroundColor: isActive ? primaryColor : 'rgba(255, 255, 255, 0.33)',
@@ -59,7 +59,7 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, 
               </div>
 
               {isActive && (
-                <motion.div
+                <m.div
                   layoutId="activeTabMobile"
                   className="absolute -bottom-3 w-1 h-1 rounded-full lg:hidden"
                   style={{ backgroundColor: primaryColor }}

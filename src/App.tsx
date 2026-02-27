@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { SplashScreen } from './components/SplashScreen';
 import { DishCard } from './components/DishCard';
 import { LazyImage } from './components/LazyImage';
@@ -94,22 +94,22 @@ function App() {
     restaurant?.roundedLogo
   );
 
-  if (isAppReady && (error || !restaurant)) {
-    return (
-      <div className="flex min-h-screen w-full items-center justify-center bg-zinc-950 text-gray-100 px-6">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
-          <h1 className="text-6xl mb-4">😔</h1>
-          <h2 className="text-2xl font-serif mb-2">Restaurante no encontrado</h2>
-          <p className="text-sm opacity-70 mb-4">{error?.message || 'No pudimos cargar el menú'}</p>
-        </motion.div>
-      </div>
-    );
-  }
-
   const currentCategory = useMemo(() => {
     if (filteredCategories.length === 0) return null;
     return filteredCategories.find(c => String(c.id) === String(activeCategory)) || filteredCategories[0];
   }, [filteredCategories, activeCategory]);
+
+  if (isAppReady && (error || !restaurant)) {
+    return (
+      <div className="flex min-h-screen w-full items-center justify-center bg-zinc-950 text-gray-100 px-6">
+        <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
+          <h1 className="text-6xl mb-4">😔</h1>
+          <h2 className="text-2xl font-serif mb-2">Restaurante no encontrado</h2>
+          <p className="text-sm opacity-70 mb-4">{error?.message || 'No pudimos cargar el menú'}</p>
+        </m.div>
+      </div>
+    );
+  }
 
   return (
     <ThemeProvider
@@ -205,7 +205,7 @@ function App() {
             style={{ backgroundColor: theme.backgroundColor }}
           >
             <AnimatePresence mode="wait">
-              <motion.div
+              <m.div
                 key={`${activeShiftId}-${activeCategory}`}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -217,7 +217,7 @@ function App() {
                   <div className="max-w-6xl mx-auto">
                     {/* Category description card — Light & Wide Redesign */}
                     {currentCategory.description?.trim() && (
-                      <motion.div
+                      <m.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{
@@ -271,7 +271,7 @@ function App() {
                             </div>
                           </div>
                         </div>
-                      </motion.div>
+                      </m.div>
                     )}
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-6">
@@ -297,7 +297,7 @@ function App() {
                     <p className="text-center font-serif italic text-xl">Selecciona una categoría para comenzar</p>
                   </div>
                 )}
-              </motion.div>
+              </m.div>
             </AnimatePresence>
 
             <div className="lg:hidden pb-12 flex justify-center w-full">

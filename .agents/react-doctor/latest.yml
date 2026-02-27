@@ -1,0 +1,8 @@
+version: 0.0.17
+files:
+  - url: ami-windows-x64-0.0.17.exe
+    sha512: 7JQ6iExfDjYw7gE/cPcx4HKTzDUa4UUmFN4cxvcgAEXVpF1MMWn9/LCir6czsaoGB9y7snlgdErMD+FYa0c+Ww==
+    size: 111189752
+path: ami-windows-x64-0.0.17.exe
+sha512: 7JQ6iExfDjYw7gE/cPcx4HKTzDUa4UUmFN4cxvcgAEXVpF1MMWn9/LCir6czsaoGB9y7snlgdErMD+FYa0c+Ww==
+releaseDate: '2026-02-25T08:07:08.480Z'
