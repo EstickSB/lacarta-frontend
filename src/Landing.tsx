@@ -347,64 +347,74 @@ const SocialProof = () => {
           {locals.map((local, i) => (
             <motion.div 
               key={i}
-              className="relative"
+              className="relative flex flex-col items-center"
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              {/* Main Card */}
-              <div className="w-52 h-52 bg-offwhite rounded-2xl border border-gray-200 flex items-center justify-center shadow-lg relative overflow-visible">
+              {/* Bubble animation layer - BEHIND the card */}
+              <div className="absolute inset-0 flex justify-center">
+                {/* Single drop that falls down from center */}
+                <motion.div
+                  initial={{ opacity: 0, y: 0, scale: 0 }}
+                  animate={hoveredIndex === i ? {
+                    opacity: [0, 1, 1, 0],
+                    y: [0, 100, 100, 100],
+                    scale: [0, 1, 1, 0],
+                    transition: { duration: 0.35, ease: "easeIn", times: [0, 0.5, 0.7, 1] }
+                  } : {
+                    opacity: 0, y: 0, scale: 0,
+                    transition: { duration: 0.2 }
+                  }}
+                  className="absolute top-1/2 w-4 h-4 bg-gray-400 rounded-full z-0"
+                />
+
+                {/* Instagram bubble - splits left */}
+                <motion.a
+                  href={local.instagram}
+                  initial={{ opacity: 0, y: 100, x: 0, scale: 0 }}
+                  animate={hoveredIndex === i ? {
+                    opacity: 1,
+                    y: 130,
+                    x: -40,
+                    scale: 1,
+                    transition: { duration: 0.4, delay: 0.25, ease: [0.34, 1.56, 0.64, 1] }
+                  } : {
+                    opacity: 0, y: 100, x: 0, scale: 0,
+                    transition: { duration: 0.25 }
+                  }}
+                  className="absolute top-1/2 w-11 h-11 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform z-0"
+                >
+                  <Instagram size={20} className="text-white" />
+                </motion.a>
+
+                {/* Carta bubble - splits right */}
+                <motion.a
+                  href={local.carta}
+                  initial={{ opacity: 0, y: 100, x: 0, scale: 0 }}
+                  animate={hoveredIndex === i ? {
+                    opacity: 1,
+                    y: 130,
+                    x: 40,
+                    scale: 1,
+                    transition: { duration: 0.4, delay: 0.3, ease: [0.34, 1.56, 0.64, 1] }
+                  } : {
+                    opacity: 0, y: 100, x: 0, scale: 0,
+                    transition: { duration: 0.25 }
+                  }}
+                  className="absolute top-1/2 w-11 h-11 bg-powerred rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform z-0"
+                >
+                  <Newspaper size={20} className="text-white" />
+                </motion.a>
+              </div>
+
+              {/* Main Card - ON TOP */}
+              <div className="w-52 h-52 bg-offwhite rounded-2xl border border-gray-200 flex items-center justify-center shadow-lg relative z-10">
                 <div className={`w-20 h-20 ${local.bgColor} rounded-2xl flex items-center justify-center`}>
                   <span className="text-white font-bold text-2xl font-serif">{local.initials}</span>
                 </div>
-                
-                {/* Hover Bubbles - Instagram (Left) */}
-                <motion.a
-                  href={local.instagram}
-                  initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
-                  animate={hoveredIndex === i ? {
-                    opacity: 1,
-                    scale: 1,
-                    x: -70,
-                    y: 120,
-                    transition: { duration: 0.4, ease: "easeOut" }
-                  } : {
-                    opacity: 0,
-                    scale: 0,
-                    x: 0,
-                    y: 0,
-                    transition: { duration: 0.3 }
-                  }}
-                  className="absolute top-1/2 left-1/2 w-11 h-11 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-full flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 transition-transform z-10"
-                  style={{ transformOrigin: 'center' }}
-                >
-                  <Instagram size={22} className="text-white" />
-                </motion.a>
-
-                {/* Hover Bubbles - Carta (Right) */}
-                <motion.a
-                  href={local.carta}
-                  initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
-                  animate={hoveredIndex === i ? {
-                    opacity: 1,
-                    scale: 1,
-                    x: 70,
-                    y: 120,
-                    transition: { duration: 0.4, ease: "easeOut", delay: 0.05 }
-                  } : {
-                    opacity: 0,
-                    scale: 0,
-                    x: 0,
-                    y: 0,
-                    transition: { duration: 0.3 }
-                  }}
-                  className="absolute top-1/2 left-1/2 w-11 h-11 bg-powerred rounded-full flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 transition-transform z-10"
-                  style={{ transformOrigin: 'center' }}
-                >
-                  <Newspaper size={22} className="text-white" />
-                </motion.a>
               </div>
               
-              <p className="text-center mt-6 text-sm font-medium text-gray-600">{local.name}</p>
+              <p className="text-center mt-14 text-sm font-medium text-gray-600">{local.name}</p>
             </motion.div>
           ))}
         </div>
