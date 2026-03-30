@@ -6,22 +6,18 @@ import {
   X, 
   Zap, 
   Search, 
-  Globe, 
   BarChart3, 
   QrCode, 
   Newspaper, 
-  Flame,
   MousePointer2,
   RefreshCw,
-  Rocket,
   Brain,
   Mail,
   User,
   Building2,
   LayoutDashboard,
   Smartphone,
-  Instagram,
-  Facebook
+  Instagram
 } from 'lucide-react';
 import Button from './components/Button';
 
@@ -66,16 +62,16 @@ const MagneticButton = ({ children, onClick, variant = 'primary', className }: a
 };
 
 const PhoneMockup = () => {
-  // URLs de comida peruana/latina de Unsplash
+  // URLs de comida peruana/latina de Unsplash - Optimized with WebP
   const foodImages = [
-    'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=100&h=100&fit=crop', // Ceviche
-    'https://images.unsplash.com/photo-1604909052743-94e838986d24?w=100&h=100&fit=crop', // Lomo saltado
-    'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=100&h=100&fit=crop', // Arroz
-    'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=100&h=100&fit=crop', // Pollo
-    'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop', // Ensalada
-    'https://images.unsplash.com/photo-1562007908-17c67e878c88?w=100&h=100&fit=crop', // Tacos
-    'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=100&h=100&fit=crop', // Pizza
-    'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=100&h=100&fit=crop', // Hamburguesa
+    'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=100&h=100&fit=crop&fm=webp&q=80', // Ceviche
+    'https://images.unsplash.com/photo-1604909052743-94e838986d24?w=100&h=100&fit=crop&fm=webp&q=80', // Lomo saltado
+    'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=100&h=100&fit=crop&fm=webp&q=80', // Arroz
+    'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=100&h=100&fit=crop&fm=webp&q=80', // Pollo
+    'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop&fm=webp&q=80', // Ensalada
+    'https://images.unsplash.com/photo-1562007908-17c67e878c88?w=100&h=100&fit=crop&fm=webp&q=80', // Tacos
+    'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=100&h=100&fit=crop&fm=webp&q=80', // Pizza
+    'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=100&h=100&fit=crop&fm=webp&q=80', // Hamburguesa
   ];
 
   return (
@@ -98,7 +94,7 @@ const PhoneMockup = () => {
         >
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i} className="bg-white rounded-xl p-2.5 shadow-sm border border-gray-100 flex gap-2.5 transform hover:scale-105 transition-transform duration-300">
-              <img src={foodImages[i]} className="w-14 h-14 rounded-lg object-cover bg-gray-200" alt="Food" />
+              <img src={foodImages[i]} width="56" height="56" loading="lazy" className="w-14 h-14 rounded-lg object-cover bg-gray-200" alt="Imagen de platillo de comida" />
               <div className="flex-1 space-y-2">
                 <div className="h-3 w-3/4 bg-gray-200 rounded-full"></div>
                 <div className="h-2 w-1/2 bg-gray-100 rounded-full"></div>
@@ -112,7 +108,7 @@ const PhoneMockup = () => {
            {/* Duplicate for Loop */}
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i + 8} className="bg-white rounded-xl p-2.5 shadow-sm border border-gray-100 flex gap-2.5">
-              <img src={foodImages[i]} className="w-14 h-14 rounded-lg object-cover bg-gray-200" alt="Food" />
+              <img src={foodImages[i]} width="56" height="56" loading="lazy" className="w-14 h-14 rounded-lg object-cover bg-gray-200" alt="Imagen de platillo de comida" />
               <div className="flex-1 space-y-2">
                 <div className="h-3 w-3/4 bg-gray-200 rounded-full"></div>
                 <div className="h-2 w-1/2 bg-gray-100 rounded-full"></div>
@@ -144,11 +140,11 @@ const DNAInteraction = () => {
   const [filter, setFilter] = useState<'ALL' | 'VEGAN' | 'SPICY' | 'GLUTEN'>('ALL');
 
   const items = [
-    { id: 1, name: 'Tacos Al Pastor', type: 'SPICY', img: 'https://images.unsplash.com/photo-1562007908-17c67e878c88?w=50&h=50&fit=crop' },
-    { id: 2, name: 'Buddha Bowl', type: 'VEGAN', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=50&h=50&fit=crop' },
-    { id: 3, name: 'Risotto Trufa', type: 'GLUTEN', img: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=50&h=50&fit=crop' },
-    { id: 4, name: 'Curry Rojo', type: 'SPICY', img: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=50&h=50&fit=crop' },
-    { id: 5, name: 'Ensalada Kale', type: 'VEGAN', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=50&h=50&fit=crop' },
+    { id: 1, name: 'Tacos Al Pastor', type: 'SPICY', img: 'https://images.unsplash.com/photo-1562007908-17c67e878c88?w=50&h=50&fit=crop&fm=webp&q=80' },
+    { id: 2, name: 'Buddha Bowl', type: 'VEGAN', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=50&h=50&fit=crop&fm=webp&q=80' },
+    { id: 3, name: 'Risotto Trufa', type: 'GLUTEN', img: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=50&h=50&fit=crop&fm=webp&q=80' },
+    { id: 4, name: 'Curry Rojo', type: 'SPICY', img: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=50&h=50&fit=crop&fm=webp&q=80' },
+    { id: 5, name: 'Ensalada Kale', type: 'VEGAN', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=50&h=50&fit=crop&fm=webp&q=80' },
   ];
 
   const filteredItems = filter === 'ALL' ? items : items; 
@@ -198,7 +194,7 @@ const DNAInteraction = () => {
                  isMatch ? 'bg-white shadow-sm border border-gray-100' : 'bg-transparent'
                }`}
              >
-                <img src={item.img} className="w-10 h-10 rounded-lg bg-gray-200 object-cover" alt={item.name}/>
+                <img src={item.img} width="40" height="40" loading="lazy" className="w-10 h-10 rounded-lg bg-gray-200 object-cover" alt={item.name}/>
                 <div className="flex-1">
                   <div className="font-medium text-sm text-richblack">{item.name}</div>
                   <div className="h-2 w-16 bg-gray-100 rounded-full mt-1"></div>
@@ -340,7 +336,7 @@ const SocialProof = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-10">
           <h2 className="font-serif text-2xl md:text-3xl mb-3 text-richblack">Locales Fundadores que Confían en Nosotros</h2>
-          <p className="text-gray-500 text-sm">Liderando la transformación digital en la gastronomía.</p>
+          <p className="text-gray-600 text-sm">Liderando la transformación digital en la gastronomía.</p>
         </div>
 
         <div className="flex justify-center gap-8 flex-wrap">
@@ -373,6 +369,7 @@ const SocialProof = () => {
                   href={local.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`Instagram de ${local.name}`}
                   initial={{ opacity: 0, y: 80, x: 0, scale: 0 }}
                   animate={hoveredIndex === i ? {
                     opacity: 1,
@@ -386,12 +383,13 @@ const SocialProof = () => {
                   }}
                   className="absolute top-1/2 w-11 h-11 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform pointer-events-auto"
                 >
-                  <Instagram size={20} className="text-white" />
+                  <Instagram size={20} className="text-white" aria-hidden="true" />
                 </motion.a>
 
                 {/* Carta bubble - splits right */}
                 <motion.a
                   href={local.carta}
+                  aria-label={`Ver carta de ${local.name}`}
                   initial={{ opacity: 0, y: 80, x: 0, scale: 0 }}
                   animate={hoveredIndex === i ? {
                     opacity: 1,
@@ -405,7 +403,7 @@ const SocialProof = () => {
                   }}
                   className="absolute top-1/2 w-11 h-11 bg-powerred rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform pointer-events-auto"
                 >
-                  <Newspaper size={20} className="text-white" />
+                  <Newspaper size={20} className="text-white" aria-hidden="true" />
                 </motion.a>
               </div>
 
@@ -547,7 +545,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
                   <span className="absolute bottom-1 left-0 w-full h-1.5 bg-powerred/10 -z-10"></span>
                 </span> con QR.
               </h1>
-              <p className="text-sm sm:text-base text-gray-500 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-600 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
                 La mejor forma de visualizar y explorar un menú. Actualiza en segundos, muestra fotos profesionales y ofrece una experiencia moderna a tus clientes.
               </p>
               
@@ -585,14 +583,22 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
              {/* Floating Elements (Food Holograms) */}
              <motion.img 
                style={{ y: y1 }}
-               src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=150&h=150&fit=crop" 
+               src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=150&h=150&fit=crop&fm=webp&q=80" 
+               width="96" 
+               height="96"
+               fetchPriority="low"
+               loading="lazy"
                className="absolute top-20 -right-4 md:-right-12 w-20 h-20 md:w-24 md:h-24 rounded-full shadow-2xl border-3 border-white z-30 hidden sm:block object-cover"
                animate={{ y: [0, 20, 0] }}
                transition={{ repeat: Infinity, duration: 6 }}
                alt="Hamburguesa"
              />
              <motion.img 
-               src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=150&h=150&fit=crop" 
+               src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=150&h=150&fit=crop&fm=webp&q=80" 
+               width="80" 
+               height="80"
+               fetchPriority="low"
+               loading="lazy"
                className="absolute bottom-40 -left-4 md:-left-12 w-16 h-16 md:w-20 md:h-20 rounded-full shadow-2xl border-3 border-white z-30 hidden sm:block grayscale hover:grayscale-0 transition-all object-cover"
                animate={{ y: [0, -15, 0] }}
                transition={{ repeat: Infinity, duration: 5, delay: 1 }}
@@ -610,12 +616,12 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
         </div>
       </section>
 
-      {/* 2. Pain Point (Real Restaurant Problems) */}
+      {/* 2. Problema - Pain Points del Restaurante */}
       <section id="beneficios" className="py-14 md:py-20 px-6 bg-white border-y border-gray-100 relative">
         <div className="max-w-6xl mx-auto">
            <div className="text-center mb-10 md:mb-12">
              <h2 className="font-serif text-2xl md:text-4xl mb-3 text-richblack">Lo que pierdes <span className="text-powerred italic">HOY</span> en tu restaurante</h2>
-             <p className="text-gray-500 text-base">Cada día sin modernizar tu carta es una oportunidad perdida.</p>
+             <p className="text-gray-600 text-base">Cada día sin modernizar tu carta es una oportunidad perdida.</p>
            </div>
            
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -628,7 +634,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
                 <div key={i} className="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:bg-white hover:shadow-xl transition-all duration-300">
                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm">{item.icon}</div>
                    <h3 className="font-bold text-richblack mb-2 text-sm">{item.t}</h3>
-                   <p className="text-gray-500 text-xs leading-relaxed">{item.d}</p>
+                   <p className="text-gray-600 text-xs leading-relaxed">{item.d}</p>
                 </div>
               ))}
            </div>
@@ -654,7 +660,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
         </div>
       </section>
 
-      {/* 3. Core Feature: Carta Digital QR */}
+      {/* 3. Solución - La mejor forma de explorar un menú */}
       <section id="como-funciona" className="py-16 px-6 bg-offwhite overflow-visible">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
@@ -705,7 +711,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
                   </div>
                   <div>
                     <h4 className="font-bold text-base text-richblack mb-1">{step.t}</h4>
-                    <p className="text-gray-500 leading-relaxed text-sm">{step.d}</p>
+                    <p className="text-gray-600 leading-relaxed text-sm">{step.d}</p>
                   </div>
                 </div>
               ))}
@@ -718,7 +724,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
         </div>
       </section>
 
-      {/* 4. How it Works: Simple & Fast */}
+      {/* 4. Cómo Funciona - Pasos Simples */}
       <section className="py-16 px-6 bg-white">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="font-serif text-2xl md:text-3xl mb-8 text-richblack">Empieza en menos de <span className="text-powerred">5 minutos</span></h2>
@@ -736,42 +742,69 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
                   {step.icon}
                 </div>
                 <h4 className="font-bold text-base mb-2 text-richblack">{step.t}</h4>
-                <p className="text-gray-500 text-xs">{step.d}</p>
+                <p className="text-gray-600 text-xs">{step.d}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 5. Features (Simplified Language) */}
+      {/* 5. Características - Tecnología que Impresiona */}
       <section className="py-16 px-6 bg-offwhite">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="font-serif text-2xl md:text-3xl mb-3 text-richblack">Tecnología que <span className="text-powerred">impresiona</span></h2>
-            <p className="text-gray-500 text-sm">Diseñado para que tu única preocupación sea cocinar.</p>
+            <p className="text-gray-600 text-sm">Diseñado para que tu única preocupación sea cocinar.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
              <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
                 <div className="w-10 h-10 bg-powerred/10 text-powerred rounded-xl flex items-center justify-center mb-4"><LayoutDashboard size={20} /></div>
                 <h3 className="font-bold text-base mb-3 text-richblack">Actualización Instantánea</h3>
-                <p className="text-gray-500 leading-relaxed">Marca platos como agotados en un click desde tu celular. Los cambios se reflejan en tiempo real para todos.</p>
+                <p className="text-gray-600 leading-relaxed text-sm">Marca platos como agotados en un click desde tu celular. Los cambios se reflejan en tiempo real para todos.</p>
              </div>
              <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
                 <div className="w-10 h-10 bg-powerred/10 text-powerred rounded-xl flex items-center justify-center mb-4"><Smartphone size={20} /></div>
                 <h3 className="font-bold text-base mb-3 text-richblack">Diseño Premium</h3>
-                <p className="text-gray-500 leading-relaxed text-sm">Cartas digitales con fotos de alta calidad que hacen justicia a tus platos. Primera impresión inolvidable.</p>
+                <p className="text-gray-600 leading-relaxed text-sm">Cartas digitales con fotos de alta calidad que hacen justicia a tus platos. Primera impresión inolvidable.</p>
              </div>
              <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
                 <div className="w-10 h-10 bg-powerred/10 text-powerred rounded-xl flex items-center justify-center mb-4"><BarChart3 size={20} /></div>
                 <h3 className="font-bold text-base mb-3 text-richblack">Menús Adaptables</h3>
-                <p className="text-gray-500 leading-relaxed text-sm">Crea menús diferentes para desayuno, almuerzo, cena o días especiales. Control total de tu oferta.</p>
+                <p className="text-gray-600 leading-relaxed text-sm">Crea menús diferentes para desayuno, almuerzo, cena o días especiales. Control total de tu oferta.</p>
              </div>
              <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
                 <div className="w-10 h-10 bg-powerred/10 text-powerred rounded-xl flex items-center justify-center mb-4"><Brain size={20} /></div>
                 <h3 className="font-bold text-base mb-3 text-richblack">Mensajes en Secciones</h3>
-                <p className="text-gray-500 leading-relaxed text-sm">Añade descripciones o mensajes personalizados en cada categoría. Cuenta la historia de cada sección de tu menú.</p>
+                <p className="text-gray-600 leading-relaxed text-sm">Añade descripciones o mensajes personalizados en cada categoría. Cuenta la historia de cada sección de tu menú.</p>
              </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. ADN Gastronómico - Interactive Component */}
+      <section className="py-16 px-6 bg-white border-t border-gray-100">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="font-serif text-2xl md:text-3xl mb-3 text-richblack">Explora tu carta con <span className="text-powerred italic">ADN Gastronómico</span></h2>
+            <p className="text-gray-600 text-sm">Filtra por preferencias alimentarias y haz que tus clientes encuentren exactamente lo que buscan.</p>
+          </div>
+          
+          <div className="max-w-2xl mx-auto">
+            <DNAInteraction />
+          </div>
+
+          <div className="mt-10 text-center">
+            <p className="text-sm text-gray-600 mb-6">Los clientes pueden filtrar platos según sus necesidades: vegano, picante, sin gluten y más.</p>
+            <Button 
+              onClick={() => {
+                const el = document.getElementById('fundadores');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }} 
+              className="inline-flex items-center gap-2"
+            >
+              Probar la experiencia <ArrowRight size={16} />
+            </Button>
           </div>
         </div>
       </section>
@@ -779,7 +812,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
       {/* 7. Social Proof & Testimonials */}
       <SocialProof />
 
-      {/* 8. Founding Locals Form */}
+      {/* 8. Formulario - Únete a los Locales Fundadores */}
       <FoundingLocalsForm />
 
       {/* 9. Footer */}
