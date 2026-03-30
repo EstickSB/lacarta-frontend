@@ -563,7 +563,7 @@ const FoundingLocalsForm = () => {
             </motion.div>
           ) : (
             <form className="space-y-4" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-6">
                 <div className="space-y-1.5">
                   <label htmlFor="nombre-responsable" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Responsable</label>
                   <div className="relative">
