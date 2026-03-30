@@ -257,7 +257,7 @@ const Navbar = ({ onEnterApp }: { onEnterApp: () => void }) => {
   const navLinks = [
     { name: 'Beneficios', href: '#beneficios' },
     { name: 'Cómo Funciona', href: '#como-funciona' },
-    { name: 'Locales Fundadores', href: '#fundadores' }
+    { name: 'Fundadores', href: '#fundadores' }
   ];
 
   return (
@@ -308,7 +308,7 @@ const Navbar = ({ onEnterApp }: { onEnterApp: () => void }) => {
           }}
           className="bg-white/10 hover:bg-white/20 text-white text-xs font-bold py-2.5 px-5 rounded-xl border border-white/10 transition-all backdrop-blur-sm"
         >
-          Postular como Local Fundador
+          Empezar Gratis
         </button>
       </div>
     </motion.nav>
@@ -511,7 +511,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
       <Navbar onEnterApp={onEnterApp} />
       
       {/* 1. Hero Section (3D Dynamic) */}
-      <section className="relative min-h-[85vh] flex items-center justify-center pt-20 pb-16 px-6 overflow-visible">
+      <section className="relative w-full h-screen flex items-center justify-center pt-28 pb-16 px-6 overflow-visible">
         {/* Background Grid */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         
@@ -584,7 +584,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
              {/* Holographic QR */}
              <motion.div 
                style={{ y: y1 }}
-               className="absolute top-1/2 -right-24 md:-right-32 z-10 hidden xl:block"
+               className="absolute top-1/2 -right-12 md:-right-16 z-10 hidden xl:block"
              >
                <HolographicQR />
              </motion.div>
