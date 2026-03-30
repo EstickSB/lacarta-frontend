@@ -62,16 +62,16 @@ const MagneticButton = ({ children, onClick, variant = 'primary', className }: a
 };
 
 const PhoneMockup = () => {
-  // URLs de comida peruana/latina de Unsplash - Optimized with WebP
+  // Imágenes locales optimizadas - Thumbnails para mejor rendimiento
   const foodImages = [
-    'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=100&h=100&fit=crop&fm=webp&q=80', // Ceviche
-    'https://images.unsplash.com/photo-1604909052743-94e838986d24?w=100&h=100&fit=crop&fm=webp&q=80', // Lomo saltado
-    'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=100&h=100&fit=crop&fm=webp&q=80', // Arroz
-    'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=100&h=100&fit=crop&fm=webp&q=80', // Pollo
-    'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop&fm=webp&q=80', // Ensalada
-    'https://images.unsplash.com/photo-1562007908-17c67e878c88?w=100&h=100&fit=crop&fm=webp&q=80', // Tacos
-    'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=100&h=100&fit=crop&fm=webp&q=80', // Pizza
-    'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=100&h=100&fit=crop&fm=webp&q=80', // Hamburguesa
+    '/img/thumb-ceviche-peruano-carta-digital.webp',
+    '/img/thumb-aji-de-gallina-carta-digital.webp',
+    '/img/thumb-arroz-con-pato-carta-digital.webp',
+    '/img/thumb-tallarin-salteado-carta-digital.webp',
+    '/img/thumb-leche-de-tigre-carta-digital.webp',
+    '/img/thumb-cheesecake-maracuya-carta-digital.webp',
+    '/img/thumb-mostrito-coctel-carta-digital.webp',
+    '/img/thumb-arroz-con-carne-estofada-carta-digital.webp',
   ];
 
   return (
@@ -92,9 +92,20 @@ const PhoneMockup = () => {
           transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
           className="space-y-4 p-4 pt-10"
         >
-          {Array.from({ length: 8 }).map((_, i) => (
+          {Array.from({ length: 8 }).map((_, i) => {
+            const altTexts = [
+              'Ceviche peruano en carta digital de restaurante',
+              'Ají de gallina - menú digital para restaurantes',
+              'Arroz con pato - platillo peruano en carta QR',
+              'Tallarín saltado en menú digital',
+              'Leche de tigre - carta digital restaurante peruano',
+              'Cheesecake de maracuyá en menú QR',
+              'Mostrito cóctel - bebida en carta digital',
+              'Arroz con carne estofada - menú digital restaurante'
+            ];
+            return (
             <div key={i} className="bg-white rounded-xl p-2.5 shadow-sm border border-gray-100 flex gap-2.5 transform hover:scale-105 transition-transform duration-300">
-              <img src={foodImages[i]} width="56" height="56" loading="lazy" className="w-14 h-14 rounded-lg object-cover bg-gray-200" alt="Imagen de platillo de comida" />
+              <img src={foodImages[i]} width="56" height="56" loading="lazy" className="w-14 h-14 rounded-lg object-cover bg-gray-200" alt={altTexts[i]} />
               <div className="flex-1 space-y-2">
                 <div className="h-3 w-3/4 bg-gray-200 rounded-full"></div>
                 <div className="h-2 w-1/2 bg-gray-100 rounded-full"></div>
@@ -104,11 +115,23 @@ const PhoneMockup = () => {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
            {/* Duplicate for Loop */}
-          {Array.from({ length: 8 }).map((_, i) => (
+          {Array.from({ length: 8 }).map((_, i) => {
+            const altTexts = [
+              'Ceviche peruano en carta digital de restaurante',
+              'Ají de gallina - menú digital para restaurantes',
+              'Arroz con pato - platillo peruano en carta QR',
+              'Tallarín saltado en menú digital',
+              'Leche de tigre - carta digital restaurante peruano',
+              'Cheesecake de maracuyá en menú QR',
+              'Mostrito cóctel - bebida en carta digital',
+              'Arroz con carne estofada - menú digital restaurante'
+            ];
+            return (
             <div key={i + 8} className="bg-white rounded-xl p-2.5 shadow-sm border border-gray-100 flex gap-2.5">
-              <img src={foodImages[i]} width="56" height="56" loading="lazy" className="w-14 h-14 rounded-lg object-cover bg-gray-200" alt="Imagen de platillo de comida" />
+              <img src={foodImages[i]} width="56" height="56" loading="lazy" className="w-14 h-14 rounded-lg object-cover bg-gray-200" alt={altTexts[i]} />
               <div className="flex-1 space-y-2">
                 <div className="h-3 w-3/4 bg-gray-200 rounded-full"></div>
                 <div className="h-2 w-1/2 bg-gray-100 rounded-full"></div>
@@ -118,7 +141,8 @@ const PhoneMockup = () => {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </motion.div>
 
         {/* Floating UI Elements over phone (Pop-out effect) */}
@@ -140,11 +164,11 @@ const DNAInteraction = () => {
   const [filter, setFilter] = useState<'ALL' | 'VEGAN' | 'SPICY' | 'GLUTEN'>('ALL');
 
   const items = [
-    { id: 1, name: 'Tacos Al Pastor', type: 'SPICY', img: 'https://images.unsplash.com/photo-1562007908-17c67e878c88?w=50&h=50&fit=crop&fm=webp&q=80' },
-    { id: 2, name: 'Buddha Bowl', type: 'VEGAN', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=50&h=50&fit=crop&fm=webp&q=80' },
-    { id: 3, name: 'Risotto Trufa', type: 'GLUTEN', img: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=50&h=50&fit=crop&fm=webp&q=80' },
-    { id: 4, name: 'Curry Rojo', type: 'SPICY', img: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=50&h=50&fit=crop&fm=webp&q=80' },
-    { id: 5, name: 'Ensalada Kale', type: 'VEGAN', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=50&h=50&fit=crop&fm=webp&q=80' },
+    { id: 1, name: 'Ají de Gallina', type: 'SPICY', img: '/img/thumb-aji-de-gallina-carta-digital.webp' },
+    { id: 2, name: 'Cheesecake Maracuyá', type: 'VEGAN', img: '/img/thumb-cheesecake-maracuya-carta-digital.webp' },
+    { id: 3, name: 'Arroz con Pato', type: 'GLUTEN', img: '/img/thumb-arroz-con-pato-carta-digital.webp' },
+    { id: 4, name: 'Tallarín Saltado', type: 'SPICY', img: '/img/thumb-tallarin-salteado-carta-digital.webp' },
+    { id: 5, name: 'Leche de Tigre', type: 'VEGAN', img: '/img/thumb-leche-de-tigre-carta-digital.webp' },
   ];
 
   const filteredItems = filter === 'ALL' ? items : items; 
@@ -317,15 +341,13 @@ const SocialProof = () => {
   const locals = [
     {
       name: "La Martina Resto & Bar",
-      initials: "LM",
-      bgColor: "bg-richblack",
+      logo: "/img/logos/la-martina-logo.png",
       instagram: "https://www.instagram.com/lamartina_pimentel/",
       carta: "https://lacarta.space/restaurante/la-martina/menu"
     },
     {
       name: "AYUKI",
-      initials: "AY",
-      bgColor: "bg-powerred",
+      logo: "/img/logos/ayuki-logo.png",
       instagram: "https://www.instagram.com/ayuki_cix/",
       carta: "https://lacarta.space/restaurante/ayuki-japanese-fusion-food/menu"
     }
@@ -408,10 +430,12 @@ const SocialProof = () => {
               </div>
 
               {/* Main Card - ON TOP */}
-              <div className="w-52 h-52 bg-offwhite rounded-2xl border border-gray-200 flex items-center justify-center shadow-lg relative" style={{ zIndex: 1 }}>
-                <div className={`w-20 h-20 ${local.bgColor} rounded-2xl flex items-center justify-center`}>
-                  <span className="text-white font-bold text-2xl font-serif">{local.initials}</span>
-                </div>
+              <div className="w-52 h-52 bg-offwhite rounded-2xl border border-gray-200 flex items-center justify-center shadow-lg relative p-6" style={{ zIndex: 1 }}>
+                <img 
+                  src={local.logo} 
+                  alt={`Logo de ${local.name}`}
+                  className="w-full h-full object-contain"
+                />
               </div>
               
               <p className="text-center mt-14 text-sm font-medium text-gray-600">{local.name}</p>
@@ -583,7 +607,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
              {/* Floating Elements (Food Holograms) */}
              <motion.img 
                style={{ y: y1 }}
-               src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=150&h=150&fit=crop&fm=webp&q=80" 
+               src="/img/ceviche-peruano-carta-digital.webp" 
                width="96" 
                height="96"
                fetchPriority="low"
@@ -591,10 +615,10 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
                className="absolute top-20 -right-4 md:-right-12 w-20 h-20 md:w-24 md:h-24 rounded-full shadow-2xl border-3 border-white z-30 hidden sm:block object-cover"
                animate={{ y: [0, 20, 0] }}
                transition={{ repeat: Infinity, duration: 6 }}
-               alt="Hamburguesa"
+               alt="Ceviche peruano - carta digital para restaurantes"
              />
              <motion.img 
-               src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=150&h=150&fit=crop&fm=webp&q=80" 
+               src="/img/leche-de-tigre-carta-digital.webp" 
                width="80" 
                height="80"
                fetchPriority="low"
@@ -602,7 +626,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
                className="absolute bottom-40 -left-4 md:-left-12 w-16 h-16 md:w-20 md:h-20 rounded-full shadow-2xl border-3 border-white z-30 hidden sm:block grayscale hover:grayscale-0 transition-all object-cover"
                animate={{ y: [0, -15, 0] }}
                transition={{ repeat: Infinity, duration: 5, delay: 1 }}
-               alt="Pizza"
+               alt="Leche de tigre - menú digital para restaurantes peruanos"
              />
 
              {/* Holographic QR */}
