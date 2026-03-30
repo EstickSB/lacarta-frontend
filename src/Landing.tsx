@@ -506,6 +506,9 @@ const FoundingLocalsForm = () => {
               Enviar solicitud <ArrowRight size={20} />
             </button>
             <p className="text-center text-[10px] text-gray-500 uppercase tracking-widest">Nos pondremos en contacto en menos de 24h</p>
+            <p className="text-center text-xs text-gray-400 mt-3 flex items-center justify-center gap-1">
+              🔒 Tus datos están 100% protegidos. No compartimos ni revelamos tu información con terceros.
+            </p>
           </form>
         </div>
       </div>
@@ -794,8 +797,8 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
             </div>
             
             <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500 mb-10">
-               <a href="#" className="hover:text-white transition-colors">Términos</a>
-               <a href="#" className="hover:text-white transition-colors">Privacidad</a>
+               <a href="/terminos" className="hover:text-white transition-colors">Términos</a>
+               <a href="/privacidad" className="hover:text-white transition-colors">Privacidad</a>
                <a href="#" className="hover:text-white transition-colors">Blog Gastronómico</a>
                <a href="#" className="hover:text-white transition-colors">Contacto</a>
             </div>

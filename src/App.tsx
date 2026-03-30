@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { AnimatePresence, m } from 'framer-motion';
 import Landing from './Landing';
+import Terminos from './Terminos';
+import Privacidad from './Privacidad';
 import { SplashScreen } from './components/SplashScreen';
 import { DishCard } from './components/DishCard';
 import { LazyImage } from './components/LazyImage';
@@ -307,6 +309,14 @@ function App() {
 
   if (isRestaurantPage) {
     return <MenuView />;
+  }
+
+  if (path === '/terminos') {
+    return <Terminos />;
+  }
+
+  if (path === '/privacidad') {
+    return <Privacidad />;
   }
 
   return <Landing onEnterApp={() => {}} />;
