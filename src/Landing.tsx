@@ -79,14 +79,14 @@ const PhoneMockup = () => {
   ];
 
   return (
-    <div className="relative mx-auto border-richblack bg-richblack border-[10px] rounded-xl h-[336px] sm:h-[368px] md:h-[400px] w-[176px] sm:w-[192px] md:w-[208px] shadow-2xl shadow-richblack/40 z-20 transform hover:scale-[1.02] transition-transform duration-500">
+    <div className="relative mx-auto border-richblack bg-richblack border-[12px] rounded-[2.5rem] h-[400px] sm:h-[440px] md:h-[480px] w-[208px] sm:w-[224px] md:w-[240px] shadow-2xl shadow-richblack/40 z-20 transform hover:scale-[1.02] transition-transform duration-500">
       {/* Side Buttons */}
       <div className="h-[28px] w-[3px] bg-richblack absolute -left-[13px] top-[60px] rounded-l-lg"></div>
       <div className="h-[38px] w-[3px] bg-richblack absolute -left-[13px] top-[104px] rounded-l-lg"></div>
       <div className="h-[54px] w-[3px] bg-richblack absolute -right-[13px] top-[120px] rounded-r-lg"></div>
       
       {/* Screen Container */}
-      <div className="rounded-xl overflow-hidden w-full h-full bg-offwhite relative">
+      <div className="rounded-[2rem] overflow-hidden w-full h-full bg-offwhite relative">
         {/* Dynamic Island */}
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[75px] h-[24px] bg-black rounded-b-2xl z-20"></div>
         
@@ -219,13 +219,13 @@ const DNAInteraction = () => {
 const HolographicQR = () => (
   <motion.div 
     whileHover={{ rotateX: 10, rotateY: 10, scale: 1.05 }}
-    className="relative w-40 h-40 bg-white rounded-2xl flex items-center justify-center border border-gray-100 shadow-2xl perspective-1000 group cursor-pointer"
+    className="relative w-44 h-44 bg-white rounded-3xl flex items-center justify-center border border-gray-100 shadow-2xl perspective-1000 group cursor-pointer"
   >
      {/* Glow Pulse */}
-     <div className="absolute inset-0 rounded-2xl bg-powerred/20 blur-xl animate-pulse"></div>
+     <div className="absolute inset-0 rounded-3xl bg-powerred/20 blur-xl animate-pulse"></div>
      
      {/* Physical Thickness (Fake 3D) */}
-     <div className="absolute top-2 left-2 w-full h-full bg-gray-200 rounded-2xl -z-10"></div>
+     <div className="absolute top-2 left-2 w-full h-full bg-gray-200 rounded-3xl -z-10"></div>
      
      <QrCode size={64} className="text-richblack relative z-10" />
      
@@ -321,13 +321,15 @@ const SocialProof = () => {
   const locals = [
     {
       name: "Local Fundador 1",
-      logo: "https://via.placeholder.com/120x120/1a1a1a/ffffff?text=L1",
+      initials: "L1",
+      bgColor: "bg-richblack",
       instagram: "#",
       carta: "#"
     },
     {
       name: "Local Fundador 2",
-      logo: "https://via.placeholder.com/120x120/E60026/ffffff?text=L2",
+      initials: "L2",
+      bgColor: "bg-powerred",
       instagram: "#",
       carta: "#"
     }
@@ -351,11 +353,9 @@ const SocialProof = () => {
             >
               {/* Main Card */}
               <div className="w-52 h-52 bg-offwhite rounded-2xl border border-gray-200 flex items-center justify-center shadow-lg relative overflow-visible">
-                <img 
-                  src={local.logo} 
-                  alt={local.name}
-                  className="w-20 h-20 object-contain"
-                />
+                <div className={`w-20 h-20 ${local.bgColor} rounded-2xl flex items-center justify-center`}>
+                  <span className="text-white font-bold text-2xl font-serif">{local.initials}</span>
+                </div>
                 
                 {/* Hover Bubbles - Instagram (Left) */}
                 <motion.a
@@ -646,7 +646,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
             <motion.div 
               initial={{ x: 50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
-              className="absolute top-1/4 -right-8 md:-right-16 bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 z-30 max-w-[180px]"
+              className="absolute top-1/4 right-0 md:-right-4 bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 z-30 max-w-[180px] hidden lg:block"
             >
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-7 h-7 bg-green-500/10 text-green-600 rounded-full flex items-center justify-center">
