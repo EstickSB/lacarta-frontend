@@ -505,7 +505,7 @@ const FoundingLocalsForm = () => {
   const inputClass = "w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors";
 
   return (
-    <section id="fundadores" className="pt-24 pb-16 px-6 bg-richblack text-white relative overflow-hidden">
+    <section id="fundadores" className="p-35 px-6 bg-richblack text-white relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_30%,#E6002610_0%,transparent_50%)]"></div>
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative z-10">
         <div>
@@ -600,7 +600,12 @@ const FoundingLocalsForm = () => {
                 </button>
               ) : (
                 <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-1.5">
-                  <label htmlFor="referido" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Código de Referido</label>
+                  <div className="flex items-center justify-between">
+                    <label htmlFor="referido" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Código de Referido</label>
+                    <button type="button" onClick={() => { setShowReferido(false); setReferido(''); }} className="text-[10px] text-gray-500 hover:text-red-400 transition-colors flex items-center gap-1">
+                      <X size={12} /> Quitar
+                    </button>
+                  </div>
                   <div className="relative">
                     <Tag className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} aria-hidden="true" />
                     <input id="referido" type="text" placeholder="LAMARTINA2026" value={referido} onChange={e => setReferido(e.target.value)} className={inputClass} />
