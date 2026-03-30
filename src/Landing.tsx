@@ -830,8 +830,23 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
             <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500 mb-10">
                <a href="/terminos" className="hover:text-white transition-colors">Términos</a>
                <a href="/privacidad" className="hover:text-white transition-colors">Privacidad</a>
-               <a href="#" className="hover:text-white transition-colors">Blog Gastronómico</a>
-               <a href="#" className="hover:text-white transition-colors">Contacto</a>
+               <a href="/blog/como-digitalizar-carta-restaurante" className="hover:text-white transition-colors">Blog</a>
+               <a href="/#fundadores" className="hover:text-white transition-colors">Contacto</a>
+            </div>
+            
+            {/* Cities Grid */}
+            <div className="mb-8 pb-8 border-b border-white/10">
+               <p className="text-xs text-gray-500 mb-4">Cartas digitales por ciudad:</p>
+               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-2xl mx-auto">
+                  <a href="/carta-digital-lima" className="text-xs text-gray-600 hover:text-white transition-colors">Lima</a>
+                  <a href="/carta-digital-arequipa" className="text-xs text-gray-600 hover:text-white transition-colors">Arequipa</a>
+                  <a href="/carta-digital-cusco" className="text-xs text-gray-600 hover:text-white transition-colors">Cusco</a>
+                  <a href="/carta-digital-trujillo" className="text-xs text-gray-600 hover:text-white transition-colors">Trujillo</a>
+                  <a href="/carta-digital-chiclayo" className="text-xs text-gray-600 hover:text-white transition-colors">Chiclayo</a>
+                  <a href="/carta-digital-piura" className="text-xs text-gray-600 hover:text-white transition-colors">Piura</a>
+                  <a href="/carta-digital-huancayo" className="text-xs text-gray-600 hover:text-white transition-colors">Huancayo</a>
+                  <a href="/carta-digital-ica" className="text-xs text-gray-600 hover:text-white transition-colors">Ica</a>
+               </div>
             </div>
             
             <p className="text-gray-600 text-xs">© 2026 LaCarta Technology. Designed for the future of dining.</p>

@@ -6,6 +6,10 @@ import { SplashScreen } from './components/SplashScreen';
 // Lazy loading de páginas que no son landing
 const Terminos = lazy(() => import('./Terminos'));
 const Privacidad = lazy(() => import('./Privacidad'));
+
+// SEO Pages - City & Blog
+const CityPage = lazy(() => import('./seo/CityPage'));
+const BlogPost = lazy(() => import('./seo/BlogPost'));
 import { DishCard } from './components/DishCard';
 import { LazyImage } from './components/LazyImage';
 import { Watermark } from './components/Watermark';
@@ -325,6 +329,26 @@ function App() {
     return (
       <Suspense fallback={<div className="min-h-screen bg-offwhite flex items-center justify-center"><p className="text-gray-500">Cargando...</p></div>}>
         <Privacidad />
+      </Suspense>
+    );
+  }
+
+  // City pages
+  if (path.startsWith('/carta-digital-')) {
+    const citySlug = path.replace('/carta-digital-', '');
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-offwhite flex items-center justify-center"><p className="text-gray-500">Cargando...</p></div>}>
+        <CityPage citySlug={citySlug} />
+      </Suspense>
+    );
+  }
+
+  // Blog posts
+  if (path.startsWith('/blog/')) {
+    const postSlug = path.replace('/blog/', '');
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-offwhite flex items-center justify-center"><p className="text-gray-500">Cargando...</p></div>}>
+        <BlogPost postSlug={postSlug} />
       </Suspense>
     );
   }
