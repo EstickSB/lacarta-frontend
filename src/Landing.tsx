@@ -383,7 +383,7 @@ const SocialProof = () => {
                     opacity: 0, scaleY: 0,
                     transition: { duration: 0.3 }
                   }}
-                  className="absolute top-1/2 w-[2px] h-24 bg-gray-300 origin-top"
+                  className="absolute top-1/2 w-[2px] h-16 bg-gray-300 origin-top"
                 />
 
                 {/* Instagram bubble - splits left */}
@@ -392,15 +392,15 @@ const SocialProof = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Instagram de ${local.name}`}
-                  initial={{ opacity: 0, y: 80, x: 0, scale: 0 }}
+                  initial={{ opacity: 0, y: 50, x: 0, scale: 0 }}
                   animate={hoveredIndex === i ? {
                     opacity: 1,
-                    y: 140,
+                    y: 90,
                     x: -36,
                     scale: 1,
                     transition: { duration: 0.5, delay: 0.35, type: "spring", stiffness: 200, damping: 15 }
                   } : {
-                    opacity: 0, y: 80, x: 0, scale: 0,
+                    opacity: 0, y: 50, x: 0, scale: 0,
                     transition: { duration: 0.35, ease: "easeIn" }
                   }}
                   className="absolute top-1/2 w-11 h-11 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform pointer-events-auto"
@@ -412,15 +412,15 @@ const SocialProof = () => {
                 <motion.a
                   href={local.carta}
                   aria-label={`Ver carta de ${local.name}`}
-                  initial={{ opacity: 0, y: 80, x: 0, scale: 0 }}
+                  initial={{ opacity: 0, y: 50, x: 0, scale: 0 }}
                   animate={hoveredIndex === i ? {
                     opacity: 1,
-                    y: 140,
+                    y: 90,
                     x: 36,
                     scale: 1,
                     transition: { duration: 0.5, delay: 0.4, type: "spring", stiffness: 200, damping: 15 }
                   } : {
-                    opacity: 0, y: 80, x: 0, scale: 0,
+                    opacity: 0, y: 50, x: 0, scale: 0,
                     transition: { duration: 0.35, ease: "easeIn" }
                   }}
                   className="absolute top-1/2 w-11 h-11 bg-powerred rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform pointer-events-auto"
@@ -430,7 +430,7 @@ const SocialProof = () => {
               </div>
 
               {/* Main Card - ON TOP */}
-              <div className="w-48 h-32 bg-white rounded-xl flex items-center justify-center shadow-md relative p-5" style={{ zIndex: 1 }}>
+              <div className="w-56 h-44 bg-transparent rounded-xl flex items-center justify-center relative p-4" style={{ zIndex: 1 }}>
                 <img 
                   src={local.logo} 
                   alt={`Logo de ${local.name}`}
