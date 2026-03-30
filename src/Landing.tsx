@@ -804,33 +804,6 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
         </div>
       </section>
 
-      {/* 6. ADN Gastronómico - Interactive Component */}
-      <section className="py-16 px-6 bg-white border-t border-gray-100">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="font-serif text-2xl md:text-3xl mb-3 text-richblack">Explora tu carta con <span className="text-powerred italic">ADN Gastronómico</span></h2>
-            <p className="text-gray-600 text-sm">Filtra por preferencias alimentarias y haz que tus clientes encuentren exactamente lo que buscan.</p>
-          </div>
-          
-          <div className="max-w-2xl mx-auto">
-            <DNAInteraction />
-          </div>
-
-          <div className="mt-10 text-center">
-            <p className="text-sm text-gray-600 mb-6">Los clientes pueden filtrar platos según sus necesidades: vegano, picante, sin gluten y más.</p>
-            <Button 
-              onClick={() => {
-                const el = document.getElementById('fundadores');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }} 
-              className="inline-flex items-center gap-2"
-            >
-              Probar la experiencia <ArrowRight size={16} />
-            </Button>
-          </div>
-        </div>
-      </section>
-
       {/* 7. Social Proof & Testimonials */}
       <SocialProof />
 
