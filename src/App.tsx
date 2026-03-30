@@ -7,8 +7,8 @@ import { SplashScreen } from './components/SplashScreen';
 const Terminos = lazy(() => import('./Terminos'));
 const Privacidad = lazy(() => import('./Privacidad'));
 
-// SEO Pages - City & Blog
-const CityPage = lazy(() => import('./seo/CityPage'));
+// SEO Pages - Blog (cities unified under blog)
+const BlogIndex = lazy(() => import('./seo/BlogIndex'));
 const BlogPost = lazy(() => import('./seo/BlogPost'));
 import { DishCard } from './components/DishCard';
 import { LazyImage } from './components/LazyImage';
@@ -333,14 +333,9 @@ function App() {
     );
   }
 
-  // City pages
+  // City pages → show landing (same page, SEO aliases)
   if (path.startsWith('/carta-digital-')) {
-    const citySlug = path.replace('/carta-digital-', '');
-    return (
-      <Suspense fallback={<div className="min-h-screen bg-offwhite flex items-center justify-center"><p className="text-gray-500">Cargando...</p></div>}>
-        <CityPage citySlug={citySlug} />
-      </Suspense>
-    );
+    return <Landing onEnterApp={() => {}} />;
   }
 
   // Blog posts
