@@ -17,7 +17,10 @@ import {
   Building2,
   LayoutDashboard,
   Smartphone,
-  Instagram
+  Instagram,
+  Phone,
+  Tag,
+  Loader2
 } from 'lucide-react';
 import Button from './components/Button';
 
@@ -445,7 +448,62 @@ const SocialProof = () => {
   );
 };
 
+const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1488244228000710747/1cnY0oH-C7lN7JlQjPKrgsKzzTsdpag86YrMnIBobQzsSEyldXUPNjwLZSiSEzzXd16b';
+
 const FoundingLocalsForm = () => {
+  const [nombre, setNombre] = useState('');
+  const [local, setLocal] = useState('');
+  const [email, setEmail] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [showReferido, setShowReferido] = useState(false);
+  const [referido, setReferido] = useState('');
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!nombre.trim() || !local.trim() || !email.trim() || !telefono.trim()) {
+      setError('Todos los campos son obligatorios');
+      return;
+    }
+    setError('');
+    setSending(true);
+
+    try {
+      const fields = [
+        { name: '👤 Responsable', value: nombre, inline: true },
+        { name: '🏪 Local', value: local, inline: true },
+        { name: '📧 Email', value: email, inline: false },
+        { name: '📱 Teléfono', value: telefono, inline: true },
+      ];
+      if (referido.trim()) {
+        fields.push({ name: '🏷️ Código Referido', value: referido, inline: true });
+      }
+
+      await fetch(DISCORD_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          embeds: [{
+            title: '🍽️ Nueva Solicitud — Local Fundador',
+            color: 0xDC2626,
+            fields,
+            footer: { text: `LaCarta.space • ${new Date().toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}` },
+          }],
+        }),
+      });
+      setSent(true);
+      setNombre(''); setLocal(''); setEmail(''); setTelefono(''); setReferido(''); setShowReferido(false);
+    } catch {
+      setError('Error al enviar. Intenta de nuevo.');
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const inputClass = "w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors";
+
   return (
     <section id="fundadores" className="py-16 px-6 bg-richblack text-white relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_30%,#E6002610_0%,transparent_50%)]"></div>
@@ -485,54 +543,91 @@ const FoundingLocalsForm = () => {
         </div>
 
         <div className="bg-white/5 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-white/10 shadow-2xl">
-          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-            <div className="space-y-2">
-              <label htmlFor="nombre-responsable" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Nombre del Responsable</label>
-              <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
-                <input 
-                  id="nombre-responsable"
-                  type="text" 
-                  placeholder="Ej. Juan Pérez"
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors"
-                />
+          {sent ? (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }} 
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-10"
+            >
+              <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Check size={32} className="text-green-400" />
               </div>
-            </div>
-            
-            <div className="space-y-2">
-              <label htmlFor="nombre-local" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Nombre del Local</label>
-              <div className="relative">
-                <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
-                <input 
-                  id="nombre-local"
-                  type="text" 
-                  placeholder="Ej. La Pizzería Central"
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors"
-                />
+              <h3 className="font-serif text-xl mb-2">¡Solicitud enviada!</h3>
+              <p className="text-gray-400 text-sm">Nos pondremos en contacto contigo en menos de 24 horas.</p>
+              <button 
+                onClick={() => setSent(false)}
+                className="mt-6 text-sm text-powerred hover:underline"
+              >
+                Enviar otra solicitud
+              </button>
+            </motion.div>
+          ) : (
+            <form className="space-y-5" onSubmit={handleSubmit}>
+              <div className="space-y-2">
+                <label htmlFor="nombre-responsable" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Nombre del Responsable</label>
+                <div className="relative">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
+                  <input id="nombre-responsable" type="text" placeholder="Ej. Juan Pérez" value={nombre} onChange={e => setNombre(e.target.value)} className={inputClass} />
+                </div>
               </div>
-            </div>
+              
+              <div className="space-y-2">
+                <label htmlFor="nombre-local" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Nombre del Local</label>
+                <div className="relative">
+                  <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
+                  <input id="nombre-local" type="text" placeholder="Ej. La Pizzería Central" value={local} onChange={e => setLocal(e.target.value)} className={inputClass} />
+                </div>
+              </div>
 
-            <div className="space-y-2">
-              <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Correo Electrónico</label>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
-                <input 
-                  id="email"
-                  type="email" 
-                  placeholder="juan@ejemplo.com"
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors"
-                />
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Correo Electrónico</label>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
+                  <input id="email" type="email" placeholder="juan@ejemplo.com" value={email} onChange={e => setEmail(e.target.value)} className={inputClass} />
+                </div>
               </div>
-            </div>
 
-            <button className="w-full bg-powerred hover:bg-red-600 text-white font-bold py-5 rounded-2xl shadow-xl shadow-powerred/20 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2">
-              Enviar solicitud <ArrowRight size={20} />
-            </button>
-            <p className="text-center text-[10px] text-gray-500 uppercase tracking-widest">Nos pondremos en contacto en menos de 24h</p>
-            <p className="text-center text-xs text-gray-400 mt-3 flex items-center justify-center gap-1">
-              🔒 Tus datos están 100% protegidos. No compartimos ni revelamos tu información con terceros.
-            </p>
-          </form>
+              <div className="space-y-2">
+                <label htmlFor="telefono" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Número de Teléfono</label>
+                <div className="relative">
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
+                  <input id="telefono" type="tel" placeholder="Ej. 987 654 321" value={telefono} onChange={e => setTelefono(e.target.value)} className={inputClass} />
+                </div>
+              </div>
+
+              {!showReferido ? (
+                <button 
+                  type="button" 
+                  onClick={() => setShowReferido(true)}
+                  className="flex items-center gap-2 text-sm text-gray-400 hover:text-powerred transition-colors"
+                >
+                  <Tag size={16} /> ¿Tienes un código de referido?
+                </button>
+              ) : (
+                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-2">
+                  <label htmlFor="referido" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Código de Referido</label>
+                  <div className="relative">
+                    <Tag className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
+                    <input id="referido" type="text" placeholder="Ej. LAMARTINA2026" value={referido} onChange={e => setReferido(e.target.value)} className={inputClass} />
+                  </div>
+                </motion.div>
+              )}
+
+              {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+
+              <button 
+                type="submit" 
+                disabled={sending}
+                className="w-full bg-powerred hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-5 rounded-2xl shadow-xl shadow-powerred/20 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+              >
+                {sending ? <><Loader2 size={20} className="animate-spin" /> Enviando...</> : <>Enviar solicitud <ArrowRight size={20} /></>}
+              </button>
+              <p className="text-center text-[10px] text-gray-500 uppercase tracking-widest">Nos pondremos en contacto en menos de 24h</p>
+              <p className="text-center text-xs text-gray-400 mt-3 flex items-center justify-center gap-1">
+                🔒 Tus datos están 100% protegidos. No compartimos ni revelamos tu información con terceros.
+              </p>
+            </form>
+          )}
         </div>
       </div>
     </section>
