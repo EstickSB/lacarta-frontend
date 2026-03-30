@@ -505,7 +505,7 @@ const FoundingLocalsForm = () => {
   const inputClass = "w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors";
 
   return (
-    <section id="fundadores" className="py-16 px-6 bg-richblack text-white relative overflow-hidden">
+    <section id="fundadores" className="pt-24 pb-16 px-6 bg-richblack text-white relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_30%,#E6002610_0%,transparent_50%)]"></div>
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative z-10">
         <div>
