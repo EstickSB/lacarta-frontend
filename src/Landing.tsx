@@ -502,7 +502,7 @@ const FoundingLocalsForm = () => {
     }
   };
 
-  const inputClass = "w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors";
+  const inputClass = "w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors";
 
   return (
     <section id="fundadores" className="py-16 px-6 bg-richblack text-white relative overflow-hidden">
@@ -562,69 +562,60 @@ const FoundingLocalsForm = () => {
               </button>
             </motion.div>
           ) : (
-            <form className="space-y-5" onSubmit={handleSubmit}>
-              <div className="space-y-2">
-                <label htmlFor="nombre-responsable" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Nombre del Responsable</label>
-                <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
-                  <input id="nombre-responsable" type="text" placeholder="Ej. Juan Pérez" value={nombre} onChange={e => setNombre(e.target.value)} className={inputClass} />
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label htmlFor="nombre-responsable" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Responsable</label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} aria-hidden="true" />
+                    <input id="nombre-responsable" type="text" placeholder="Juan Pérez" value={nombre} onChange={e => setNombre(e.target.value)} className={inputClass} />
+                  </div>
                 </div>
-              </div>
-              
-              <div className="space-y-2">
-                <label htmlFor="nombre-local" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Nombre del Local</label>
-                <div className="relative">
-                  <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
-                  <input id="nombre-local" type="text" placeholder="Ej. La Pizzería Central" value={local} onChange={e => setLocal(e.target.value)} className={inputClass} />
+                <div className="space-y-1.5">
+                  <label htmlFor="nombre-local" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Local</label>
+                  <div className="relative">
+                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} aria-hidden="true" />
+                    <input id="nombre-local" type="text" placeholder="La Pizzería Central" value={local} onChange={e => setLocal(e.target.value)} className={inputClass} />
+                  </div>
                 </div>
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Correo Electrónico</label>
-                <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
-                  <input id="email" type="email" placeholder="juan@ejemplo.com" value={email} onChange={e => setEmail(e.target.value)} className={inputClass} />
+                <div className="space-y-1.5">
+                  <label htmlFor="email" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Email</label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} aria-hidden="true" />
+                    <input id="email" type="email" placeholder="juan@ejemplo.com" value={email} onChange={e => setEmail(e.target.value)} className={inputClass} />
+                  </div>
                 </div>
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="telefono" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Número de Teléfono</label>
-                <div className="relative">
-                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
-                  <input id="telefono" type="tel" placeholder="Ej. 987 654 321" value={telefono} onChange={e => setTelefono(e.target.value)} className={inputClass} />
+                <div className="space-y-1.5">
+                  <label htmlFor="telefono" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Teléfono</label>
+                  <div className="relative">
+                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} aria-hidden="true" />
+                    <input id="telefono" type="tel" placeholder="987 654 321" value={telefono} onChange={e => setTelefono(e.target.value)} className={inputClass} />
+                  </div>
                 </div>
               </div>
 
               {!showReferido ? (
-                <button 
-                  type="button" 
-                  onClick={() => setShowReferido(true)}
-                  className="flex items-center gap-2 text-sm text-gray-400 hover:text-powerred transition-colors"
-                >
-                  <Tag size={16} /> ¿Tienes un código de referido?
+                <button type="button" onClick={() => setShowReferido(true)} className="flex items-center gap-2 text-xs text-gray-400 hover:text-powerred transition-colors">
+                  <Tag size={14} /> ¿Tienes un código de referido?
                 </button>
               ) : (
-                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-2">
-                  <label htmlFor="referido" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Código de Referido</label>
+                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-1.5">
+                  <label htmlFor="referido" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Código de Referido</label>
                   <div className="relative">
-                    <Tag className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
-                    <input id="referido" type="text" placeholder="Ej. LAMARTINA2026" value={referido} onChange={e => setReferido(e.target.value)} className={inputClass} />
+                    <Tag className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} aria-hidden="true" />
+                    <input id="referido" type="text" placeholder="LAMARTINA2026" value={referido} onChange={e => setReferido(e.target.value)} className={inputClass} />
                   </div>
                 </motion.div>
               )}
 
-              {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+              {error && <p className="text-red-400 text-xs text-center">{error}</p>}
 
-              <button 
-                type="submit" 
-                disabled={sending}
-                className="w-full bg-powerred hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-5 rounded-2xl shadow-xl shadow-powerred/20 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
-              >
+              <button type="submit" disabled={sending} className="w-full bg-powerred hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 rounded-2xl shadow-xl shadow-powerred/20 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2">
                 {sending ? <><Loader2 size={20} className="animate-spin" /> Enviando...</> : <>Enviar solicitud <ArrowRight size={20} /></>}
               </button>
               <p className="text-center text-[10px] text-gray-500 uppercase tracking-widest">Nos pondremos en contacto en menos de 24h</p>
-              <p className="text-center text-xs text-gray-400 mt-3 flex items-center justify-center gap-1">
-                🔒 Tus datos están 100% protegidos. No compartimos ni revelamos tu información con terceros.
+              <p className="text-center text-[10px] text-gray-400 mt-2 flex items-center justify-center gap-1">
+                🔒 Tus datos están 100% protegidos.
               </p>
             </form>
           )}
