@@ -7,9 +7,6 @@ import { SplashScreen } from './components/SplashScreen';
 const Terminos = lazy(() => import('./Terminos'));
 const Privacidad = lazy(() => import('./Privacidad'));
 
-// SEO Pages - Blog (cities unified under blog)
-const BlogIndex = lazy(() => import('./seo/BlogIndex'));
-const BlogPost = lazy(() => import('./seo/BlogPost'));
 import { DishCard } from './components/DishCard';
 import { LazyImage } from './components/LazyImage';
 import { Watermark } from './components/Watermark';
@@ -333,30 +330,9 @@ function App() {
     );
   }
 
-  // Redirect old city pages to blog
+  // City SEO aliases → same landing page
   if (path.startsWith('/carta-digital-')) {
-    const citySlug = path.replace('/carta-digital-', '');
-    window.location.replace(`/blog/carta-digital-${citySlug}`);
-    return null;
-  }
-
-  // Blog index
-  if (path === '/blog' || path === '/blog/') {
-    return (
-      <Suspense fallback={<div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0a0a0a' }}><p className="text-white/40">Cargando...</p></div>}>
-        <BlogIndex />
-      </Suspense>
-    );
-  }
-
-  // Blog posts (articles + city pages under /blog/carta-digital-*)
-  if (path.startsWith('/blog/')) {
-    const postSlug = path.replace('/blog/', '');
-    return (
-      <Suspense fallback={<div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0a0a0a' }}><p className="text-white/40">Cargando...</p></div>}>
-        <BlogPost postSlug={postSlug} />
-      </Suspense>
-    );
+    return <Landing onEnterApp={() => {}} />;
   }
 
   return <Landing onEnterApp={() => {}} />;

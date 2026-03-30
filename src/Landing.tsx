@@ -277,7 +277,6 @@ const Navbar = ({ onEnterApp }: { onEnterApp: () => void }) => {
   const navLinks = [
     { name: 'Beneficios', href: '#beneficios' },
     { name: 'Cómo Funciona', href: '#como-funciona' },
-    { name: 'Blog', href: '/blog' },
     { name: 'Fundadores', href: '#fundadores' }
   ];
 
