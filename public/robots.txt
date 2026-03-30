@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /restaurante/*/menu
+
+Sitemap: https://lacarta.space/sitemap.xml

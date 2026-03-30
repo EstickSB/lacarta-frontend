@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, lazy, Suspense } from 'react';
 import { AnimatePresence, m } from 'framer-motion';
 import Landing from './Landing';
-import Terminos from './Terminos';
-import Privacidad from './Privacidad';
 import { SplashScreen } from './components/SplashScreen';
+
+// Lazy loading de páginas que no son landing
+const Terminos = lazy(() => import('./Terminos'));
+const Privacidad = lazy(() => import('./Privacidad'));
 import { DishCard } from './components/DishCard';
 import { LazyImage } from './components/LazyImage';
 import { Watermark } from './components/Watermark';
@@ -312,11 +314,19 @@ function App() {
   }
 
   if (path === '/terminos') {
-    return <Terminos />;
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-offwhite flex items-center justify-center"><p className="text-gray-500">Cargando...</p></div>}>
+        <Terminos />
+      </Suspense>
+    );
   }
 
   if (path === '/privacidad') {
-    return <Privacidad />;
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-offwhite flex items-center justify-center"><p className="text-gray-500">Cargando...</p></div>}>
+        <Privacidad />
+      </Suspense>
+    );
   }
 
   return <Landing onEnterApp={() => {}} />;

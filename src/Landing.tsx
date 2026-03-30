@@ -445,19 +445,19 @@ const FoundingLocalsForm = () => {
           <div className="space-y-6">
             <div className="flex items-center gap-4">
               <div className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                <Check size={18} className="text-powerred" />
+                <Check size={18} className="text-powerred" aria-hidden="true" />
               </div>
               <span className="text-gray-300">Implementación asistida y personalizada</span>
             </div>
             <div className="flex items-center gap-4">
               <div className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                <Check size={18} className="text-powerred" />
+                <Check size={18} className="text-powerred" aria-hidden="true" />
               </div>
               <span className="text-gray-300">Beneficios exclusivos de por vida</span>
             </div>
             <div className="flex items-center gap-4">
               <div className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                <Check size={18} className="text-powerred" />
+                <Check size={18} className="text-powerred" aria-hidden="true" />
               </div>
               <span className="text-gray-300">Prioridad en nuevas funcionalidades</span>
             </div>
@@ -467,10 +467,11 @@ const FoundingLocalsForm = () => {
         <div className="bg-white/5 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-white/10 shadow-2xl">
           <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-2">Nombre del Responsable</label>
+              <label htmlFor="nombre-responsable" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Nombre del Responsable</label>
               <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
                 <input 
+                  id="nombre-responsable"
                   type="text" 
                   placeholder="Ej. Juan Pérez"
                   className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors"
@@ -479,10 +480,11 @@ const FoundingLocalsForm = () => {
             </div>
             
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-2">Nombre del Local</label>
+              <label htmlFor="nombre-local" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Nombre del Local</label>
               <div className="relative">
-                <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
                 <input 
+                  id="nombre-local"
                   type="text" 
                   placeholder="Ej. La Pizzería Central"
                   className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors"
@@ -491,10 +493,11 @@ const FoundingLocalsForm = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-2">Correo Electrónico</label>
+              <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-gray-600 ml-2">Correo Electrónico</label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} aria-hidden="true" />
                 <input 
+                  id="email"
                   type="email" 
                   placeholder="juan@ejemplo.com"
                   className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors"
