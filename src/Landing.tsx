@@ -940,7 +940,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
                </div>
             </div>
             
-            <p className="text-gray-600 text-xs">© 2026 LaCarta Technology. Designed for the future of dining.</p>
+            <p className="text-gray-600 text-xs">© 2026 LaCarta Technology. Powered by <a href="https://luminari.agency" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Luminari</a></p>
          </div>
       </footer>
 
