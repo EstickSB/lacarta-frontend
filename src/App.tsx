@@ -308,7 +308,7 @@ function MenuView() {
 
 function App() {
   const path = window.location.pathname;
-  const isRestaurantPage = path.startsWith('/restaurante/') || path.startsWith('/rest/') || path.startsWith('/restaurant/');
+  const isRestaurantPage = path.startsWith('/restaurante/') || path.startsWith('/restaurant/') || path.startsWith('/rest/') || path.startsWith('/res/');
 
   if (isRestaurantPage) {
     return <MenuView />;
