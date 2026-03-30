@@ -66,6 +66,18 @@ const MagneticButton = ({ children, onClick, variant = 'primary', className }: a
 };
 
 const PhoneMockup = () => {
+  // URLs de comida peruana/latina de Unsplash
+  const foodImages = [
+    'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=100&h=100&fit=crop', // Ceviche
+    'https://images.unsplash.com/photo-1604909052743-94e838986d24?w=100&h=100&fit=crop', // Lomo saltado
+    'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=100&h=100&fit=crop', // Arroz
+    'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=100&h=100&fit=crop', // Pollo
+    'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop', // Ensalada
+    'https://images.unsplash.com/photo-1562007908-17c67e878c88?w=100&h=100&fit=crop', // Tacos
+    'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=100&h=100&fit=crop', // Pizza
+    'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=100&h=100&fit=crop', // Hamburguesa
+  ];
+
   return (
     <div className="relative mx-auto border-richblack bg-richblack border-[12px] rounded-[3rem] h-[500px] sm:h-[550px] md:h-[600px] w-[260px] sm:w-[280px] md:w-[300px] shadow-2xl shadow-richblack/40 z-20 transform hover:scale-[1.02] transition-transform duration-500">
       {/* Side Buttons */}
@@ -86,7 +98,7 @@ const PhoneMockup = () => {
         >
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i} className="bg-white rounded-2xl p-3 shadow-sm border border-gray-100 flex gap-3 transform hover:scale-105 transition-transform duration-300">
-              <img src={`https://picsum.photos/100/100?random=${i+50}`} className="w-16 h-16 rounded-xl object-cover bg-gray-200" alt="Food" />
+              <img src={foodImages[i]} className="w-16 h-16 rounded-xl object-cover bg-gray-200" alt="Food" />
               <div className="flex-1 space-y-2">
                 <div className="h-3 w-3/4 bg-gray-200 rounded-full"></div>
                 <div className="h-2 w-1/2 bg-gray-100 rounded-full"></div>
@@ -100,7 +112,7 @@ const PhoneMockup = () => {
            {/* Duplicate for Loop */}
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i + 8} className="bg-white rounded-2xl p-3 shadow-sm border border-gray-100 flex gap-3">
-              <img src={`https://picsum.photos/100/100?random=${i+150}`} className="w-16 h-16 rounded-xl object-cover bg-gray-200" alt="Food" />
+              <img src={foodImages[i]} className="w-16 h-16 rounded-xl object-cover bg-gray-200" alt="Food" />
               <div className="flex-1 space-y-2">
                 <div className="h-3 w-3/4 bg-gray-200 rounded-full"></div>
                 <div className="h-2 w-1/2 bg-gray-100 rounded-full"></div>
@@ -132,11 +144,11 @@ const DNAInteraction = () => {
   const [filter, setFilter] = useState<'ALL' | 'VEGAN' | 'SPICY' | 'GLUTEN'>('ALL');
 
   const items = [
-    { id: 1, name: 'Tacos Al Pastor', type: 'SPICY', img: '10' },
-    { id: 2, name: 'Buddha Bowl', type: 'VEGAN', img: '20' },
-    { id: 3, name: 'Risotto Trufa', type: 'GLUTEN', img: '30' },
-    { id: 4, name: 'Curry Rojo', type: 'SPICY', img: '40' },
-    { id: 5, name: 'Ensalada Kale', type: 'VEGAN', img: '50' },
+    { id: 1, name: 'Tacos Al Pastor', type: 'SPICY', img: 'https://images.unsplash.com/photo-1562007908-17c67e878c88?w=50&h=50&fit=crop' },
+    { id: 2, name: 'Buddha Bowl', type: 'VEGAN', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=50&h=50&fit=crop' },
+    { id: 3, name: 'Risotto Trufa', type: 'GLUTEN', img: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=50&h=50&fit=crop' },
+    { id: 4, name: 'Curry Rojo', type: 'SPICY', img: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=50&h=50&fit=crop' },
+    { id: 5, name: 'Ensalada Kale', type: 'VEGAN', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=50&h=50&fit=crop' },
   ];
 
   const filteredItems = filter === 'ALL' ? items : items; 
@@ -186,7 +198,7 @@ const DNAInteraction = () => {
                  isMatch ? 'bg-white shadow-sm border border-gray-100' : 'bg-transparent'
                }`}
              >
-                <img src={`https://picsum.photos/50/50?random=${item.img}`} className="w-10 h-10 rounded-lg bg-gray-200 object-cover" alt={item.name}/>
+                <img src={item.img} className="w-10 h-10 rounded-lg bg-gray-200 object-cover" alt={item.name}/>
                 <div className="flex-1">
                   <div className="font-medium text-sm text-richblack">{item.name}</div>
                   <div className="h-2 w-16 bg-gray-100 rounded-full mt-1"></div>
@@ -224,7 +236,7 @@ const HolographicQR = () => (
         <div className="absolute top-1/2 -left-6 w-2 h-2 bg-yellow-500 rounded-full blur-[1px]"></div>
      </div>
 
-     <div className="absolute bottom-3 text-[10px] font-bold tracking-[0.3em] text-gray-400">SCAN</div>
+     <div className="absolute bottom-3 text-[10px] font-bold tracking-[0.3em] text-gray-400">ESCANEA</div>
   </motion.div>
 );
 
@@ -308,46 +320,16 @@ const SocialProof = () => {
 
   const locals = [
     {
-      name: "Café de la Plaza",
-      type: "Cafetería de Especialidad",
-      location: "Barcelona",
-      logo: "https://picsum.photos/200/200?random=10",
-      testimonial: "Gracias a LaCarta, digitalizamos nuestra carta y ahora los clientes pueden explorar nuestros productos de forma moderna.",
-      person: {
-        name: "Marta García",
-        role: "Propietaria",
-        photo: "https://i.pravatar.cc/150?u=marta",
-        comment: "La mejor decisión para modernizar nuestro negocio."
-      },
-      color: "bg-green-500"
+      name: "Local Fundador 1",
+      logo: "https://via.placeholder.com/120x120/1a1a1a/ffffff?text=L1",
+      instagram: "#",
+      carta: "#"
     },
     {
-      name: "Parrilla & Sabor",
-      type: "Restaurante de Carnes",
-      location: "Madrid",
-      logo: "https://picsum.photos/200/200?random=11",
-      testimonial: "Actualizamos la carta en tiempo real desde el móvil. Los clientes ven siempre lo que hay disponible.",
-      person: {
-        name: "Carlos Ruiz",
-        role: "Chef Ejecutivo",
-        photo: "https://i.pravatar.cc/150?u=carlos",
-        comment: "Un cambio radical en nuestra forma de presentar el menú."
-      },
-      color: "bg-powerred"
-    },
-    {
-      name: "Sushi Zen",
-      type: "Cocina Japonesa",
-      location: "Valencia",
-      logo: "https://picsum.photos/200/200?random=12",
-      testimonial: "La carta digital con QR nos permite mostrar fotos profesionales de cada plato. Los clientes exploran todo antes de elegir.",
-      person: {
-        name: "Elena Moon",
-        role: "Manager",
-        photo: "https://i.pravatar.cc/150?u=elena",
-        comment: "Tecnología que realmente entiende al restaurador."
-      },
-      color: "bg-blue-500"
+      name: "Local Fundador 2",
+      logo: "https://via.placeholder.com/120x120/E60026/ffffff?text=L2",
+      instagram: "#",
+      carta: "#"
     }
   ];
 
@@ -359,63 +341,70 @@ const SocialProof = () => {
           <p className="text-gray-500 text-lg">Liderando la transformación digital en la gastronomía.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="flex justify-center gap-16 flex-wrap">
           {locals.map((local, i) => (
             <motion.div 
               key={i}
-              className="relative group bg-white rounded-t-[2rem] shadow-xl shadow-gray-200/50 border border-gray-100 flex flex-col h-full overflow-visible"
+              className="relative"
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              {/* Top: Logo */}
-              <div className="p-10 flex justify-center items-center bg-gray-50 rounded-t-[2rem] border-b border-gray-100">
-                <motion.img 
+              {/* Main Card */}
+              <div className="w-64 h-64 bg-offwhite rounded-3xl border border-gray-200 flex items-center justify-center shadow-lg relative overflow-visible">
+                <img 
                   src={local.logo} 
                   alt={local.name}
-                  className={`h-20 w-20 object-contain transition-all duration-500 ${hoveredIndex === i ? 'grayscale-0 scale-110' : 'grayscale opacity-60'}`}
+                  className="w-28 h-28 object-contain"
                 />
-              </div>
+                
+                {/* Hover Bubbles - Instagram (Left) */}
+                <motion.a
+                  href={local.instagram}
+                  initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
+                  animate={hoveredIndex === i ? {
+                    opacity: 1,
+                    scale: 1,
+                    x: -80,
+                    y: 140,
+                    transition: { duration: 0.4, ease: "easeOut" }
+                  } : {
+                    opacity: 0,
+                    scale: 0,
+                    x: 0,
+                    y: 0,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="absolute top-1/2 left-1/2 w-16 h-16 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-full flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 transition-transform z-10"
+                  style={{ transformOrigin: 'center' }}
+                >
+                  <Instagram size={28} className="text-white" />
+                </motion.a>
 
-              {/* Header */}
-              <div className="p-8 pb-4">
-                <h3 className="font-bold text-xl text-richblack mb-1">{local.name}</h3>
-                <p className="text-xs text-gray-400 uppercase tracking-widest font-bold">{local.type} — {local.location}</p>
+                {/* Hover Bubbles - Carta (Right) */}
+                <motion.a
+                  href={local.carta}
+                  initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
+                  animate={hoveredIndex === i ? {
+                    opacity: 1,
+                    scale: 1,
+                    x: 80,
+                    y: 140,
+                    transition: { duration: 0.4, ease: "easeOut", delay: 0.05 }
+                  } : {
+                    opacity: 0,
+                    scale: 0,
+                    x: 0,
+                    y: 0,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="absolute top-1/2 left-1/2 w-16 h-16 bg-powerred rounded-full flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 transition-transform z-10"
+                  style={{ transformOrigin: 'center' }}
+                >
+                  <Newspaper size={28} className="text-white" />
+                </motion.a>
               </div>
-
-              {/* Body */}
-              <div className="px-8 pb-8 flex-1">
-                <p className="text-gray-500 text-sm leading-relaxed italic">"{local.testimonial}"</p>
-              </div>
-
-              {/* Hover Testimonial Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                animate={{ 
-                  opacity: hoveredIndex === i ? 1 : 0, 
-                  y: hoveredIndex === i ? 0 : 20,
-                  scale: hoveredIndex === i ? 1 : 0.95,
-                  pointerEvents: hoveredIndex === i ? 'auto' : 'none'
-                }}
-                className="absolute inset-x-0 top-0 bottom-0 bg-white rounded-[2rem] p-8 shadow-2xl z-20 flex flex-col justify-center items-center text-center border border-gray-100"
-              >
-                <img src={local.person.photo} alt={local.person.name} className="w-16 h-16 rounded-full object-cover mb-4 border-2 border-gray-100 shadow-sm" />
-                <div className="font-bold text-richblack">{local.person.name}</div>
-                <div className="text-[10px] text-gray-400 uppercase tracking-widest mb-4">{local.person.role}</div>
-                <p className="text-sm text-gray-600 font-medium">"{local.person.comment}"</p>
-              </motion.div>
-
-              {/* Bottom Strip */}
-              <div className={`h-14 ${local.color} flex items-center justify-center gap-4 px-8 rounded-b-2xl mt-auto`}>
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/40 transition-colors cursor-pointer">
-                  <Instagram size={14} className="text-white" />
-                </div>
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/40 transition-colors cursor-pointer">
-                  <Facebook size={14} className="text-white" />
-                </div>
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/40 transition-colors cursor-pointer">
-                  <Globe size={14} className="text-white" />
-                </div>
-              </div>
+              
+              <p className="text-center mt-6 text-sm font-medium text-gray-600">{local.name}</p>
             </motion.div>
           ))}
         </div>
@@ -514,15 +503,15 @@ const FoundingLocalsForm = () => {
 
 const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
   const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
+  const y1 = useTransform(scrollY, [0, 500], [0, 100]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -80]);
 
   return (
     <div className="min-h-screen bg-offwhite font-sans selection:bg-powerred selection:text-white overflow-x-hidden">
       <Navbar onEnterApp={onEnterApp} />
       
       {/* 1. Hero Section (3D Dynamic) */}
-      <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-20 px-6 overflow-hidden">
+      <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-20 px-6 overflow-visible">
         {/* Background Grid */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         
@@ -578,16 +567,18 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
              {/* Floating Elements (Food Holograms) */}
              <motion.img 
                style={{ y: y1 }}
-               src="https://picsum.photos/150/150?random=99" 
-               className="absolute top-20 -right-4 md:-right-12 w-24 h-24 md:w-32 md:h-32 rounded-full shadow-2xl border-4 border-white z-30 hidden sm:block"
+               src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=150&h=150&fit=crop" 
+               className="absolute top-20 -right-4 md:-right-12 w-24 h-24 md:w-32 md:h-32 rounded-full shadow-2xl border-4 border-white z-30 hidden sm:block object-cover"
                animate={{ y: [0, 20, 0] }}
                transition={{ repeat: Infinity, duration: 6 }}
+               alt="Hamburguesa"
              />
              <motion.img 
-               src="https://picsum.photos/150/150?random=98" 
-               className="absolute bottom-40 -left-4 md:-left-12 w-20 h-20 md:w-24 md:h-24 rounded-full shadow-2xl border-4 border-white z-30 hidden sm:block grayscale hover:grayscale-0 transition-all"
+               src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=150&h=150&fit=crop" 
+               className="absolute bottom-40 -left-4 md:-left-12 w-20 h-20 md:w-24 md:h-24 rounded-full shadow-2xl border-4 border-white z-30 hidden sm:block grayscale hover:grayscale-0 transition-all object-cover"
                animate={{ y: [0, -15, 0] }}
                transition={{ repeat: Infinity, duration: 5, delay: 1 }}
+               alt="Pizza"
              />
 
              {/* Holographic QR */}
@@ -646,8 +637,8 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
       </section>
 
       {/* 3. Core Feature: Carta Digital QR */}
-      <section id="como-funciona" className="py-24 px-6 bg-offwhite overflow-hidden">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section id="como-funciona" className="py-24 px-6 bg-offwhite overflow-visible">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="relative">
             <div className="absolute -top-20 -left-20 w-64 h-64 bg-powerred/10 rounded-full blur-[100px]"></div>
             <PhoneMockup />
@@ -661,15 +652,15 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
                 <div className="w-8 h-8 bg-green-500/10 text-green-600 rounded-full flex items-center justify-center">
                   <Check size={16} />
                 </div>
-                <span className="text-xs font-bold text-richblack">Experiencia Fluida</span>
+                <span className="text-xs font-bold text-richblack">Carta del Día</span>
               </div>
               <div className="space-y-2">
                 <div className="h-2 w-full bg-gray-100 rounded-full"></div>
                 <div className="h-2 w-2/3 bg-gray-100 rounded-full"></div>
               </div>
               <div className="mt-4 pt-4 border-t border-gray-50 flex justify-between items-center">
-                <span className="text-[10px] text-gray-400">Vista Móvil</span>
-                <span className="text-xs font-bold text-powerred">100% Digital</span>
+                <span className="text-[10px] text-gray-400">Menú Actualizado</span>
+                <span className="text-xs font-bold text-powerred">En Vivo</span>
               </div>
             </motion.div>
           </div>
