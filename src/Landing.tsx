@@ -320,18 +320,18 @@ const SocialProof = () => {
 
   const locals = [
     {
-      name: "Local Fundador 1",
-      initials: "L1",
+      name: "La Martina Resto & Bar",
+      initials: "LM",
       bgColor: "bg-richblack",
-      instagram: "#",
-      carta: "#"
+      instagram: "https://www.instagram.com/lamartina_pimentel/",
+      carta: "https://lacarta.space/restaurante/la-martina/menu"
     },
     {
-      name: "Local Fundador 2",
-      initials: "L2",
+      name: "AYUKI",
+      initials: "AY",
       bgColor: "bg-powerred",
-      instagram: "#",
-      carta: "#"
+      instagram: "https://www.instagram.com/ayuki_cix/",
+      carta: "https://lacarta.space/restaurante/ayuki-japanese-fusion-food/menu"
     }
   ];
 
@@ -347,42 +347,44 @@ const SocialProof = () => {
           {locals.map((local, i) => (
             <motion.div 
               key={i}
-              className="relative flex flex-col items-center"
+              className="relative flex flex-col items-center cursor-pointer"
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={() => setHoveredIndex(hoveredIndex === i ? null : i)}
             >
               {/* Bubble animation layer - BEHIND the card */}
-              <div className="absolute inset-0 flex justify-center">
-                {/* Single drop that falls down from center */}
+              <div className="absolute inset-0 flex justify-center pointer-events-none" style={{ zIndex: 0 }}>
+                {/* Drop line falling down */}
                 <motion.div
-                  initial={{ opacity: 0, y: 0, scale: 0 }}
+                  initial={{ opacity: 0, scaleY: 0 }}
                   animate={hoveredIndex === i ? {
-                    opacity: [0, 1, 1, 0],
-                    y: [0, 100, 100, 100],
-                    scale: [0, 1, 1, 0],
-                    transition: { duration: 0.35, ease: "easeIn", times: [0, 0.5, 0.7, 1] }
+                    opacity: [0, 0.6, 0.6, 0],
+                    scaleY: [0, 1, 1, 0],
+                    transition: { duration: 0.6, ease: "easeOut", times: [0, 0.4, 0.7, 1] }
                   } : {
-                    opacity: 0, y: 0, scale: 0,
-                    transition: { duration: 0.2 }
+                    opacity: 0, scaleY: 0,
+                    transition: { duration: 0.3 }
                   }}
-                  className="absolute top-1/2 w-4 h-4 bg-gray-400 rounded-full z-0"
+                  className="absolute top-1/2 w-[2px] h-24 bg-gray-300 origin-top"
                 />
 
                 {/* Instagram bubble - splits left */}
                 <motion.a
                   href={local.instagram}
-                  initial={{ opacity: 0, y: 100, x: 0, scale: 0 }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 80, x: 0, scale: 0 }}
                   animate={hoveredIndex === i ? {
                     opacity: 1,
-                    y: 130,
-                    x: -40,
+                    y: 140,
+                    x: -36,
                     scale: 1,
-                    transition: { duration: 0.4, delay: 0.25, ease: [0.34, 1.56, 0.64, 1] }
+                    transition: { duration: 0.5, delay: 0.35, type: "spring", stiffness: 200, damping: 15 }
                   } : {
-                    opacity: 0, y: 100, x: 0, scale: 0,
-                    transition: { duration: 0.25 }
+                    opacity: 0, y: 80, x: 0, scale: 0,
+                    transition: { duration: 0.35, ease: "easeIn" }
                   }}
-                  className="absolute top-1/2 w-11 h-11 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform z-0"
+                  className="absolute top-1/2 w-11 h-11 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform pointer-events-auto"
                 >
                   <Instagram size={20} className="text-white" />
                 </motion.a>
@@ -390,25 +392,25 @@ const SocialProof = () => {
                 {/* Carta bubble - splits right */}
                 <motion.a
                   href={local.carta}
-                  initial={{ opacity: 0, y: 100, x: 0, scale: 0 }}
+                  initial={{ opacity: 0, y: 80, x: 0, scale: 0 }}
                   animate={hoveredIndex === i ? {
                     opacity: 1,
-                    y: 130,
-                    x: 40,
+                    y: 140,
+                    x: 36,
                     scale: 1,
-                    transition: { duration: 0.4, delay: 0.3, ease: [0.34, 1.56, 0.64, 1] }
+                    transition: { duration: 0.5, delay: 0.4, type: "spring", stiffness: 200, damping: 15 }
                   } : {
-                    opacity: 0, y: 100, x: 0, scale: 0,
-                    transition: { duration: 0.25 }
+                    opacity: 0, y: 80, x: 0, scale: 0,
+                    transition: { duration: 0.35, ease: "easeIn" }
                   }}
-                  className="absolute top-1/2 w-11 h-11 bg-powerred rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform z-0"
+                  className="absolute top-1/2 w-11 h-11 bg-powerred rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform pointer-events-auto"
                 >
                   <Newspaper size={20} className="text-white" />
                 </motion.a>
               </div>
 
               {/* Main Card - ON TOP */}
-              <div className="w-52 h-52 bg-offwhite rounded-2xl border border-gray-200 flex items-center justify-center shadow-lg relative z-10">
+              <div className="w-52 h-52 bg-offwhite rounded-2xl border border-gray-200 flex items-center justify-center shadow-lg relative" style={{ zIndex: 1 }}>
                 <div className={`w-20 h-20 ${local.bgColor} rounded-2xl flex items-center justify-center`}>
                   <span className="text-white font-bold text-2xl font-serif">{local.initials}</span>
                 </div>
