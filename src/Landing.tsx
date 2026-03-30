@@ -432,19 +432,19 @@ const FoundingLocalsForm = () => {
           
           <div className="space-y-6">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+              <div className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
                 <Check size={18} className="text-powerred" />
               </div>
               <span className="text-gray-300">Implementación asistida y personalizada</span>
             </div>
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+              <div className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
                 <Check size={18} className="text-powerred" />
               </div>
               <span className="text-gray-300">Beneficios exclusivos de por vida</span>
             </div>
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+              <div className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
                 <Check size={18} className="text-powerred" />
               </div>
               <span className="text-gray-300">Prioridad en nuevas funcionalidades</span>
