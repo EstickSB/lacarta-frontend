@@ -333,16 +333,27 @@ function App() {
     );
   }
 
-  // City pages → show landing (same page, SEO aliases)
+  // Redirect old city pages to blog
   if (path.startsWith('/carta-digital-')) {
-    return <Landing onEnterApp={() => {}} />;
+    const citySlug = path.replace('/carta-digital-', '');
+    window.location.replace(`/blog/carta-digital-${citySlug}`);
+    return null;
   }
 
-  // Blog posts
+  // Blog index
+  if (path === '/blog' || path === '/blog/') {
+    return (
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0a0a0a' }}><p className="text-white/40">Cargando...</p></div>}>
+        <BlogIndex />
+      </Suspense>
+    );
+  }
+
+  // Blog posts (articles + city pages under /blog/carta-digital-*)
   if (path.startsWith('/blog/')) {
     const postSlug = path.replace('/blog/', '');
     return (
-      <Suspense fallback={<div className="min-h-screen bg-offwhite flex items-center justify-center"><p className="text-gray-500">Cargando...</p></div>}>
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0a0a0a' }}><p className="text-white/40">Cargando...</p></div>}>
         <BlogPost postSlug={postSlug} />
       </Suspense>
     );

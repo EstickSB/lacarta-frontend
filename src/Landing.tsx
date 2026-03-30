@@ -831,7 +831,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
             <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500 mb-10">
                <a href="/terminos" className="hover:text-white transition-colors">Términos</a>
                <a href="/privacidad" className="hover:text-white transition-colors">Privacidad</a>
-               <a href="/blog/como-digitalizar-carta-restaurante" className="hover:text-white transition-colors">Blog</a>
+               <a href="/blog" className="hover:text-white transition-colors">Blog</a>
                <a href="/#fundadores" className="hover:text-white transition-colors">Contacto</a>
             </div>
             
