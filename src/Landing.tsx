@@ -430,15 +430,13 @@ const SocialProof = () => {
               </div>
 
               {/* Main Card - ON TOP */}
-              <div className="w-52 h-52 bg-offwhite rounded-2xl border border-gray-200 flex items-center justify-center shadow-lg relative p-6" style={{ zIndex: 1 }}>
+              <div className="w-48 h-32 bg-white rounded-xl flex items-center justify-center shadow-md relative p-5" style={{ zIndex: 1 }}>
                 <img 
                   src={local.logo} 
                   alt={`Logo de ${local.name}`}
-                  className="w-full h-full object-contain"
+                  className={`w-full h-full object-contain transition-all duration-500 ${hoveredIndex === i ? '' : 'grayscale opacity-50'}`}
                 />
               </div>
-              
-              <p className="text-center mt-14 text-sm font-medium text-gray-600">{local.name}</p>
             </motion.div>
           ))}
         </div>
