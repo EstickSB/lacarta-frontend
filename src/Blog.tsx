@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Clock, ArrowRight, Search, ChevronRight } from 'lucide-react';
 
 // Empty for now — articles will be added later
@@ -23,33 +23,74 @@ const categoryColors: Record<string, string> = {
   'Comparativas': 'bg-blue-500/10 text-blue-400',
 };
 
-const BlogNavbar = () => (
-  <nav className="sticky top-0 z-50 bg-richblack/95 backdrop-blur-md border-b border-white/5">
-    <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/" className="flex items-center gap-2">
-        <div className="relative">
-          <div className="absolute inset-0 bg-powerred blur-md opacity-40 rounded-full"></div>
-          <div className="w-8 h-8 bg-richblack rounded-full border border-white/10 flex items-center justify-center relative z-10">
-            <span className="text-powerred font-serif font-bold italic text-lg">L</span>
+const BlogNavbar = () => {
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
+
+  const navLinks = [
+    { name: 'Inicio', href: '/' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Fundadores', href: '/#fundadores' }
+  ];
+
+  return (
+    <motion.nav
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-150%" },
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      className="fixed top-6 left-0 right-0 z-50 flex justify-center px-6"
+    >
+      <div className="w-full max-w-4xl bg-[#121212]/90 backdrop-blur-[12px] rounded-2xl border border-amber-500/20 px-6 py-3 flex items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
+        <a href="/" className="flex items-center gap-2 cursor-pointer">
+          <div className="relative">
+            <div className="absolute inset-0 bg-powerred blur-md opacity-40 rounded-full"></div>
+            <div className="w-8 h-8 bg-richblack rounded-full border border-white/10 flex items-center justify-center relative z-10">
+              <span className="text-powerred font-serif font-bold italic text-lg">L</span>
+            </div>
           </div>
+          <span className="text-white font-serif font-bold text-xl tracking-wide">LaCarta</span>
+        </a>
+
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className={`relative text-sm font-medium transition-colors group ${link.name === 'Blog' ? 'text-white' : 'text-gray-400 hover:text-white'}`}
+            >
+              {link.name}
+              {link.name === 'Blog' && (
+                <div className="absolute -bottom-2 left-1/2 w-1 h-1 bg-powerred rounded-full" style={{ transform: 'translateX(-50%)' }} />
+              )}
+            </a>
+          ))}
         </div>
-        <span className="text-white font-serif font-bold text-xl tracking-wide">LaCarta</span>
-        <span className="text-gray-500 text-sm font-light ml-1">/ Blog</span>
-      </a>
-      
-      <div className="flex items-center gap-6">
-        <a href="/" className="hidden md:block text-gray-400 hover:text-white text-sm transition-colors">Inicio</a>
-        <a href="/#fundadores" className="hidden md:block text-gray-400 hover:text-white text-sm transition-colors">Fundadores</a>
-        <a href="/#fundadores" className="bg-powerred hover:bg-red-600 text-white text-xs font-bold py-2 px-4 rounded-xl transition-colors">
+
+        <a
+          href="/#fundadores"
+          className="bg-white/10 hover:bg-white/20 text-white text-xs font-bold py-2.5 px-5 rounded-xl border border-white/10 transition-all backdrop-blur-sm"
+        >
           Empezar Gratis
         </a>
       </div>
-    </div>
-  </nav>
-);
+    </motion.nav>
+  );
+};
 
 const BlogHero = () => (
-  <section className="pt-16 pb-12 px-6 bg-richblack relative overflow-hidden">
+  <section className="pt-28 pb-12 px-6 bg-richblack relative overflow-hidden">
     {/* Background decoration */}
     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-powerred/5 rounded-full blur-[150px] pointer-events-none" />
     <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
