@@ -2,19 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Clock, ArrowRight, Search, ChevronRight } from 'lucide-react';
 
-// Empty for now — articles will be added later
-const articles: Article[] = [];
-
-interface Article {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  readingTime: string;
-  date: string;
-  coverImage: string;
-  featured?: boolean;
-}
+import { articles } from './blog/articles';
+import type { BlogArticle } from './blog/articles';
 
 const categoryColors: Record<string, string> = {
   'Guía': 'bg-powerred/10 text-powerred',
