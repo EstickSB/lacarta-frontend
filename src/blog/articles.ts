@@ -15,5 +15,59 @@ export interface BlogArticle {
 }
 
 export const articles: BlogArticle[] = [
-  // Articles will be added here by the daily cron job
+  {
+    slug: 'por-que-tu-restaurante-necesita-carta-digital',
+    title: 'Por qué tu restaurante necesita una carta digital en 2026',
+    excerpt: 'Descubre cómo una carta digital puede mejorar la experiencia de tus clientes, reducir costos de impresión y modernizar tu negocio gastronómico.',
+    category: 'Guía',
+    readingTime: '5 min lectura',
+    date: '31 Mar 2026',
+    coverImage: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
+    featured: true,
+    author: 'LaCarta',
+    content: `
+<h2>La revolución silenciosa en la mesa de tu restaurante</h2>
+<p>Si todavía dependes de menús impresos en tu restaurante, es probable que estés perdiendo oportunidades de negocio sin darte cuenta. En 2026, <strong>los clientes esperan experiencias digitales</strong> en cada aspecto de su vida, y la gastronomía no es la excepción. Una carta digital no es solo una moda pasajera: es una herramienta que transforma la forma en que tus comensales interactúan con tu oferta.</p>
+
+<h2>¿Qué es una carta digital y cómo funciona?</h2>
+<p>Una carta digital es la versión online de tu menú tradicional. Tus clientes acceden a ella escaneando un <strong>código QR</strong> desde su celular, sin necesidad de descargar ninguna aplicación. En segundos, tienen toda tu oferta gastronómica en la palma de su mano: platos, precios, descripciones, fotos y hasta información sobre alérgenos.</p>
+<p>Plataformas como <strong>LaCarta</strong> permiten crear y gestionar tu carta digital en minutos, sin conocimientos técnicos. Solo necesitas subir tus platos, organizar las categorías y compartir el enlace o código QR con tus clientes.</p>
+
+<h2>Beneficios concretos para tu negocio</h2>
+<p>Adoptar una carta digital no es solo cuestión de imagen. Los beneficios son tangibles y medibles desde el primer día:</p>
+<ul>
+  <li><strong>Ahorro en impresión:</strong> Olvídate de reimprimir menús cada vez que cambias un precio o agregas un plato. Todo se actualiza al instante desde tu panel de control.</li>
+  <li><strong>Actualización en tiempo real:</strong> ¿Se acabó un ingrediente? ¿Tienes un plato del día? Modifica tu carta en segundos y todos tus clientes verán los cambios inmediatamente.</li>
+  <li><strong>Mejor experiencia del cliente:</strong> Fotos de alta calidad, descripciones detalladas y una navegación intuitiva hacen que pedir sea más fácil y atractivo.</li>
+  <li><strong>Higiene y seguridad:</strong> Sin menús físicos que pasan de mano en mano, reduces el riesgo de contagios. Un aprendizaje que la pandemia dejó claro.</li>
+  <li><strong>Accesibilidad:</strong> Los clientes pueden consultar tu menú antes de llegar al restaurante, lo que reduce tiempos de espera y mejora la rotación de mesas.</li>
+  <li><strong>Imagen moderna:</strong> Un restaurante con carta digital transmite profesionalismo e innovación. Tus clientes lo notan y lo valoran.</li>
+</ul>
+
+<h3>El factor costo: una inversión que se paga sola</h3>
+<p>Muchos restaurantes gastan entre <strong>$200 y $500 al año</strong> solo en impresión de menús. Cada cambio de temporada, cada ajuste de precio, cada nuevo plato implica una reimpresión. Con una carta digital, ese gasto desaparece por completo. La inversión inicial es mínima y el retorno es inmediato.</p>
+
+<blockquote>
+  <p>«Desde que implementamos nuestra carta digital, nuestros clientes piden más porque ven fotos de los platos. Las ventas de postres aumentaron un 25% en el primer mes.»</p>
+</blockquote>
+
+<h3>QR: la puerta de entrada más simple</h3>
+<p>El código QR se ha convertido en un gesto natural para los comensales. Basta con colocar un pequeño código en cada mesa, en la entrada del local o incluso en tus redes sociales. <strong>No hay fricción:</strong> el cliente escanea, ve tu menú y está listo para pedir. Sin apps, sin registros, sin complicaciones.</p>
+
+<h2>¿Qué buscar en una plataforma de carta digital?</h2>
+<p>No todas las soluciones son iguales. Al elegir una plataforma para digitalizar tu menú, considera estos factores:</p>
+<ul>
+  <li><strong>Facilidad de uso:</strong> Deberías poder crear tu carta sin ayuda técnica.</li>
+  <li><strong>Diseño atractivo:</strong> Tu menú digital debe verse tan bien como tu comida.</li>
+  <li><strong>Velocidad de carga:</strong> Los clientes no van a esperar 10 segundos a que cargue una página.</li>
+  <li><strong>Soporte en español:</strong> Si operas en Latinoamérica, necesitas una plataforma que entienda tu mercado.</li>
+  <li><strong>Personalización:</strong> Colores, logo, categorías… tu carta debe reflejar la identidad de tu restaurante.</li>
+</ul>
+<p>LaCarta fue diseñada pensando exactamente en estas necesidades. Es rápida, visual y está hecha para el mercado hispanohablante.</p>
+
+<h2>El momento de dar el paso es ahora</h2>
+<p>La digitalización del sector gastronómico no va a detenerse. Los restaurantes que adoptan herramientas digitales hoy están construyendo una ventaja competitiva para mañana. No se trata de reemplazar la calidez del servicio humano, sino de <strong>complementarlo con tecnología que facilite la experiencia</strong> tanto para el comensal como para el equipo de sala.</p>
+<p>Si aún no has dado el salto a la carta digital, este es el mejor momento para empezar. Tu menú merece estar donde están tus clientes: en su celular.</p>
+`
+  },
 ];
