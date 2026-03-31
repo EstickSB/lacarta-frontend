@@ -15,5 +15,84 @@ export interface BlogArticle {
 }
 
 export const articles: BlogArticle[] = [
-  // Articles will be added here by the daily cron job
+  {
+    slug: 'como-elegir-sistema-pos-restaurante',
+    title: 'Cómo Elegir un Sistema POS para tu Restaurante',
+    excerpt: 'Guía práctica para elegir el sistema POS ideal para tu restaurante: qué características buscar, opciones populares en Perú y Latinoamérica, y costos reales.',
+    category: 'Tecnología',
+    readingTime: '7 min lectura',
+    date: '31 Mar 2026',
+    coverImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
+    featured: false,
+    author: 'Equipo LaCarta',
+    content: `
+<h2>¿Por qué tu restaurante necesita un sistema POS?</h2>
+<p>Si todavía gestionas tu restaurante con comandas en papel, una calculadora y buena memoria, es momento de dar el salto. Un sistema POS (Point of Sale o Punto de Venta) es mucho más que una caja registradora moderna: es el cerebro operativo de tu negocio gastronómico.</p>
+<p>Un buen POS te permite registrar ventas en tiempo real, controlar el inventario de insumos, enviar comandas directamente a cocina, emitir comprobantes electrónicos y, sobre todo, tomar decisiones basadas en datos concretos en lugar de suposiciones.</p>
+
+<h2>¿Qué debe tener un buen sistema POS para restaurantes?</h2>
+<p>Antes de comparar opciones, es fundamental saber qué características son indispensables. No todos los POS sirven igual para una pollería, un café o un restaurante de comida marina. Estos son los criterios clave:</p>
+
+<h3>1. Facturación electrónica integrada</h3>
+<p>En Perú, la conexión directa con SUNAT para emitir boletas y facturas electrónicas es obligatoria para la mayoría de negocios. Si el sistema requiere un programa aparte para facturar, no es una solución completa. En otros países de Latinoamérica existen requisitos similares con sus respectivas entidades tributarias.</p>
+
+<h3>2. Gestión de inventario y recetas</h3>
+<p>El control del costo de alimentos (food cost) es donde muchos restaurantes pierden dinero sin darse cuenta. Un POS que te permita registrar recetas con cantidades exactas de insumos y descontar automáticamente del inventario es una herramienta invaluable.</p>
+
+<h3>3. Facilidad de uso</h3>
+<p>Tu equipo de sala necesita un sistema que puedan aprender a usar en minutos, no en semanas. Una interfaz intuitiva reduce errores y agiliza la atención, especialmente en horas punta.</p>
+
+<h3>4. Gestión de mesas y comandas</h3>
+<p>Visualizar el estado de cada mesa, dividir cuentas, transferir pedidos entre mesas y enviar comandas a cocina son funciones esenciales para restaurantes con servicio en salón.</p>
+
+<h3>5. Reportes y estadísticas</h3>
+<p>Saber cuáles son tus platos más vendidos, en qué horarios vendes más y cuál es tu ticket promedio te permite optimizar tu carta y tu operación. Los datos son tu mejor aliado.</p>
+
+<h3>6. Soporte técnico confiable</h3>
+<blockquote>Un consejo práctico: antes de contratar un POS, escribe a su soporte técnico un viernes por la noche. La rapidez y calidad de su respuesta te dirá mucho sobre cómo será tu experiencia cuando realmente los necesites.</blockquote>
+
+<h2>Opciones populares de POS en Perú</h2>
+<p>El mercado peruano tiene tanto soluciones locales como internacionales. Estas son algunas de las más utilizadas:</p>
+
+<h3>Panca Software</h3>
+<p><strong>Panca</strong> es una solución peruana todo-en-uno que incluye POS, facturación electrónica directa a SUNAT, comandas y control de inventarios. Destaca por integrar medios de pago locales como Yape y Plin en el flujo de caja. Sus planes van desde <strong>S/ 99/mes</strong> (Plan Básico) hasta <strong>S/ 119/mes</strong> (Plan Profesional). Es ideal para pollerías, cafeterías, dark kitchens y cadenas que buscan escalar.</p>
+
+<h3>Fudo</h3>
+<p><strong>Fudo</strong> es un sistema 100% en la nube, popular en varios países de Latinoamérica. Se destaca por su interfaz limpia y su app para tomar pedidos desde el celular. Su precio ronda los <strong>USD 30/mes</strong>. Es una buena opción para food trucks, cafeterías y restaurantes medianos que priorizan la velocidad de atención.</p>
+
+<h3>Restaurant.pe</h3>
+<p><strong>Restaurant.pe</strong> es un clásico del mercado peruano con años de trayectoria. Su módulo de inventarios y producción es especialmente robusto, permitiendo gestionar recetas complejas y controlar mermas — algo vital si trabajas con insumos costosos como mariscos.</p>
+
+<h3>Inforest</h3>
+<p><strong>Inforest</strong>, desarrollado por Infomática (Infhotel Servicios Informáticos S.A.C.), es un software de gestión integral para restaurantes con larga presencia en el mercado peruano. Ofrece control de costos, gestión de almacén central con Kardex, reportes estadísticos completos y se integra con pasarelas de pago como PagoEfectivo. Funciona con servidores locales, lo que puede ser una ventaja si la conexión a internet no es estable. Su precio se maneja con cotización personalizada.</p>
+
+<h2>Opciones populares en Latinoamérica</h2>
+
+<h3>Treinta POS</h3>
+<p><strong>Treinta</strong> combina app móvil y plataforma web como un POS completo. Incluye gestión de mesas, configuración de menú con recetas, control de inventario, estadísticas de ventas e impresión de tickets y comandas. Se adapta desde puestos de comida en ferias hasta restaurantes más formales.</p>
+
+<h3>Loyverse</h3>
+<p><strong>Loyverse</strong> es popular entre emprendedores que están comenzando. Ofrece registro de ventas, gestión de clientes, inventario básico y pantalla para cocina (KDS). Su plan base es gratuito, con módulos premium opcionales. Frecuente en cafeterías de autor y panaderías.</p>
+
+<h3>Square POS</h3>
+<p><strong>Square</strong> es reconocido globalmente y ha ganado presencia en grandes ciudades de Latinoamérica. Ofrece módulos para restaurante y retail, gestión de mesas y procesamiento de pagos integrado. Requiere dispositivos específicos de la marca.</p>
+
+<h3>Soft Restaurant</h3>
+<p><strong>Soft Restaurant</strong> es una solución POS tradicional desarrollada en México y adaptada a varios países de la región. Ofrece comandas móviles, control de inventarios y recetas, y administración de mesas. Es una opción consolidada para restaurantes medianos y grandes.</p>
+
+<h2>¿Cuánto cuesta realmente un sistema POS?</h2>
+<p>Los costos varían según el proveedor y las funcionalidades que necesites. Como referencia general del mercado:</p>
+<ul>
+<li><strong>Soluciones básicas en la nube:</strong> Desde USD 30/mes aproximadamente, según ComparaSoftware.</li>
+<li><strong>Soluciones locales en Perú:</strong> Desde S/ 99/mes (como el caso de Panca) hasta cotizaciones personalizadas para sistemas más robustos como Inforest.</li>
+<li><strong>Hardware adicional:</strong> Impresoras de tickets, tablets, lectores de tarjetas y cajones de dinero son costos aparte que debes considerar.</li>
+<li><strong>Planes gratuitos:</strong> Algunas opciones como Loyverse ofrecen funcionalidades básicas sin costo, con módulos premium de pago.</li>
+</ul>
+<p>Antes de decidir, solicita una demostración o prueba gratuita. La mayoría de proveedores las ofrecen, y es la mejor forma de evaluar si el sistema se adapta a tu operación real.</p>
+
+<h2>Más allá del POS: digitaliza toda la experiencia</h2>
+<p>Un sistema POS resuelve la gestión operativa de tu restaurante, pero la experiencia del cliente comienza antes de hacer el pedido. Tener una <strong>carta digital</strong> accesible por código QR permite que tus comensales exploren tu menú con fotos, descripciones y precios actualizados al instante, sin depender de cartas físicas que se deterioran o quedan desactualizadas.</p>
+<p><strong>LaCarta</strong> ofrece cartas digitales con QR que complementan perfectamente tu sistema POS. Mientras el POS gestiona lo que pasa en cocina y caja, LaCarta se encarga de lo que ve tu cliente: un menú atractivo, siempre actualizado y fácil de consultar desde cualquier celular. Juntos, forman el combo ideal para un restaurante moderno y eficiente.</p>
+`
+  },
 ];
