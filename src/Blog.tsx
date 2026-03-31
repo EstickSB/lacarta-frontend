@@ -90,7 +90,7 @@ const BlogNavbar = () => {
 };
 
 const BlogHero = () => (
-  <section className="pt-28 pb-12 px-6 bg-richblack relative overflow-hidden">
+  <section className="pt-36 pb-12 px-6 bg-richblack relative overflow-hidden">
     {/* Background decoration */}
     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-powerred/5 rounded-full blur-[150px] pointer-events-none" />
     <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
@@ -134,29 +134,8 @@ const BlogHero = () => (
 const FeaturedCarousel = () => {
   const featured = articles.filter(a => a.featured);
   
-  if (featured.length === 0) {
-    return (
-      <section className="px-6 pb-12 bg-richblack">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-white font-serif text-2xl mb-8">Artículos Destacados</h2>
-          <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="min-w-[340px] md:min-w-[400px] flex-shrink-0">
-                <div className="relative h-56 bg-white/[0.03] rounded-2xl border border-white/5 overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-t from-richblack via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <div className="w-16 h-5 bg-white/10 rounded-full mb-3" />
-                    <div className="w-3/4 h-6 bg-white/10 rounded mb-2" />
-                    <div className="w-1/2 h-4 bg-white/5 rounded" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
+  // Hidden when no featured articles — will activate based on visit analytics
+  if (featured.length === 0) return null;
 
   return (
     <section className="px-6 pb-12 bg-richblack">
@@ -192,8 +171,13 @@ const FeaturedCarousel = () => {
   );
 };
 
+const ARTICLES_PER_PAGE = 9;
+
 const ArticleGrid = () => {
+  const [currentPage, setCurrentPage] = useState(1);
   const nonFeatured = articles.filter(a => !a.featured);
+  const totalPages = Math.max(1, Math.ceil(nonFeatured.length / ARTICLES_PER_PAGE));
+  const paginatedArticles = nonFeatured.slice((currentPage - 1) * ARTICLES_PER_PAGE, currentPage * ARTICLES_PER_PAGE);
 
   return (
     <section className="px-6 py-16 bg-richblack border-t border-white/5">
@@ -253,7 +237,7 @@ const ArticleGrid = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {nonFeatured.map((article, i) => (
+            {paginatedArticles.map((article, i) => (
               <motion.a
                 key={article.slug}
                 href={`/blog/${article.slug}`}
@@ -292,6 +276,39 @@ const ArticleGrid = () => {
                 </div>
               </motion.a>
             ))}
+          </div>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-2 mt-12">
+            <button
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-2 rounded-xl text-sm font-medium bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/5 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              Anterior
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              <button
+                key={page}
+                onClick={() => { setCurrentPage(page); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className={`w-10 h-10 rounded-xl text-sm font-bold transition-all ${
+                  page === currentPage
+                    ? 'bg-powerred text-white'
+                    : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/5'
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+            <button
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 rounded-xl text-sm font-medium bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/5 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              Siguiente
+            </button>
           </div>
         )}
 
