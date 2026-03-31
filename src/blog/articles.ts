@@ -23,7 +23,7 @@ export const articles: BlogArticle[] = [
     readingTime: '5 min lectura',
     date: '31 Mar 2026',
     coverImage: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
-    featured: true,
+    featured: false,
     author: 'LaCarta',
     content: `
 <h2>La revolución silenciosa en la mesa de tu restaurante</h2>
@@ -48,7 +48,7 @@ export const articles: BlogArticle[] = [
 <p>Muchos restaurantes gastan entre <strong>$200 y $500 al año</strong> solo en impresión de menús. Cada cambio de temporada, cada ajuste de precio, cada nuevo plato implica una reimpresión. Con una carta digital, ese gasto desaparece por completo. La inversión inicial es mínima y el retorno es inmediato.</p>
 
 <blockquote>
-  <p>«Desde que implementamos nuestra carta digital, nuestros clientes piden más porque ven fotos de los platos. Las ventas de postres aumentaron un 25% en el primer mes.»</p>
+  <p>Con una solución como LaCarta, puedes crear tu carta digital en minutos, personalizarla con los colores y logo de tu restaurante, y compartirla con un simple código QR. Sin complicaciones, sin costos de impresión recurrentes.</p>
 </blockquote>
 
 <h3>QR: la puerta de entrada más simple</h3>

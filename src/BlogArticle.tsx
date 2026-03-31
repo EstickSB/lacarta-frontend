@@ -1,7 +1,94 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Clock, ArrowLeft, User, Calendar } from 'lucide-react';
+import { Clock, ArrowLeft, User, Calendar, List } from 'lucide-react';
 import { articles } from './blog/articles';
+
+interface TocItem {
+  id: string;
+  text: string;
+  level: number;
+}
+
+function extractHeadings(html: string): TocItem[] {
+  const regex = /<h([23])[^>]*>(.*?)<\/h[23]>/gi;
+  const items: TocItem[] = [];
+  let match;
+  while ((match = regex.exec(html)) !== null) {
+    const text = match[2].replace(/<[^>]*>/g, '').trim();
+    const id = text
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+    items.push({ id, text, level: parseInt(match[1]) });
+  }
+  return items;
+}
+
+function injectIds(html: string, headings: TocItem[]): string {
+  let idx = 0;
+  return html.replace(/<h([23])([^>]*)>/gi, (match, level, attrs) => {
+    if (idx < headings.length) {
+      const id = headings[idx].id;
+      idx++;
+      return `<h${level}${attrs} id="${id}">`;
+    }
+    return match;
+  });
+}
+
+const TableOfContents: React.FC<{ headings: TocItem[] }> = ({ headings }) => {
+  const [activeId, setActiveId] = useState<string>('');
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter(e => e.isIntersecting);
+        if (visible.length > 0) {
+          setActiveId(visible[0].target.id);
+        }
+      },
+      { rootMargin: '-80px 0px -60% 0px', threshold: 0.1 }
+    );
+
+    headings.forEach(h => {
+      const el = document.getElementById(h.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [headings]);
+
+  if (headings.length === 0) return null;
+
+  return (
+    <nav className="space-y-1">
+      <div className="flex items-center gap-2 text-gray-500 text-[11px] font-bold uppercase tracking-[0.2em] mb-4">
+        <List size={14} />
+        <span>En este artículo</span>
+      </div>
+      {headings.map((h) => (
+        <a
+          key={h.id}
+          href={`#${h.id}`}
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById(h.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }}
+          className={`block text-[13px] leading-relaxed transition-all duration-200 border-l-2 ${
+            h.level === 3 ? 'pl-6' : 'pl-4'
+          } ${
+            activeId === h.id
+              ? 'border-[#DC2626] text-white font-medium'
+              : 'border-transparent text-gray-500 hover:text-gray-300 hover:border-gray-700'
+          }`}
+        >
+          {h.text}
+        </a>
+      ))}
+    </nav>
+  );
+};
 
 const ArticleNavbar = () => {
   const { scrollY } = useScroll();
@@ -49,6 +136,9 @@ const ArticleNavbar = () => {
 const BlogArticlePage: React.FC<{ articleSlug: string }> = ({ articleSlug }) => {
   const article = articles.find(a => a.slug === articleSlug);
 
+  const headings = useMemo(() => article ? extractHeadings(article.content) : [], [article]);
+  const processedContent = useMemo(() => article ? injectIds(article.content, headings) : '', [article, headings]);
+
   useEffect(() => {
     if (article) {
       document.title = `${article.title} | Blog LaCarta`;
@@ -78,7 +168,7 @@ const BlogArticlePage: React.FC<{ articleSlug: string }> = ({ articleSlug }) => 
       
       {/* Hero */}
       <header className="pt-36 pb-12 px-6">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto lg:max-w-5xl">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <a href="/blog" className="inline-flex items-center gap-2 text-gray-500 hover:text-white text-sm mb-8 transition-colors">
               <ArrowLeft size={16} /> Volver al blog
@@ -101,43 +191,55 @@ const BlogArticlePage: React.FC<{ articleSlug: string }> = ({ articleSlug }) => 
       {/* Cover image */}
       {article.coverImage && (
         <div className="px-6 pb-12">
-          <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-white/5">
+          <div className="max-w-4xl mx-auto lg:max-w-5xl rounded-2xl overflow-hidden border border-white/5">
             <img src={article.coverImage} alt={article.title} className="w-full h-64 md:h-96 object-cover" />
           </div>
         </div>
       )}
 
-      {/* Content */}
-      <main className="px-6 pb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="max-w-3xl mx-auto prose-invert"
-        >
-          <div
-            className="text-gray-300 leading-relaxed text-[16px] space-y-6
-              [&>h2]:font-serif [&>h2]:text-2xl [&>h2]:text-white [&>h2]:mt-12 [&>h2]:mb-4
-              [&>h3]:font-serif [&>h3]:text-xl [&>h3]:text-white [&>h3]:mt-8 [&>h3]:mb-3
-              [&>p]:mb-4
-              [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-4 [&>ul>li]:mb-2
-              [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:mb-4 [&>ol>li]:mb-2
-              [&>blockquote]:border-l-4 [&>blockquote]:border-[#DC2626] [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-gray-400 [&>blockquote]:my-6
-              [&>strong]:text-white [&>p>strong]:text-white
-              [&>a]:text-[#DC2626] [&>a]:underline [&>p>a]:text-[#DC2626] [&>p>a]:underline"
-            dangerouslySetInnerHTML={{ __html: article.content }}
-          />
-        </motion.div>
+      {/* Content + TOC */}
+      <div className="px-6 pb-16">
+        <div className="max-w-5xl mx-auto lg:grid lg:grid-cols-[1fr_220px] lg:gap-12">
+          {/* Article content */}
+          <main>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="prose-invert"
+            >
+              <div
+                className="text-gray-300 leading-relaxed text-[16px] space-y-6
+                  [&>h2]:font-serif [&>h2]:text-2xl [&>h2]:text-white [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:scroll-mt-24
+                  [&>h3]:font-serif [&>h3]:text-xl [&>h3]:text-white [&>h3]:mt-8 [&>h3]:mb-3 [&>h3]:scroll-mt-24
+                  [&>p]:mb-4
+                  [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-4 [&>ul>li]:mb-2
+                  [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:mb-4 [&>ol>li]:mb-2
+                  [&>blockquote]:border-l-4 [&>blockquote]:border-[#DC2626] [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-gray-400 [&>blockquote]:my-6
+                  [&>strong]:text-white [&>p>strong]:text-white
+                  [&>a]:text-[#DC2626] [&>a]:underline [&>p>a]:text-[#DC2626] [&>p>a]:underline"
+                dangerouslySetInnerHTML={{ __html: processedContent }}
+              />
+            </motion.div>
 
-        {/* CTA */}
-        <div className="max-w-3xl mx-auto mt-16 p-8 bg-white/[0.03] rounded-2xl border border-white/5 text-center">
-          <h3 className="font-serif text-2xl text-white mb-3">¿Listo para digitalizar tu restaurante?</h3>
-          <p className="text-gray-500 text-sm mb-6">Únete a los Locales Fundadores de LaCarta y transforma la experiencia de tus clientes.</p>
-          <a href="/#fundadores" className="inline-flex items-center gap-2 bg-[#DC2626] hover:bg-red-600 text-white font-bold py-3 px-8 rounded-xl transition-colors">
-            Empezar Gratis
-          </a>
+            {/* CTA */}
+            <div className="mt-16 p-8 bg-white/[0.03] rounded-2xl border border-white/5 text-center">
+              <h3 className="font-serif text-2xl text-white mb-3">¿Listo para digitalizar tu restaurante?</h3>
+              <p className="text-gray-500 text-sm mb-6">Únete a los Locales Fundadores de LaCarta y transforma la experiencia de tus clientes.</p>
+              <a href="/#fundadores" className="inline-flex items-center gap-2 bg-[#DC2626] hover:bg-red-600 text-white font-bold py-3 px-8 rounded-xl transition-colors">
+                Empezar Gratis
+              </a>
+            </div>
+          </main>
+
+          {/* Sticky TOC sidebar — desktop only */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-28">
+              <TableOfContents headings={headings} />
+            </div>
+          </aside>
         </div>
-      </main>
+      </div>
 
       {/* Related articles */}
       {otherArticles.length > 0 && (
