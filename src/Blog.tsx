@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Clock, ArrowRight, Search, ChevronRight } from 'lucide-react';
+import { Clock, ArrowRight, Search, ChevronRight, Newspaper } from 'lucide-react';
 
 import { articles } from './blog/articles';
 import type { BlogArticle } from './blog/articles';
@@ -191,39 +191,17 @@ const ArticleGrid = () => {
         </div>
 
         {nonFeatured.length === 0 ? (
-          /* Empty state — placeholder grid */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map(i => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }}
-                className="bg-white/[0.02] rounded-2xl border border-white/5 overflow-hidden"
-              >
-                {/* Image placeholder */}
-                <div className="h-44 bg-white/[0.03] relative">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center">
-                      <span className="text-gray-600 text-2xl">📝</span>
-                    </div>
-                  </div>
-                </div>
-                {/* Content placeholder */}
-                <div className="p-5">
-                  <div className="w-20 h-5 bg-white/5 rounded-full mb-4" />
-                  <div className="w-full h-5 bg-white/[0.06] rounded mb-2" />
-                  <div className="w-3/4 h-5 bg-white/[0.04] rounded mb-4" />
-                  <div className="w-full h-3 bg-white/[0.03] rounded mb-1.5" />
-                  <div className="w-2/3 h-3 bg-white/[0.03] rounded mb-6" />
-                  <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                    <div className="w-24 h-3 bg-white/[0.04] rounded" />
-                    <div className="w-16 h-3 bg-white/[0.04] rounded" />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-col items-center justify-center py-20 text-center"
+          >
+            <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6">
+              <Newspaper size={28} className="text-gray-600" />
+            </div>
+            <h3 className="font-serif text-xl text-white mb-2">Aún no hay artículos publicados</h3>
+            <p className="text-gray-500 text-sm max-w-md">Estamos preparando contenido de valor para ayudarte a transformar la experiencia de tu restaurante. ¡Vuelve pronto!</p>
+          </motion.div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedArticles.map((article, i) => (
@@ -301,20 +279,7 @@ const ArticleGrid = () => {
           </div>
         )}
 
-        {/* Empty state message */}
-        {articles.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-center mt-12"
-          >
-            <p className="text-gray-500 text-sm">Próximamente publicaremos contenido de valor para tu restaurante.</p>
-            <a href="/#fundadores" className="inline-flex items-center gap-2 mt-4 text-powerred text-sm font-semibold hover:underline">
-              Únete como Local Fundador <ChevronRight size={16} />
-            </a>
-          </motion.div>
-        )}
+        {/* Empty state handled above in the grid section */}
       </div>
     </section>
   );
