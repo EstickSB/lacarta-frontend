@@ -339,107 +339,128 @@ const Navbar = ({ onEnterApp }: { onEnterApp: () => void }) => {
 };
 
 const SocialProof = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const locals = [
     {
       name: "La Martina Resto & Bar",
       logo: "/img/logos/la-martina-logo.png",
       instagram: "https://www.instagram.com/lamartina_pimentel/",
-      carta: "https://lacarta.space/restaurante/la-martina/menu"
+      carta: "https://lacarta.space/restaurante/la-martina/menu",
+      type: "Resto & Bar"
     },
     {
       name: "AYUKI",
       logo: "/img/logos/ayuki-logo.png",
       instagram: "https://www.instagram.com/ayuki_cix/",
-      carta: "https://lacarta.space/restaurante/ayuki-japanese-fusion-food/menu"
+      carta: "https://lacarta.space/restaurante/ayuki-japanese-fusion-food/menu",
+      type: "Japanese Fusion"
     }
   ];
 
   return (
-    <section className="py-16 px-6 bg-white border-t border-gray-100 overflow-visible">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="font-serif text-2xl md:text-3xl mb-3 text-richblack">Locales Fundadores que Confían en Nosotros</h2>
-          <p className="text-gray-600 text-sm">Liderando la transformación digital en la gastronomía.</p>
+    <section className="py-20 px-6 bg-richblack relative overflow-hidden">
+      {/* Subtle background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-powerred/5 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="max-w-5xl mx-auto relative z-10">
+        <div className="text-center mb-14">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-powerred text-xs font-bold uppercase tracking-[0.3em] mb-4"
+          >
+            Ya confían en nosotros
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="font-serif text-2xl md:text-4xl text-white"
+          >
+            Locales Fundadores
+          </motion.h2>
         </div>
 
-        <div className="flex justify-center gap-8 flex-wrap">
+        <div className="flex justify-center gap-6 md:gap-10 flex-wrap">
           {locals.map((local, i) => (
-            <motion.div 
+            <motion.div
               key={i}
-              className="relative flex flex-col items-center cursor-pointer"
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              onClick={() => setHoveredIndex(hoveredIndex === i ? null : i)}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.6 }}
+              className="group relative"
+              onMouseEnter={() => setActiveIndex(i)}
+              onMouseLeave={() => setActiveIndex(null)}
+              onClick={() => setActiveIndex(activeIndex === i ? null : i)}
             >
-              {/* Bubble animation layer - BEHIND the card */}
-              <div className="absolute inset-0 flex justify-center pointer-events-none" style={{ zIndex: 0 }}>
-                {/* Drop line falling down */}
+              {/* Card */}
+              <motion.div
+                animate={{
+                  borderColor: activeIndex === i ? 'rgba(220, 38, 38, 0.4)' : 'rgba(255, 255, 255, 0.06)',
+                }}
+                transition={{ duration: 0.4 }}
+                className="relative w-64 bg-white/[0.03] backdrop-blur-sm rounded-2xl border overflow-hidden"
+              >
+                {/* Logo area */}
+                <div className="h-40 flex items-center justify-center p-6 relative">
+                  {/* Hover glow */}
+                  <motion.div
+                    animate={{ opacity: activeIndex === i ? 1 : 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute inset-0 bg-gradient-to-b from-powerred/10 to-transparent pointer-events-none"
+                  />
+                  <motion.img
+                    src={local.logo}
+                    alt={`Logo de ${local.name}`}
+                    animate={{
+                      filter: activeIndex === i ? 'grayscale(0%) brightness(1.1)' : 'grayscale(100%) brightness(0.5)',
+                      scale: activeIndex === i ? 1.05 : 1,
+                    }}
+                    transition={{ duration: 0.5 }}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+
+                {/* Info bar */}
+                <div className="px-5 py-4 border-t border-white/5">
+                  <p className="text-white text-sm font-semibold truncate">{local.name}</p>
+                  <p className="text-gray-500 text-xs mt-0.5">{local.type}</p>
+                </div>
+
+                {/* Action buttons - slide up on hover */}
                 <motion.div
-                  initial={{ opacity: 0, scaleY: 0 }}
-                  animate={hoveredIndex === i ? {
-                    opacity: [0, 0.6, 0.6, 0],
-                    scaleY: [0, 1, 1, 0],
-                    transition: { duration: 0.6, ease: "easeOut", times: [0, 0.4, 0.7, 1] }
-                  } : {
-                    opacity: 0, scaleY: 0,
-                    transition: { duration: 0.3 }
+                  initial={false}
+                  animate={{
+                    height: activeIndex === i ? 'auto' : 0,
+                    opacity: activeIndex === i ? 1 : 0,
                   }}
-                  className="absolute top-1/2 w-[2px] h-16 bg-gray-300 origin-top"
-                />
-
-                {/* Instagram bubble - splits left */}
-                <motion.a
-                  href={local.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Instagram de ${local.name}`}
-                  initial={{ opacity: 0, y: 50, x: 0, scale: 0 }}
-                  animate={hoveredIndex === i ? {
-                    opacity: 1,
-                    y: 90,
-                    x: -36,
-                    scale: 1,
-                    transition: { duration: 0.5, delay: 0.35, type: "spring", stiffness: 200, damping: 15 }
-                  } : {
-                    opacity: 0, y: 50, x: 0, scale: 0,
-                    transition: { duration: 0.35, ease: "easeIn" }
-                  }}
-                  className="absolute top-1/2 w-11 h-11 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform pointer-events-auto"
+                  transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="overflow-hidden"
                 >
-                  <Instagram size={20} className="text-white" aria-hidden="true" />
-                </motion.a>
-
-                {/* Carta bubble - splits right */}
-                <motion.a
-                  href={local.carta}
-                  aria-label={`Ver carta de ${local.name}`}
-                  initial={{ opacity: 0, y: 50, x: 0, scale: 0 }}
-                  animate={hoveredIndex === i ? {
-                    opacity: 1,
-                    y: 90,
-                    x: 36,
-                    scale: 1,
-                    transition: { duration: 0.5, delay: 0.4, type: "spring", stiffness: 200, damping: 15 }
-                  } : {
-                    opacity: 0, y: 50, x: 0, scale: 0,
-                    transition: { duration: 0.35, ease: "easeIn" }
-                  }}
-                  className="absolute top-1/2 w-11 h-11 bg-powerred rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform pointer-events-auto"
-                >
-                  <Newspaper size={20} className="text-white" aria-hidden="true" />
-                </motion.a>
-              </div>
-
-              {/* Main Card - ON TOP */}
-              <div className="w-56 h-44 bg-transparent rounded-xl flex items-center justify-center relative p-4" style={{ zIndex: 1 }}>
-                <img 
-                  src={local.logo} 
-                  alt={`Logo de ${local.name}`}
-                  className={`w-full h-full object-contain transition-all duration-500 ${hoveredIndex === i ? '' : 'grayscale opacity-50'}`}
-                />
-              </div>
+                  <div className="px-5 pb-5 flex gap-3">
+                    <a
+                      href={local.carta}
+                      className="flex-1 flex items-center justify-center gap-2 bg-powerred hover:bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl transition-colors"
+                    >
+                      <Newspaper size={14} aria-hidden="true" />
+                      Ver carta
+                    </a>
+                    <a
+                      href={local.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Instagram de ${local.name}`}
+                      className="w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 rounded-xl border border-white/10 hover:border-transparent transition-all"
+                    >
+                      <Instagram size={16} className="text-white" aria-hidden="true" />
+                    </a>
+                  </div>
+                </motion.div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
