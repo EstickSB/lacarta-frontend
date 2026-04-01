@@ -95,4 +95,66 @@ export const articles: BlogArticle[] = [
 <p><strong>LaCarta</strong> ofrece cartas digitales con QR que complementan perfectamente tu sistema POS. Mientras el POS gestiona lo que pasa en cocina y caja, LaCarta se encarga de lo que ve tu cliente: un menú atractivo, siempre actualizado y fácil de consultar desde cualquier celular. Juntos, forman el combo ideal para un restaurante moderno y eficiente.</p>
 `
   },
+  {
+    slug: 'qr-restaurantes-mas-alla-menu',
+    title: 'QR en Restaurantes: Más Allá del Menú',
+    excerpt: 'Los códigos QR no son solo para mostrar la carta. Descubre cómo usarlos para pagos, reservas, fidelización, feedback y más en tu restaurante.',
+    category: 'Tecnología',
+    readingTime: '6 min lectura',
+    date: '01 Abr 2026',
+    coverImage: 'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=800&q=80',
+    featured: false,
+    author: 'Equipo LaCarta',
+    content: `
+<h2>El QR ya no es solo un menú digital</h2>
+<p>Cuando los códigos QR se masificaron en restaurantes durante la pandemia, su uso principal era reemplazar la carta física. Pero en 2026, limitar el QR a mostrar tu menú es como usar un smartphone solo para hacer llamadas: te estás perdiendo el 90% de su potencial.</p>
+<p>Hoy, los restaurantes más competitivos de Latinoamérica están usando códigos QR para pagos en mesa, programas de fidelización, recolección de feedback, reservas, conexión WiFi y hasta promociones interactivas. Y lo mejor: la mayoría de estos usos no requieren inversiones gigantes.</p>
+
+<h2>1. Pagos en mesa: rapidez y mayor rotación</h2>
+<p>Uno de los usos con mayor impacto directo en la facturación es el pago mediante QR. Según un estudio de Square, la empresa de procesamiento de pagos, los restaurantes que adoptan pagos con QR experimentan un incremento de hasta el 15% en la rotación de mesas, ya que los comensales no tienen que esperar a que el mozo traiga la cuenta.</p>
+<p>En Perú, plataformas como Yape y Plin ya permiten pagos con QR que cualquier restaurante puede implementar sin costo adicional. En Argentina, Mercado Pago ofrece funcionalidades similares. El proceso es simple: el cliente escanea, paga desde su celular y listo.</p>
+<p>Para el restaurante, esto significa menos tiempo muerto entre clientes y una experiencia de pago sin fricciones que los comensales valoran cada vez más.</p>
+
+<h3>Consejo práctico</h3>
+<p>Coloca el QR de pago directamente en la mesa o en la cuenta impresa. Cuanto menos pasos tenga que dar el cliente, mejor.</p>
+
+<h2>2. Reservas simplificadas</h2>
+<p>Un QR en tu vitrina, en tus redes sociales o incluso en tu tarjeta de presentación puede dirigir directamente a tu sistema de reservas online. El cliente escanea, elige fecha y hora, y queda reservado sin necesidad de llamar ni enviar mensajes.</p>
+<p>Según Barcelona Culinary Hub, los códigos QR vinculados a plataformas de reservas permiten además que el cliente seleccione preferencias como zona del salón, ocasión especial o restricciones alimentarias, datos que tu equipo puede usar para personalizar la experiencia.</p>
+
+<h2>3. Feedback instantáneo: opiniones que llegan a tiempo</h2>
+<p>Las reseñas en Google son importantes, pero muchas veces el cliente se olvida de dejarla al llegar a casa. Un QR en la mesa o en la cuenta que lleve directamente a un formulario breve de satisfacción captura la opinión en el momento justo.</p>
+<p>Plataformas como Supercode permiten crear QR de feedback con calificación por estrellas y comentarios estructurados. La ventaja es doble: obtienes información real para mejorar y, si el cliente está contento, puedes redirigirlo a que deje su reseña en Google.</p>
+
+<blockquote>El mejor momento para pedir feedback es cuando el cliente aún tiene la experiencia fresca. Un QR en la mesa logra exactamente eso.</blockquote>
+
+<h2>4. Programas de fidelización sin apps</h2>
+<p>Uno de los mayores desafíos de los programas de lealtad es que los clientes no quieren descargarse otra app. Con QR dinámicos, puedes crear un sistema de puntos o sellos digitales que funciona directamente desde el navegador del celular.</p>
+<p>Marcas como Starbucks y McDonald's ya utilizan QR codes integrados en sus programas de lealtad, según documenta Uniqode en su análisis de casos de éxito. Pero no necesitas ser una cadena multinacional: un restaurante local puede implementar un sistema simple donde cada escaneo suma puntos canjeables por descuentos o platos gratis.</p>
+
+<h2>5. Conexión WiFi automática</h2>
+<p>Parece menor, pero ofrecer WiFi gratis mediante un QR que conecta automáticamente (sin pedir contraseña) mejora significativamente la experiencia del cliente. Además, puedes configurar una página de bienvenida donde muestres tus promociones actuales o invites al cliente a seguirte en redes sociales.</p>
+
+<h2>6. Promociones y concursos interactivos</h2>
+<p>PlaceIn, plataforma especializada en marketing con QR, destaca que los códigos QR permiten crear experiencias interactivas: desde descuentos exclusivos para quienes escaneen un código en el local, hasta concursos donde el premio es un plato gratis o un descuento en la próxima visita.</p>
+<p>Este tipo de dinámicas generan engagement, dan al cliente una razón para volver y te permiten medir exactamente cuántas personas interactúan con cada promoción.</p>
+
+<h2>7. Acceso a redes sociales y Google Maps</h2>
+<p>Un QR que agrupe todos tus perfiles sociales (Instagram, TikTok, Facebook) y tu ficha de Google Maps facilita que los clientes te sigan y te recomienden. Es mucho más efectivo que decir "síguenos en Instagram" en un letrero.</p>
+
+<h2>¿Cómo empezar sin complicarte?</h2>
+<p>No necesitas implementar los siete usos de golpe. La clave es empezar por los que más impacto tienen en tu tipo de negocio:</p>
+<ul>
+<li><strong>Si pierdes clientes por la espera:</strong> empieza por pagos con QR.</li>
+<li><strong>Si no sabes qué opinan tus clientes:</strong> implementa feedback con QR.</li>
+<li><strong>Si quieres que vuelvan más seguido:</strong> crea un programa de fidelización simple.</li>
+<li><strong>Si tu carta cambia seguido:</strong> usa un menú digital con QR que puedas actualizar al instante.</li>
+</ul>
+
+<h2>LaCarta: tu QR hace mucho más que mostrar el menú</h2>
+<p>Con <strong>LaCarta</strong>, tu código QR no es solo una carta digital bonita. Es la puerta de entrada a toda la experiencia digital de tu restaurante. <strong>LaCarta te permite crear tu carta digital en minutos, con QR personalizable</strong>, y actualizarla cada vez que cambies un plato, un precio o una promoción, sin reimprimir nada.</p>
+<p>Además, al centralizar tu menú en una plataforma profesional como <strong>LaCarta</strong>, puedes combinar el QR de tu carta con enlaces a tus redes sociales, tu sistema de reservas y tu información de contacto, todo desde un solo escaneo. Es la base ideal sobre la cual construir todos los usos que mencionamos en este artículo.</p>
+<p>Si todavía usas un PDF subido a Google Drive como "menú digital", es momento de dar el salto a una solución pensada específicamente para restaurantes. <strong>LaCarta</strong> es gratis para empezar y no necesitas conocimientos técnicos.</p>
+`
+  },
 ];
