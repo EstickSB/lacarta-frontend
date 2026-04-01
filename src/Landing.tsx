@@ -280,7 +280,6 @@ const Navbar = ({ onEnterApp }: { onEnterApp: () => void }) => {
   const navLinks = [
     { name: 'Beneficios', href: '#beneficios' },
     { name: 'Cómo Funciona', href: '#como-funciona' },
-    { name: 'Blog', href: '/blog' },
     { name: 'Fundadores', href: '#fundadores' }
   ];
 
@@ -943,7 +942,6 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
             <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500 mb-10">
                <a href="/terminos" className="hover:text-white transition-colors">Términos</a>
                <a href="/privacidad" className="hover:text-white transition-colors">Privacidad</a>
-               <a href="/blog" className="hover:text-white transition-colors">Blog</a>
                <a href="/#fundadores" className="hover:text-white transition-colors">Contacto</a>
             </div>
             
