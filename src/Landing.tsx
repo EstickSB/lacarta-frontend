@@ -403,7 +403,7 @@ const SocialProof = () => {
                   borderColor: activeIndex === i ? 'rgba(220, 38, 38, 0.4)' : 'rgba(255, 255, 255, 0.06)',
                 }}
                 transition={{ duration: 0.4 }}
-                className="relative w-64 bg-white/[0.03] backdrop-blur-sm rounded-2xl border overflow-hidden"
+                className="relative w-64 bg-[#1A1A1A] rounded-2xl border overflow-hidden"
               >
                 {/* Logo area */}
                 <div className="h-40 flex items-center justify-center p-6 relative">
