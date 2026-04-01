@@ -403,7 +403,7 @@ const SocialProof = () => {
                   borderColor: activeIndex === i ? 'rgba(220, 38, 38, 0.4)' : 'rgba(255, 255, 255, 0.06)',
                 }}
                 transition={{ duration: 0.4 }}
-                className="relative w-64 bg-[#1A1A1A] rounded-2xl border overflow-hidden"
+                className={`relative w-64 rounded-2xl border overflow-hidden transition-colors duration-400 ${activeIndex === i ? 'bg-[#FAF9F6]' : 'bg-white/[0.06]'}`}
               >
                 {/* Logo area */}
                 <div className="h-40 flex items-center justify-center p-6 relative">
@@ -426,9 +426,9 @@ const SocialProof = () => {
                 </div>
 
                 {/* Info bar */}
-                <div className="px-5 py-4 border-t border-white/5">
-                  <p className="text-white text-sm font-semibold truncate">{local.name}</p>
-                  <p className="text-gray-500 text-xs mt-0.5">{local.type}</p>
+                <div className={`px-5 py-4 border-t ${activeIndex === i ? 'border-gray-200' : 'border-white/5'}`}>
+                  <p className={`text-sm font-semibold truncate transition-colors duration-400 ${activeIndex === i ? 'text-gray-900' : 'text-white'}`}>{local.name}</p>
+                  <p className={`text-xs mt-0.5 transition-colors duration-400 ${activeIndex === i ? 'text-gray-500' : 'text-gray-500'}`}>{local.type}</p>
                 </div>
 
                 {/* Action buttons - slide up on hover */}
@@ -454,9 +454,9 @@ const SocialProof = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Instagram de ${local.name}`}
-                      className="w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 rounded-xl border border-white/10 hover:border-transparent transition-all"
+                      className={`w-10 h-10 flex items-center justify-center hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 rounded-xl border hover:border-transparent transition-all ${activeIndex === i ? 'bg-gray-100 border-gray-200' : 'bg-white/5 border-white/10'}`}
                     >
-                      <Instagram size={16} className="text-white" aria-hidden="true" />
+                      <Instagram size={16} className={activeIndex === i ? 'text-gray-700' : 'text-white'} aria-hidden="true" />
                     </a>
                   </div>
                 </motion.div>
