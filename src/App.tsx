@@ -6,8 +6,6 @@ import { SplashScreen } from './components/SplashScreen';
 // Lazy loading de páginas que no son landing
 const Terminos = lazy(() => import('./Terminos'));
 const Privacidad = lazy(() => import('./Privacidad'));
-// const Blog = lazy(() => import('./Blog'));
-// const BlogArticle = lazy(() => import('./BlogArticle'));
 
 import { DishCard } from './components/DishCard';
 import { LazyImage } from './components/LazyImage';
@@ -331,10 +329,6 @@ function App() {
       </Suspense>
     );
   }
-
-  // Blog routes disabled
-  // if (path === '/blog' || path === '/blog/') { ... }
-  // if (path.startsWith('/blog/')) { ... }
 
   if (path.startsWith('/carta-digital-')) {
     return <Landing onEnterApp={() => {}} />;
