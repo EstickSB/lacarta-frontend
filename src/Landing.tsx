@@ -657,16 +657,23 @@ const FoundingLocalsForm = () => {
 };
 
 const PricingSection = () => {
+  const [hovered, setHovered] = useState<number | null>(null);
+
   const plans = [
     {
       name: 'Presencia',
-      tag: 'FREE',
-      tagline: 'Empieza sin riesgo',
-      price: null,
+      label: 'Para empezar',
       priceLabel: 'Gratis',
+      priceNote: 'sin límite de tiempo',
       cta: 'Empezar gratis',
-      ctaHref: '#fundadores',
       highlighted: false,
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
+          <rect x="9" y="3" width="6" height="4" rx="1" />
+          <path d="M9 12h6M9 16h4" />
+        </svg>
+      ),
       features: [
         { text: 'Carta digital con QR', ok: true },
         { text: 'Hasta 15 platos', ok: true },
@@ -674,44 +681,52 @@ const PricingSection = () => {
         { text: 'Editor básico desde dashboard', ok: true },
         { text: 'Categorías simples', ok: true },
         { text: 'Personalización completa', ok: false },
-        { text: 'Múltiples menús (día/noche)', ok: false },
-        { text: 'Estadísticas', ok: false },
+        { text: 'Cartas por turno día / noche', ok: false },
+        { text: 'Estadísticas de platos', ok: false },
         { text: 'Sistema de mesas', ok: false },
       ],
-      icon: <Utensils size={20} />,
     },
     {
       name: 'Carta Pro',
-      tag: 'S/ 80 / mes',
-      tagline: 'Haz que tu carta trabaje mejor',
-      price: 80,
+      label: 'Tu carta, pero mejor',
       priceLabel: 'S/ 80',
+      priceNote: 'por mes',
       cta: 'Mejorar mi carta',
-      ctaHref: '#fundadores',
       highlighted: false,
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      ),
       features: [
-        { text: 'Todo lo del plan Free', ok: true },
+        { text: 'Todo lo del plan Presencia', ok: true },
         { text: 'Hasta 80 platos', ok: true },
         { text: 'Múltiples categorías e imágenes', ok: true },
         { text: 'Cartas por turno (día / noche)', ok: true },
-        { text: 'Personalización completa (sin branding)', ok: true },
-        { text: 'Marcar platos como agotados', ok: true },
+        { text: 'Personalización completa sin branding', ok: true },
+        { text: 'Platos agotados en un click', ok: true },
         { text: 'Vista básica de actividad', ok: true },
         { text: 'Sistema de mesas', ok: false },
         { text: 'Pedidos desde el cliente', ok: false },
       ],
-      icon: <Star size={20} />,
     },
     {
       name: 'Mesas Inteligentes',
-      tag: 'S/ 120 / mes',
-      tagline: 'Más pedidos, menos errores, más control',
-      price: 120,
+      label: 'Operación completa',
       priceLabel: 'S/ 120',
+      priceNote: 'por mes',
       cta: 'Activar mi restaurante',
-      ctaHref: '#fundadores',
       highlighted: true,
-      badge: '⭐ Más popular',
+      badge: 'Más popular',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <path d="M14 14h7v7h-7z" opacity="0.4" />
+          <path d="M17.5 17.5v0" strokeWidth="2.5" />
+        </svg>
+      ),
       features: [
         { text: 'Todo lo del plan Carta Pro', ok: true },
         { text: 'Platos ilimitados', ok: true },
@@ -720,156 +735,166 @@ const PricingSection = () => {
         { text: 'Pedidos directos desde el menú', ok: true },
         { text: 'Envío de pedidos a cocina', ok: true },
         { text: 'Estado de mesas en tiempo real', ok: true },
-        { text: 'Analíticas Pulse (platos más pedidos, insights)', ok: true },
+        { text: 'Analíticas Pulse — platos e insights', ok: true },
         { text: 'Soporte prioritario', ok: true },
       ],
-      icon: <TableProperties size={20} />,
     },
   ];
 
+  const scrollToForm = (e: React.MouseEvent) => {
+    e.preventDefault();
+    document.getElementById('fundadores')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <section id="precios" className="py-20 px-6 bg-white relative overflow-hidden">
-      {/* Decorative */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-powerred/[0.03] rounded-full blur-[120px] pointer-events-none" />
+    <section id="precios" className="py-24 px-6 bg-richblack relative overflow-hidden">
+      {/* Background glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-powerred/[0.04] rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-powerred/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-14">
+        {/* Header */}
+        <div className="text-center mb-16">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-powerred text-xs font-bold uppercase tracking-[0.3em] mb-3"
+            className="text-powerred text-xs font-bold uppercase tracking-[0.3em] mb-4"
           >
             Planes
           </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-serif text-3xl md:text-4xl text-richblack mb-4"
+            className="font-serif text-3xl md:text-5xl text-white mb-4 leading-tight"
           >
-            El plan que necesita <span className="text-powerred">tu restaurante</span>
+            El plan que necesita<br />
+            <span className="text-powerred">tu restaurante</span>
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-500 text-sm max-w-md mx-auto"
+            className="text-gray-500 text-sm max-w-sm mx-auto"
           >
-            Empieza gratis y escala cuando lo necesites.
+            Empieza gratis. Escala cuando lo necesites.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className={`relative rounded-2xl border flex flex-col overflow-hidden ${
+              transition={{ delay: i * 0.12, duration: 0.6 }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              className={`relative flex flex-col rounded-2xl overflow-hidden border transition-all duration-500 ${
                 plan.highlighted
-                  ? 'bg-richblack border-powerred/30 shadow-2xl shadow-powerred/10 md:-mt-4 md:mb-4'
-                  : 'bg-white border-gray-100 shadow-sm'
+                  ? 'border-powerred/40 bg-[#1a0a0a] shadow-[0_0_60px_rgba(220,38,38,0.12)] md:-translate-y-2'
+                  : hovered === i
+                    ? 'border-white/15 bg-white/[0.06]'
+                    : 'border-white/[0.07] bg-white/[0.03]'
               }`}
             >
+              {/* Top glow on highlighted */}
+              {plan.highlighted && (
+                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-powerred/60 to-transparent" />
+              )}
+
+              {/* Badge */}
               {plan.badge && (
-                <div className="absolute top-0 left-0 right-0 bg-powerred text-white text-[10px] font-bold uppercase tracking-[0.2em] text-center py-2">
-                  {plan.badge}
+                <div className="flex justify-center pt-4">
+                  <span className="inline-flex items-center gap-1.5 bg-powerred/15 text-powerred border border-powerred/30 text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">
+                    <TrendingUp size={10} />
+                    {plan.badge}
+                  </span>
                 </div>
               )}
 
-              <div className={`p-7 ${plan.badge ? 'pt-10' : ''}`}>
-                {/* Icon + Plan name */}
-                <div className="flex items-center gap-3 mb-5">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                    plan.highlighted ? 'bg-powerred/20 text-powerred' : 'bg-powerred/10 text-powerred'
-                  }`}>
-                    {plan.icon}
-                  </div>
+              <div className={`flex flex-col flex-1 p-7 ${plan.badge ? 'pt-4' : ''}`}>
+                {/* Plan header */}
+                <div className="flex items-start justify-between mb-6">
                   <div>
-                    <p className={`text-[10px] font-bold uppercase tracking-[0.2em] ${plan.highlighted ? 'text-gray-400' : 'text-gray-400'}`}>
-                      {plan.tag}
-                    </p>
-                    <h3 className={`font-serif text-xl font-bold ${plan.highlighted ? 'text-white' : 'text-richblack'}`}>
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center mb-3 ${
+                      plan.highlighted ? 'bg-powerred/20 text-powerred' : 'bg-white/8 text-gray-400'
+                    }`}>
+                      {plan.icon}
+                    </div>
+                    <p className="text-gray-500 text-[10px] uppercase tracking-[0.25em] font-semibold mb-0.5">{plan.label}</p>
+                    <h3 className={`font-serif text-xl leading-tight ${plan.highlighted ? 'text-white' : 'text-white/90'}`}>
                       {plan.name}
                     </h3>
                   </div>
                 </div>
 
                 {/* Price */}
-                <div className="mb-2">
-                  <span className={`font-serif text-4xl font-bold ${plan.highlighted ? 'text-white' : 'text-richblack'}`}>
-                    {plan.priceLabel}
-                  </span>
-                  {plan.price && (
-                    <span className={`text-sm ml-1 ${plan.highlighted ? 'text-gray-400' : 'text-gray-400'}`}>/mes</span>
-                  )}
+                <div className="mb-6 pb-6 border-b border-white/[0.08]">
+                  <div className="flex items-baseline gap-2">
+                    <span className={`font-serif text-5xl font-bold tracking-tight ${plan.highlighted ? 'text-white' : 'text-white/80'}`}>
+                      {plan.priceLabel}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 text-xs mt-1">{plan.priceNote}</p>
                 </div>
-                <p className={`text-xs mb-6 ${plan.highlighted ? 'text-gray-400' : 'text-gray-500'}`}>
-                  {plan.tagline}
-                </p>
-
-                {/* CTA */}
-                <a
-                  href={plan.ctaHref}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById('fundadores')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className={`w-full block text-center py-3 px-6 rounded-xl text-sm font-bold transition-all duration-300 mb-6 ${
-                    plan.highlighted
-                      ? 'bg-powerred hover:bg-red-600 text-white shadow-lg shadow-powerred/30 hover:scale-[1.02]'
-                      : 'bg-richblack/5 hover:bg-richblack text-richblack hover:text-white border border-richblack/10'
-                  }`}
-                >
-                  {plan.cta}
-                </a>
-
-                {/* Divider */}
-                <div className={`h-px w-full mb-5 ${plan.highlighted ? 'bg-white/10' : 'bg-gray-100'}`} />
 
                 {/* Features */}
-                <ul className="space-y-3">
+                <ul className="space-y-3 flex-1 mb-8">
                   {plan.features.map((f, fi) => (
-                    <li key={fi} className="flex items-start gap-2.5">
-                      <span className={`mt-0.5 flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center ${
+                    <li key={fi} className="flex items-center gap-3">
+                      <span className={`flex-shrink-0 w-[18px] h-[18px] rounded-full flex items-center justify-center ${
                         f.ok
-                          ? plan.highlighted ? 'bg-powerred/20 text-powerred' : 'bg-powerred/10 text-powerred'
-                          : 'bg-gray-100 text-gray-300'
+                          ? plan.highlighted ? 'bg-powerred/20 text-powerred' : 'bg-white/10 text-gray-300'
+                          : 'bg-white/[0.04] text-gray-700'
                       }`}>
                         {f.ok
                           ? <Check size={10} strokeWidth={3} />
-                          : <X size={10} strokeWidth={3} />
+                          : <X size={10} strokeWidth={2.5} />
                         }
                       </span>
-                      <span className={`text-xs leading-relaxed ${
+                      <span className={`text-[13px] leading-tight ${
                         f.ok
-                          ? plan.highlighted ? 'text-gray-300' : 'text-gray-700'
-                          : plan.highlighted ? 'text-gray-600' : 'text-gray-400'
+                          ? plan.highlighted ? 'text-gray-200' : 'text-gray-400'
+                          : 'text-gray-700 line-through decoration-gray-800'
                       }`}>
-                        {f.ok ? f.text : <><Lock size={10} className="inline mr-1 opacity-50" />{f.text}</>}
+                        {f.text}
                       </span>
                     </li>
                   ))}
                 </ul>
+
+                {/* CTA */}
+                <a
+                  href="#fundadores"
+                  onClick={scrollToForm}
+                  className={`w-full block text-center py-3.5 px-6 rounded-xl text-sm font-bold transition-all duration-300 ${
+                    plan.highlighted
+                      ? 'bg-powerred hover:bg-red-600 text-white shadow-lg shadow-powerred/25 hover:shadow-powerred/40 hover:scale-[1.02]'
+                      : 'bg-white/[0.07] hover:bg-white/[0.13] text-white border border-white/10 hover:border-white/20'
+                  }`}
+                >
+                  {plan.cta}
+                </a>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom note */}
+        {/* Footer note */}
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="text-center text-xs text-gray-400 mt-10"
+          transition={{ delay: 0.5 }}
+          className="text-center text-xs text-gray-600 mt-10"
         >
-          Sin contratos. Cancela cuando quieras. ¿Dudas? <a href="#fundadores" onClick={(e) => { e.preventDefault(); document.getElementById('fundadores')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-powerred hover:underline">Escríbenos.</a>
+          Sin contratos. Sin cobros ocultos. Cancela cuando quieras.
         </motion.p>
       </div>
     </section>
