@@ -96,12 +96,15 @@ function MenuView() {
     restaurant?.titleDishColor,
     restaurant?.descriptionCategoryColor,
     restaurant?.borderLogo,
-    restaurant?.roundedLogo
+    restaurant?.roundedLogo,
   );
 
   const currentCategory = useMemo(() => {
     if (filteredCategories.length === 0) return null;
-    return filteredCategories.find(c => String(c.id) === String(activeCategory)) || filteredCategories[0];
+    return (
+      filteredCategories.find((c) => String(c.id) === String(activeCategory)) ||
+      filteredCategories[0]
+    );
   }, [filteredCategories, activeCategory]);
 
   if (isAppReady && (error || !restaurant)) {
@@ -129,24 +132,37 @@ function MenuView() {
       borderLogo={restaurant?.borderLogo}
       roundedLogo={restaurant?.roundedLogo}
     >
-      <div className="flex min-h-screen w-full text-gray-100" style={{ fontFamily: theme.fontFamily, backgroundColor: theme.backgroundColor }}>
+      <div
+        className="flex min-h-screen w-full text-gray-100"
+        style={{ fontFamily: theme.fontFamily, backgroundColor: theme.backgroundColor }}
+      >
         <AnimatePresence mode="wait">
           {showSplash && (
             <SplashScreen
               restaurant={restaurant}
-              initialName={initialName}
+              _initialName={initialName}
               isDataReady={!apiLoading}
               onComplete={() => setShowSplash(false)}
             />
           )}
         </AnimatePresence>
 
-        <div className={`relative w-full transition-opacity duration-700 lg:grid lg:grid-cols-[380px_1fr] lg:h-screen lg:overflow-hidden ${showSplash ? 'opacity-0' : 'opacity-100'}`}>
-
+        <div
+          className={`relative w-full transition-opacity duration-700 lg:grid lg:grid-cols-[380px_1fr] lg:h-screen lg:overflow-hidden ${showSplash ? 'opacity-0' : 'opacity-100'}`}
+        >
           <header className="lg:hidden relative w-full mb-2">
             <div className="relative h-[30vh] w-full overflow-hidden">
-              <LazyImage src={restaurant?.coverUrl || ''} alt="Cover" className="h-full w-full object-cover" />
-              <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, transparent, ${theme.backgroundColor})` }} />
+              <LazyImage
+                src={restaurant?.coverUrl || ''}
+                alt="Cover"
+                className="h-full w-full object-cover"
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: `linear-gradient(to bottom, transparent, ${theme.backgroundColor})`,
+                }}
+              />
             </div>
             <div className="relative px-6 -mt-4 pb-4">
               <RestaurantInfo restaurant={restaurant} isMobile={true} />
@@ -162,9 +178,16 @@ function MenuView() {
             </div>
           </header>
 
-          <aside className="hidden lg:flex flex-col relative h-screen border-r border-white/5 z-30 overflow-hidden" style={{ backgroundColor: theme.backgroundColor }}>
+          <aside
+            className="hidden lg:flex flex-col relative h-screen border-r border-white/5 z-30 overflow-hidden"
+            style={{ backgroundColor: theme.backgroundColor }}
+          >
             <div className="absolute inset-0 z-0 opacity-10">
-              <LazyImage src={restaurant?.coverUrl || ''} alt="Cover" className="h-full w-full object-cover" />
+              <LazyImage
+                src={restaurant?.coverUrl || ''}
+                alt="Cover"
+                className="h-full w-full object-cover"
+              />
               <div className="absolute inset-0 bg-black/80" />
             </div>
 
@@ -196,7 +219,10 @@ function MenuView() {
             </div>
           </aside>
 
-          <div className="lg:hidden sticky top-0 z-50 w-full backdrop-blur-md border-b border-white/5" style={{ backgroundColor: `${theme.backgroundColor}dd` }}>
+          <div
+            className="lg:hidden sticky top-0 z-50 w-full backdrop-blur-md border-b border-white/5"
+            style={{ backgroundColor: `${theme.backgroundColor}dd` }}
+          >
             <CategoryNav
               categories={filteredCategories}
               activeId={activeCategory}
@@ -225,10 +251,10 @@ function MenuView() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{
-                          type: "spring",
+                          type: 'spring',
                           stiffness: 100,
                           damping: 20,
-                          delay: 0.1
+                          delay: 0.1,
                         }}
                         className="mb-12 mx-auto w-full"
                       >
@@ -236,13 +262,12 @@ function MenuView() {
                           <div
                             className="absolute inset-0 rounded-[1.5rem]"
                             style={{
-                              background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.05), transparent)',
-                              padding: '1px'
+                              background:
+                                'linear-gradient(to bottom, rgba(0, 0, 0, 0.05), transparent)',
+                              padding: '1px',
                             }}
                           />
-                          <div
-                            className="relative bg-white/95 backdrop-blur-md rounded-[1.5rem] p-5 lg:p-7 shadow-lg flex flex-col sm:flex-row items-center sm:items-start gap-4 lg:gap-6"
-                          >
+                          <div className="relative bg-white/95 backdrop-blur-md rounded-[1.5rem] p-5 lg:p-7 shadow-lg flex flex-col sm:flex-row items-center sm:items-start gap-4 lg:gap-6">
                             <div className="shrink-0">
                               <div
                                 className="flex items-center justify-center w-11 h-11 rounded-xl bg-gray-50 border border-gray-100 shadow-sm"
@@ -272,11 +297,7 @@ function MenuView() {
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-6">
                       {currentCategory.dishes.map((dish, index) => (
-                        <DishCard
-                          key={`${dish.id}-${activeShiftId}`}
-                          dish={dish}
-                          index={index}
-                        />
+                        <DishCard key={`${dish.id}-${activeShiftId}`} dish={dish} index={index} />
                       ))}
                     </div>
 
@@ -290,7 +311,9 @@ function MenuView() {
                 ) : (
                   <div className="flex flex-col items-center justify-center py-20 opacity-40">
                     <span className="text-4xl mb-4">🌙</span>
-                    <p className="text-center font-serif italic text-xl">Selecciona una categoría para comenzar</p>
+                    <p className="text-center font-serif italic text-xl">
+                      Selecciona una categoría para comenzar
+                    </p>
                   </div>
                 )}
               </m.div>
@@ -308,7 +331,11 @@ function MenuView() {
 
 function App() {
   const path = window.location.pathname;
-  const isRestaurantPage = path.startsWith('/restaurante/') || path.startsWith('/restaurant/') || path.startsWith('/rest/') || path.startsWith('/res/');
+  const isRestaurantPage =
+    path.startsWith('/restaurante/') ||
+    path.startsWith('/restaurant/') ||
+    path.startsWith('/rest/') ||
+    path.startsWith('/res/');
 
   if (isRestaurantPage) {
     return <MenuView />;
@@ -316,7 +343,13 @@ function App() {
 
   if (path === '/terminos') {
     return (
-      <Suspense fallback={<div className="min-h-screen bg-offwhite flex items-center justify-center"><p className="text-gray-500">Cargando...</p></div>}>
+      <Suspense
+        fallback={
+          <div className="min-h-screen bg-offwhite flex items-center justify-center">
+            <p className="text-gray-500">Cargando...</p>
+          </div>
+        }
+      >
         <Terminos />
       </Suspense>
     );
@@ -324,7 +357,13 @@ function App() {
 
   if (path === '/privacidad') {
     return (
-      <Suspense fallback={<div className="min-h-screen bg-offwhite flex items-center justify-center"><p className="text-gray-500">Cargando...</p></div>}>
+      <Suspense
+        fallback={
+          <div className="min-h-screen bg-offwhite flex items-center justify-center">
+            <p className="text-gray-500">Cargando...</p>
+          </div>
+        }
+      >
         <Privacidad />
       </Suspense>
     );

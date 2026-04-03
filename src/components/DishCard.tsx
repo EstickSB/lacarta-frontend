@@ -19,14 +19,35 @@ const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 );
 
 const BadgeIcon: React.FC<{ type: DietaryBadge; color: string }> = ({ type, color }) => {
-  const iconProps = { size: 12, strokeWidth: 2.5, className: "drop-shadow-md text-white" };
+  const iconProps = { size: 12, strokeWidth: 2.5, className: 'drop-shadow-md text-white' };
 
   switch (type) {
-    case 'spicy': return <Wrapper><Flame {...iconProps} className="text-red-500" /></Wrapper>;
-    case 'vegan': return <Wrapper><Leaf {...iconProps} className="text-green-500" /></Wrapper>;
-    case 'gluten-free': return <Wrapper><WheatOff {...iconProps} className="text-amber-500" /></Wrapper>;
-    case 'chef-choice': return <Wrapper><Star {...iconProps} style={{ color }} fill={color} /></Wrapper>;
-    default: return null;
+    case 'spicy':
+      return (
+        <Wrapper>
+          <Flame {...iconProps} className="text-red-500" />
+        </Wrapper>
+      );
+    case 'vegan':
+      return (
+        <Wrapper>
+          <Leaf {...iconProps} className="text-green-500" />
+        </Wrapper>
+      );
+    case 'gluten-free':
+      return (
+        <Wrapper>
+          <WheatOff {...iconProps} className="text-amber-500" />
+        </Wrapper>
+      );
+    case 'chef-choice':
+      return (
+        <Wrapper>
+          <Star {...iconProps} style={{ color }} fill={color} />
+        </Wrapper>
+      );
+    default:
+      return null;
   }
 };
 
@@ -39,8 +60,8 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, delay: index * ANIMATION_STAGGER_DELAY, ease: "easeOut" }
-    }
+      transition: { duration: 0.4, delay: index * ANIMATION_STAGGER_DELAY, ease: 'easeOut' },
+    },
   };
 
   return (
@@ -48,7 +69,7 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
       className="flex flex-col h-full bg-white/5 rounded-2xl overflow-hidden border border-white/5 shadow-sm group"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-10%" }}
+      viewport={{ once: true, margin: '-10%' }}
       variants={cardVariants}
     >
       <div className="relative aspect-square w-full overflow-hidden bg-zinc-900">
@@ -77,7 +98,7 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
           className="text-[11px] lg:text-xs leading-relaxed mb-3 grow italic opacity-70"
           style={{
             color: descriptionDishColor,
-            whiteSpace: 'pre-wrap'
+            whiteSpace: 'pre-wrap',
           }}
         >
           {description?.replace(/\\n/g, '\n')}

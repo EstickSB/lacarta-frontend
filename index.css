@@ -19,8 +19,8 @@ body {
   font-family: 'Inter', 'Outfit', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #FAF9F6;
-  color: #0A0A0A;
+  background-color: #faf9f6;
+  color: #0a0a0a;
   overflow-x: hidden;
   overscroll-behavior-y: none;
   /* Native app feel - prevent pull to refresh if desired */
@@ -54,7 +54,9 @@ html {
 .blur-load {
   filter: blur(20px);
   scale: 1.1;
-  transition: filter 0.5s ease-out, scale 0.5s ease-out;
+  transition:
+    filter 0.5s ease-out,
+    scale 0.5s ease-out;
 }
 
 .blur-load.loaded {
@@ -91,18 +93,20 @@ html {
 }
 
 .scroll-primary::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-color, #E60026) !important;
+  background: var(--scrollbar-color, #e60026) !important;
   opacity: 0.3 !important;
   border-radius: 10px !important;
 }
 
 .scroll-primary::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-color, #E60026) !important;
+  background: var(--scrollbar-color, #e60026) !important;
   filter: brightness(1.1) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+  *,
+  ::before,
+  ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

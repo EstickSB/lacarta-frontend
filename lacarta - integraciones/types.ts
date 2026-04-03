@@ -1,5 +1,10 @@
-
-export type UserViewMode = 'LANDING' | 'REGISTER' | 'LOGIN' | 'FORGOT_PASSWORD' | 'RESTAURANT_DASHBOARD' | 'DINER_MENU';
+export type UserViewMode =
+  | 'LANDING'
+  | 'REGISTER'
+  | 'LOGIN'
+  | 'FORGOT_PASSWORD'
+  | 'RESTAURANT_DASHBOARD'
+  | 'DINER_MENU';
 
 export type StockStatus = 'AVAILABLE' | 'SOLD_OUT' | 'TODAY_ONLY';
 
@@ -76,7 +81,7 @@ export interface HallTable {
   status: TableStatus;
   total: number;
   timeActive: string; // e.g., "45m"
-  items: OrderItem[]; 
+  items: OrderItem[];
   pin?: string; // For payment request
   allergensAlert?: string[]; // Critical alerts for the table
 }
@@ -100,17 +105,21 @@ export const PREFERENCE_OPTIONS = [
   { id: 'spicy-lover', label: 'Amante del Picante' },
   { id: 'keto', label: 'Keto Friendly' },
   { id: 'gourmet', label: 'Gourmet' },
-  { id: 'traditional', label: 'Tradicional' }
+  { id: 'traditional', label: 'Tradicional' },
 ];
 
 export const ALLERGEN_OPTIONS = [
-    { id: 'nuts', label: 'Nueces' },
-    { id: 'shellfish', label: 'Mariscos' },
-    { id: 'dairy', label: 'Lácteos' },
-    { id: 'soy', label: 'Soya' },
-    { id: 'gluten', label: 'Gluten' }
+  { id: 'nuts', label: 'Nueces' },
+  { id: 'shellfish', label: 'Mariscos' },
+  { id: 'dairy', label: 'Lácteos' },
+  { id: 'soy', label: 'Soya' },
+  { id: 'gluten', label: 'Gluten' },
 ];
 
 export const REVIEW_TAGS = [
-  "Porción generosa", "Presentación 10/10", "Muy picante", "Precio/Calidad justo", "Sabor auténtico"
+  'Porción generosa',
+  'Presentación 10/10',
+  'Muy picante',
+  'Precio/Calidad justo',
+  'Sabor auténtico',
 ];

@@ -5,12 +5,17 @@ import { SPLASH_PROGRESS_INCREMENT, SPLASH_COMPLETION_DELAY } from '../constants
 
 interface SplashScreenProps {
   restaurant?: RestaurantConfig | null;
-  initialName: string;
+  _initialName?: string;
   isDataReady: boolean;
   onComplete: () => void;
 }
 
-export const SplashScreen: React.FC<SplashScreenProps> = ({ restaurant, initialName, isDataReady, onComplete }) => {
+export const SplashScreen: React.FC<SplashScreenProps> = ({
+  restaurant,
+  _initialName,
+  isDataReady,
+  onComplete,
+}) => {
   const [progress, setProgress] = useState(0);
 
   const displayName = restaurant?.name;
@@ -38,7 +43,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ restaurant, initialN
     <m.div
       className="fixed inset-0 min-h-screen z-[100] flex flex-col items-center justify-center bg-zinc-950 overflow-hidden px-6"
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
+      exit={{ opacity: 0, transition: { duration: 0.8, ease: 'easeInOut' } }}
     >
       <AnimatePresence mode="wait">
         <m.h1

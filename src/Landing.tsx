@@ -1,14 +1,20 @@
 import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useMotionValueEvent } from 'framer-motion';
-import { 
-  ArrowRight, 
-  Check, 
-  X, 
-  Zap, 
-  Search, 
-  BarChart3, 
-  QrCode, 
-  Newspaper, 
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useMotionValueEvent,
+} from 'framer-motion';
+import {
+  ArrowRight,
+  Check,
+  X,
+  Zap,
+  Search,
+  BarChart3,
+  QrCode,
+  Newspaper,
   MousePointer2,
   RefreshCw,
   Brain,
@@ -21,11 +27,7 @@ import {
   Phone,
   Tag,
   Loader2,
-  Lock,
-  Star,
-  Utensils,
-  TableProperties,
-  TrendingUp
+  TrendingUp,
 } from 'lucide-react';
 import Button from './components/Button';
 
@@ -55,10 +57,10 @@ const MagneticButton = ({ children, onClick, variant = 'primary', className }: a
   };
 
   return (
-    <motion.div 
-      ref={ref} 
-      style={{ x, y }} 
-      onMouseMove={handleMouse} 
+    <motion.div
+      ref={ref}
+      style={{ x, y }}
+      onMouseMove={handleMouse}
       onMouseLeave={reset}
       className="inline-block touch-none"
     >
@@ -88,16 +90,16 @@ const PhoneMockup = () => {
       <div className="h-[28px] w-[3px] bg-richblack absolute -left-[13px] top-[60px] rounded-l-lg"></div>
       <div className="h-[38px] w-[3px] bg-richblack absolute -left-[13px] top-[104px] rounded-l-lg"></div>
       <div className="h-[54px] w-[3px] bg-richblack absolute -right-[13px] top-[120px] rounded-r-lg"></div>
-      
+
       {/* Screen Container */}
       <div className="rounded-[2rem] overflow-hidden w-full h-full bg-offwhite relative">
         {/* Dynamic Island */}
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[75px] h-[24px] bg-black rounded-b-2xl z-20"></div>
-        
+
         {/* Infinite Scroll Content */}
-        <motion.div 
+        <motion.div
           animate={{ y: [-20, -1000] }}
-          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+          transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
           className="space-y-4 p-4 pt-10"
         >
           {Array.from({ length: 8 }).map((_, i) => {
@@ -109,23 +111,35 @@ const PhoneMockup = () => {
               'Leche de tigre - carta digital restaurante peruano',
               'Cheesecake de maracuyá en menú QR',
               'Mostrito cóctel - bebida en carta digital',
-              'Arroz con carne estofada - menú digital restaurante'
+              'Arroz con carne estofada - menú digital restaurante',
             ];
             return (
-            <div key={i} className="bg-white rounded-xl p-2.5 shadow-sm border border-gray-100 flex gap-2.5 transform hover:scale-105 transition-transform duration-300">
-              <img src={foodImages[i]} width="56" height="56" loading="lazy" className="w-14 h-14 rounded-lg object-cover bg-gray-200" alt={altTexts[i]} />
-              <div className="flex-1 space-y-2">
-                <div className="h-3 w-3/4 bg-gray-200 rounded-full"></div>
-                <div className="h-2 w-1/2 bg-gray-100 rounded-full"></div>
-                <div className="flex justify-between items-center mt-2">
-                  <div className="h-3 w-10 bg-powerred/10 text-powerred rounded-full"></div>
-                  <div className="h-6 w-6 rounded-full bg-richblack text-white flex items-center justify-center text-[10px]">★</div>
+              <div
+                key={i}
+                className="bg-white rounded-xl p-2.5 shadow-sm border border-gray-100 flex gap-2.5 transform hover:scale-105 transition-transform duration-300"
+              >
+                <img
+                  src={foodImages[i]}
+                  width="56"
+                  height="56"
+                  loading="lazy"
+                  className="w-14 h-14 rounded-lg object-cover bg-gray-200"
+                  alt={altTexts[i]}
+                />
+                <div className="flex-1 space-y-2">
+                  <div className="h-3 w-3/4 bg-gray-200 rounded-full"></div>
+                  <div className="h-2 w-1/2 bg-gray-100 rounded-full"></div>
+                  <div className="flex justify-between items-center mt-2">
+                    <div className="h-3 w-10 bg-powerred/10 text-powerred rounded-full"></div>
+                    <div className="h-6 w-6 rounded-full bg-richblack text-white flex items-center justify-center text-[10px]">
+                      ★
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
             );
           })}
-           {/* Duplicate for Loop */}
+          {/* Duplicate for Loop */}
           {Array.from({ length: 8 }).map((_, i) => {
             const altTexts = [
               'Ceviche peruano en carta digital de restaurante',
@@ -135,33 +149,45 @@ const PhoneMockup = () => {
               'Leche de tigre - carta digital restaurante peruano',
               'Cheesecake de maracuyá en menú QR',
               'Mostrito cóctel - bebida en carta digital',
-              'Arroz con carne estofada - menú digital restaurante'
+              'Arroz con carne estofada - menú digital restaurante',
             ];
             return (
-            <div key={i + 8} className="bg-white rounded-xl p-2.5 shadow-sm border border-gray-100 flex gap-2.5">
-              <img src={foodImages[i]} width="56" height="56" loading="lazy" className="w-14 h-14 rounded-lg object-cover bg-gray-200" alt={altTexts[i]} />
-              <div className="flex-1 space-y-2">
-                <div className="h-3 w-3/4 bg-gray-200 rounded-full"></div>
-                <div className="h-2 w-1/2 bg-gray-100 rounded-full"></div>
-                <div className="flex justify-between items-center mt-2">
-                  <div className="h-3 w-10 bg-powerred/10 rounded-full"></div>
-                  <div className="h-6 w-6 rounded-full bg-richblack"></div>
+              <div
+                key={i + 8}
+                className="bg-white rounded-xl p-2.5 shadow-sm border border-gray-100 flex gap-2.5"
+              >
+                <img
+                  src={foodImages[i]}
+                  width="56"
+                  height="56"
+                  loading="lazy"
+                  className="w-14 h-14 rounded-lg object-cover bg-gray-200"
+                  alt={altTexts[i]}
+                />
+                <div className="flex-1 space-y-2">
+                  <div className="h-3 w-3/4 bg-gray-200 rounded-full"></div>
+                  <div className="h-2 w-1/2 bg-gray-100 rounded-full"></div>
+                  <div className="flex justify-between items-center mt-2">
+                    <div className="h-3 w-10 bg-powerred/10 rounded-full"></div>
+                    <div className="h-6 w-6 rounded-full bg-richblack"></div>
+                  </div>
                 </div>
               </div>
-            </div>
             );
           })}
         </motion.div>
 
         {/* Floating UI Elements over phone (Pop-out effect) */}
         <div className="absolute bottom-6 left-4 right-4 bg-white/80 backdrop-blur-xl p-4 rounded-2xl shadow-xl border border-white/50 z-10 flex justify-between items-center">
-             <div className="flex flex-col">
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Vista Rápida</span>
-                <span className="text-sm font-bold text-richblack">15 Platos</span>
-             </div>
-             <div className="w-8 h-8 bg-powerred rounded-full flex items-center justify-center text-white shadow-lg shadow-powerred/30">
-               <ArrowRight size={14} />
-             </div>
+          <div className="flex flex-col">
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+              Vista Rápida
+            </span>
+            <span className="text-sm font-bold text-richblack">15 Platos</span>
+          </div>
+          <div className="w-8 h-8 bg-powerred rounded-full flex items-center justify-center text-white shadow-lg shadow-powerred/30">
+            <ArrowRight size={14} />
+          </div>
         </div>
       </div>
     </div>
@@ -172,14 +198,39 @@ const DNAInteraction = () => {
   const [filter, setFilter] = useState<'ALL' | 'VEGAN' | 'SPICY' | 'GLUTEN'>('ALL');
 
   const items = [
-    { id: 1, name: 'Ají de Gallina', type: 'SPICY', img: '/img/thumb-aji-de-gallina-carta-digital.webp' },
-    { id: 2, name: 'Cheesecake Maracuyá', type: 'VEGAN', img: '/img/thumb-cheesecake-maracuya-carta-digital.webp' },
-    { id: 3, name: 'Arroz con Pato', type: 'GLUTEN', img: '/img/thumb-arroz-con-pato-carta-digital.webp' },
-    { id: 4, name: 'Tallarín Saltado', type: 'SPICY', img: '/img/thumb-tallarin-salteado-carta-digital.webp' },
-    { id: 5, name: 'Leche de Tigre', type: 'VEGAN', img: '/img/thumb-leche-de-tigre-carta-digital.webp' },
+    {
+      id: 1,
+      name: 'Ají de Gallina',
+      type: 'SPICY',
+      img: '/img/thumb-aji-de-gallina-carta-digital.webp',
+    },
+    {
+      id: 2,
+      name: 'Cheesecake Maracuyá',
+      type: 'VEGAN',
+      img: '/img/thumb-cheesecake-maracuya-carta-digital.webp',
+    },
+    {
+      id: 3,
+      name: 'Arroz con Pato',
+      type: 'GLUTEN',
+      img: '/img/thumb-arroz-con-pato-carta-digital.webp',
+    },
+    {
+      id: 4,
+      name: 'Tallarín Saltado',
+      type: 'SPICY',
+      img: '/img/thumb-tallarin-salteado-carta-digital.webp',
+    },
+    {
+      id: 5,
+      name: 'Leche de Tigre',
+      type: 'VEGAN',
+      img: '/img/thumb-leche-de-tigre-carta-digital.webp',
+    },
   ];
 
-  const filteredItems = filter === 'ALL' ? items : items; 
+  const filteredItems = filter === 'ALL' ? items : items;
 
   return (
     <div className="bg-white rounded-xl p-5 md:p-6 border border-gray-100 shadow-xl relative overflow-hidden h-full">
@@ -187,16 +238,16 @@ const DNAInteraction = () => {
         <Search size={100} />
       </div>
       <h3 className="font-serif text-xl mb-5">ADN Gastronómico</h3>
-      
+
       {/* Interactive Buttons */}
       <div className="flex gap-2 mb-8 overflow-x-auto no-scrollbar pb-2">
         {['VEGAN', 'SPICY', 'GLUTEN'].map((f) => (
           <button
             key={f}
-            onClick={() => setFilter(filter === f ? 'ALL' : f as any)}
+            onClick={() => setFilter(filter === f ? 'ALL' : (f as any))}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 transform border flex-shrink-0 ${
-              filter === f 
-                ? 'bg-richblack text-white scale-110 shadow-lg border-richblack' 
+              filter === f
+                ? 'bg-richblack text-white scale-110 shadow-lg border-richblack'
                 : 'bg-gray-50 text-gray-500 hover:bg-gray-100 border-gray-100'
             }`}
           >
@@ -211,33 +262,43 @@ const DNAInteraction = () => {
       {/* List */}
       <div className="space-y-3">
         {filteredItems.map((item) => {
-           const isMatch = filter === 'ALL' || item.type === filter;
-           return (
-             <motion.div 
-               layout
-               initial={false}
-               animate={{ 
-                 opacity: isMatch ? 1 : 0.3, 
-                 scale: isMatch ? 1 : 0.95,
-                 x: isMatch ? 0 : 0
-               }}
-               key={item.id}
-               className={`flex items-center gap-4 p-3 rounded-xl transition-colors ${
-                 isMatch ? 'bg-white shadow-sm border border-gray-100' : 'bg-transparent'
-               }`}
-             >
-                <img src={item.img} width="40" height="40" loading="lazy" className="w-10 h-10 rounded-lg bg-gray-200 object-cover" alt={item.name}/>
-                <div className="flex-1">
-                  <div className="font-medium text-sm text-richblack">{item.name}</div>
-                  <div className="h-2 w-16 bg-gray-100 rounded-full mt-1"></div>
-                </div>
-                {filter === item.type && (
-                  <motion.div layoutId="match-badge" className="text-[10px] font-bold text-powerred bg-powerred/10 px-2 py-1 rounded-full">
-                    MATCH
-                  </motion.div>
-                )}
-             </motion.div>
-           );
+          const isMatch = filter === 'ALL' || item.type === filter;
+          return (
+            <motion.div
+              layout
+              initial={false}
+              animate={{
+                opacity: isMatch ? 1 : 0.3,
+                scale: isMatch ? 1 : 0.95,
+                x: isMatch ? 0 : 0,
+              }}
+              key={item.id}
+              className={`flex items-center gap-4 p-3 rounded-xl transition-colors ${
+                isMatch ? 'bg-white shadow-sm border border-gray-100' : 'bg-transparent'
+              }`}
+            >
+              <img
+                src={item.img}
+                width="40"
+                height="40"
+                loading="lazy"
+                className="w-10 h-10 rounded-lg bg-gray-200 object-cover"
+                alt={item.name}
+              />
+              <div className="flex-1">
+                <div className="font-medium text-sm text-richblack">{item.name}</div>
+                <div className="h-2 w-16 bg-gray-100 rounded-full mt-1"></div>
+              </div>
+              {filter === item.type && (
+                <motion.div
+                  layoutId="match-badge"
+                  className="text-[10px] font-bold text-powerred bg-powerred/10 px-2 py-1 rounded-full"
+                >
+                  MATCH
+                </motion.div>
+              )}
+            </motion.div>
+          );
         })}
       </div>
     </div>
@@ -245,35 +306,36 @@ const DNAInteraction = () => {
 };
 
 const HolographicQR = () => (
-  <motion.div 
+  <motion.div
     whileHover={{ rotateX: 10, rotateY: 10, scale: 1.05 }}
     className="relative w-44 h-44 bg-white rounded-3xl flex items-center justify-center border border-gray-100 shadow-2xl perspective-1000 group cursor-pointer"
   >
-     {/* Glow Pulse */}
-     <div className="absolute inset-0 rounded-3xl bg-powerred/20 blur-xl animate-pulse"></div>
-     
-     {/* Physical Thickness (Fake 3D) */}
-     <div className="absolute top-2 left-2 w-full h-full bg-gray-200 rounded-3xl -z-10"></div>
-     
-     <QrCode size={64} className="text-richblack relative z-10" />
-     
-     {/* Orbiting Particles */}
-     <div className="absolute w-full h-full animate-spin-slow">
-        <div className="absolute -top-4 left-1/2 w-2 h-2 bg-green-500 rounded-full blur-[1px]"></div>
-        <div className="absolute bottom-4 -right-4 w-3 h-3 bg-red-500 rounded-full blur-[1px]"></div>
-        <div className="absolute top-1/2 -left-6 w-2 h-2 bg-yellow-500 rounded-full blur-[1px]"></div>
-     </div>
+    {/* Glow Pulse */}
+    <div className="absolute inset-0 rounded-3xl bg-powerred/20 blur-xl animate-pulse"></div>
 
-     <div className="absolute bottom-3 text-[10px] font-bold tracking-[0.3em] text-gray-400">ESCANEA</div>
+    {/* Physical Thickness (Fake 3D) */}
+    <div className="absolute top-2 left-2 w-full h-full bg-gray-200 rounded-3xl -z-10"></div>
+
+    <QrCode size={64} className="text-richblack relative z-10" />
+
+    {/* Orbiting Particles */}
+    <div className="absolute w-full h-full animate-spin-slow">
+      <div className="absolute -top-4 left-1/2 w-2 h-2 bg-green-500 rounded-full blur-[1px]"></div>
+      <div className="absolute bottom-4 -right-4 w-3 h-3 bg-red-500 rounded-full blur-[1px]"></div>
+      <div className="absolute top-1/2 -left-6 w-2 h-2 bg-yellow-500 rounded-full blur-[1px]"></div>
+    </div>
+
+    <div className="absolute bottom-3 text-[10px] font-bold tracking-[0.3em] text-gray-400">
+      ESCANEA
+    </div>
   </motion.div>
 );
 
-
-const Navbar = ({ onEnterApp }: { onEnterApp: () => void }) => {
+const Navbar = ({ _onEnterApp }: { _onEnterApp?: () => void }) => {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
+  useMotionValueEvent(scrollY, 'change', (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
     if (latest > previous && latest > 150) {
       setHidden(true);
@@ -285,17 +347,17 @@ const Navbar = ({ onEnterApp }: { onEnterApp: () => void }) => {
   const navLinks = [
     { name: 'Beneficios', href: '#beneficios' },
     { name: 'Cómo Funciona', href: '#como-funciona' },
-    { name: 'Fundadores', href: '#fundadores' }
+    { name: 'Fundadores', href: '#fundadores' },
   ];
 
   return (
     <motion.nav
       variants={{
         visible: { y: 0 },
-        hidden: { y: "-150%" },
+        hidden: { y: '-150%' },
       }}
-      animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.35, ease: "easeInOut" }}
+      animate={hidden ? 'hidden' : 'visible'}
+      transition={{ duration: 0.35, ease: 'easeInOut' }}
       className="fixed top-6 left-0 right-0 z-50 flex justify-center px-6"
     >
       <div className="w-full max-w-4xl bg-[#121212]/90 backdrop-blur-[12px] rounded-2xl border border-amber-500/20 px-6 py-3 flex items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
@@ -321,7 +383,7 @@ const Navbar = ({ onEnterApp }: { onEnterApp: () => void }) => {
               {link.name}
               <motion.div
                 className="absolute -bottom-2 left-1/2 w-1 h-1 bg-powerred rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                style={{ translateX: "-50%" }}
+                style={{ translateX: '-50%' }}
                 layoutId="navDot"
               />
             </motion.a>
@@ -348,29 +410,29 @@ const SocialProof = () => {
 
   const locals = [
     {
-      name: "La Martina Resto & Bar",
-      logo: "/img/logos/la-martina-logo.png",
-      instagram: "https://www.instagram.com/lamartina_pimentel/",
-      carta: "https://lacarta.space/restaurante/la-martina/menu",
-      type: "Resto & Bar"
+      name: 'La Martina Resto & Bar',
+      logo: '/img/logos/la-martina-logo.png',
+      instagram: 'https://www.instagram.com/lamartina_pimentel/',
+      carta: 'https://lacarta.space/restaurante/la-martina/menu',
+      type: 'Resto & Bar',
     },
     {
-      name: "AYUKI",
-      logo: "/img/logos/ayuki-logo.png",
-      instagram: "https://www.instagram.com/ayuki_cix/",
-      carta: "https://lacarta.space/restaurante/ayuki-japanese-fusion-food/menu",
-      type: "Japanese Fusion"
-    }
+      name: 'AYUKI',
+      logo: '/img/logos/ayuki-logo.png',
+      instagram: 'https://www.instagram.com/ayuki_cix/',
+      carta: 'https://lacarta.space/restaurante/ayuki-japanese-fusion-food/menu',
+      type: 'Japanese Fusion',
+    },
   ];
 
   return (
     <section className="py-20 px-6 bg-richblack relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-powerred/5 rounded-full blur-[120px] pointer-events-none" />
-      
+
       <div className="max-w-5xl mx-auto relative z-10">
         <div className="text-center mb-14">
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -378,7 +440,7 @@ const SocialProof = () => {
           >
             Ya confían en nosotros
           </motion.p>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -405,7 +467,8 @@ const SocialProof = () => {
               {/* Card */}
               <motion.div
                 animate={{
-                  borderColor: activeIndex === i ? 'rgba(220, 38, 38, 0.4)' : 'rgba(255, 255, 255, 0.06)',
+                  borderColor:
+                    activeIndex === i ? 'rgba(220, 38, 38, 0.4)' : 'rgba(255, 255, 255, 0.06)',
                 }}
                 transition={{ duration: 0.4 }}
                 className={`relative w-64 rounded-2xl border overflow-hidden transition-colors duration-400 ${activeIndex === i ? 'bg-[#FAF9F6]' : 'bg-white/[0.06]'}`}
@@ -422,7 +485,10 @@ const SocialProof = () => {
                     src={local.logo}
                     alt={`Logo de ${local.name}`}
                     animate={{
-                      filter: activeIndex === i ? 'grayscale(0%) brightness(1.1)' : 'grayscale(100%) brightness(0.5)',
+                      filter:
+                        activeIndex === i
+                          ? 'grayscale(0%) brightness(1.1)'
+                          : 'grayscale(100%) brightness(0.5)',
                       scale: activeIndex === i ? 1.05 : 1,
                     }}
                     transition={{ duration: 0.5 }}
@@ -431,9 +497,19 @@ const SocialProof = () => {
                 </div>
 
                 {/* Info bar */}
-                <div className={`px-5 py-4 border-t ${activeIndex === i ? 'border-gray-200' : 'border-white/5'}`}>
-                  <p className={`text-sm font-semibold truncate transition-colors duration-400 ${activeIndex === i ? 'text-gray-900' : 'text-white'}`}>{local.name}</p>
-                  <p className={`text-xs mt-0.5 transition-colors duration-400 ${activeIndex === i ? 'text-gray-500' : 'text-gray-500'}`}>{local.type}</p>
+                <div
+                  className={`px-5 py-4 border-t ${activeIndex === i ? 'border-gray-200' : 'border-white/5'}`}
+                >
+                  <p
+                    className={`text-sm font-semibold truncate transition-colors duration-400 ${activeIndex === i ? 'text-gray-900' : 'text-white'}`}
+                  >
+                    {local.name}
+                  </p>
+                  <p
+                    className={`text-xs mt-0.5 transition-colors duration-400 ${activeIndex === i ? 'text-gray-500' : 'text-gray-500'}`}
+                  >
+                    {local.type}
+                  </p>
                 </div>
 
                 {/* Action buttons - slide up on hover */}
@@ -461,7 +537,11 @@ const SocialProof = () => {
                       aria-label={`Instagram de ${local.name}`}
                       className={`w-10 h-10 flex items-center justify-center hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 rounded-xl border hover:border-transparent transition-all ${activeIndex === i ? 'bg-gray-100 border-gray-200' : 'bg-white/5 border-white/10'}`}
                     >
-                      <Instagram size={16} className={activeIndex === i ? 'text-gray-700' : 'text-white'} aria-hidden="true" />
+                      <Instagram
+                        size={16}
+                        className={activeIndex === i ? 'text-gray-700' : 'text-white'}
+                        aria-hidden="true"
+                      />
                     </a>
                   </div>
                 </motion.div>
@@ -474,7 +554,8 @@ const SocialProof = () => {
   );
 };
 
-const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1488244228000710747/1cnY0oH-C7lN7JlQjPKrgsKzzTsdpag86YrMnIBobQzsSEyldXUPNjwLZSiSEzzXd16b';
+const DISCORD_WEBHOOK =
+  'https://discord.com/api/webhooks/1488244228000710747/1cnY0oH-C7lN7JlQjPKrgsKzzTsdpag86YrMnIBobQzsSEyldXUPNjwLZSiSEzzXd16b';
 
 const FoundingLocalsForm = () => {
   const [nombre, setNombre] = useState('');
@@ -511,16 +592,25 @@ const FoundingLocalsForm = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          embeds: [{
-            title: '🍽️ Nueva Solicitud — Local Fundador',
-            color: 0xDC2626,
-            fields,
-            footer: { text: `LaCarta.space • ${new Date().toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}` },
-          }],
+          embeds: [
+            {
+              title: '🍽️ Nueva Solicitud — Local Fundador',
+              color: 0xdc2626,
+              fields,
+              footer: {
+                text: `LaCarta.space • ${new Date().toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}`,
+              },
+            },
+          ],
         }),
       });
       setSent(true);
-      setNombre(''); setLocal(''); setEmail(''); setTelefono(''); setReferido(''); setShowReferido(false);
+      setNombre('');
+      setLocal('');
+      setEmail('');
+      setTelefono('');
+      setReferido('');
+      setShowReferido(false);
     } catch {
       setError('Error al enviar. Intenta de nuevo.');
     } finally {
@@ -528,10 +618,14 @@ const FoundingLocalsForm = () => {
     }
   };
 
-  const inputClass = "w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors";
+  const inputClass =
+    'w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-powerred transition-colors';
 
   return (
-    <section id="fundadores" className="pt-48 pb-16 px-6 bg-richblack text-white relative overflow-hidden">
+    <section
+      id="fundadores"
+      className="pt-48 pb-16 px-6 bg-richblack text-white relative overflow-hidden"
+    >
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_30%,#E6002610_0%,transparent_50%)]"></div>
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative z-10">
         <div>
@@ -539,13 +633,15 @@ const FoundingLocalsForm = () => {
             Early Access
           </div>
           <h2 className="font-serif text-2xl md:text-4xl mb-6 leading-tight">
-            Únete a los <br/>
+            Únete a los <br />
             <span className="text-powerred italic">Locales Fundadores</span>.
           </h2>
           <p className="text-gray-400 text-sm mb-8 leading-relaxed">
-            Estamos seleccionando un grupo exclusivo de restaurantes para liderar la nueva era de la gastronomía digital. Envía tu solicitud y nos pondremos en contacto contigo para una implementación personalizada.
+            Estamos seleccionando un grupo exclusivo de restaurantes para liderar la nueva era de la
+            gastronomía digital. Envía tu solicitud y nos pondremos en contacto contigo para una
+            implementación personalizada.
           </p>
-          
+
           <div className="space-y-6">
             <div className="flex items-center gap-4">
               <div className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
@@ -570,8 +666,8 @@ const FoundingLocalsForm = () => {
 
         <div className="bg-white/5 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-white/10 shadow-2xl">
           {sent ? (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }} 
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               className="text-center py-10"
             >
@@ -579,8 +675,10 @@ const FoundingLocalsForm = () => {
                 <Check size={32} className="text-green-400" />
               </div>
               <h3 className="font-serif text-xl mb-2">¡Solicitud enviada!</h3>
-              <p className="text-gray-400 text-sm">Nos pondremos en contacto contigo en menos de 24 horas.</p>
-              <button 
+              <p className="text-gray-400 text-sm">
+                Nos pondremos en contacto contigo en menos de 24 horas.
+              </p>
+              <button
                 onClick={() => setSent(false)}
                 className="mt-6 text-sm text-powerred hover:underline"
               >
@@ -591,60 +689,169 @@ const FoundingLocalsForm = () => {
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-6">
                 <div className="space-y-1.5">
-                  <label htmlFor="nombre-responsable" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Responsable</label>
+                  <label
+                    htmlFor="nombre-responsable"
+                    className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2"
+                  >
+                    Responsable
+                  </label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} aria-hidden="true" />
-                    <input id="nombre-responsable" type="text" placeholder="Juan Pérez" value={nombre} onChange={e => setNombre(e.target.value)} className={inputClass} />
+                    <User
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                      size={16}
+                      aria-hidden="true"
+                    />
+                    <input
+                      id="nombre-responsable"
+                      type="text"
+                      placeholder="Juan Pérez"
+                      value={nombre}
+                      onChange={(e) => setNombre(e.target.value)}
+                      className={inputClass}
+                    />
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <label htmlFor="nombre-local" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Local</label>
+                  <label
+                    htmlFor="nombre-local"
+                    className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2"
+                  >
+                    Local
+                  </label>
                   <div className="relative">
-                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} aria-hidden="true" />
-                    <input id="nombre-local" type="text" placeholder="La Pizzería Central" value={local} onChange={e => setLocal(e.target.value)} className={inputClass} />
+                    <Building2
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                      size={16}
+                      aria-hidden="true"
+                    />
+                    <input
+                      id="nombre-local"
+                      type="text"
+                      placeholder="La Pizzería Central"
+                      value={local}
+                      onChange={(e) => setLocal(e.target.value)}
+                      className={inputClass}
+                    />
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <label htmlFor="email" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Email</label>
+                  <label
+                    htmlFor="email"
+                    className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2"
+                  >
+                    Email
+                  </label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} aria-hidden="true" />
-                    <input id="email" type="email" placeholder="juan@ejemplo.com" value={email} onChange={e => setEmail(e.target.value)} className={inputClass} />
+                    <Mail
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                      size={16}
+                      aria-hidden="true"
+                    />
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder="juan@ejemplo.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className={inputClass}
+                    />
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <label htmlFor="telefono" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Teléfono</label>
+                  <label
+                    htmlFor="telefono"
+                    className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2"
+                  >
+                    Teléfono
+                  </label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} aria-hidden="true" />
-                    <input id="telefono" type="tel" placeholder="987 654 321" value={telefono} onChange={e => setTelefono(e.target.value)} className={inputClass} />
+                    <Phone
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                      size={16}
+                      aria-hidden="true"
+                    />
+                    <input
+                      id="telefono"
+                      type="tel"
+                      placeholder="987 654 321"
+                      value={telefono}
+                      onChange={(e) => setTelefono(e.target.value)}
+                      className={inputClass}
+                    />
                   </div>
                 </div>
               </div>
 
               {!showReferido ? (
-                <button type="button" onClick={() => setShowReferido(true)} className="flex items-center gap-2 text-xs text-gray-400 hover:text-powerred transition-colors">
+                <button
+                  type="button"
+                  onClick={() => setShowReferido(true)}
+                  className="flex items-center gap-2 text-xs text-gray-400 hover:text-powerred transition-colors"
+                >
                   <Tag size={14} /> ¿Tienes un código de referido?
                 </button>
               ) : (
-                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-1.5">
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  className="space-y-1.5"
+                >
                   <div className="flex items-center justify-between">
-                    <label htmlFor="referido" className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">Código de Referido</label>
-                    <button type="button" onClick={() => { setShowReferido(false); setReferido(''); }} className="text-[10px] text-gray-500 hover:text-red-400 transition-colors flex items-center gap-1">
+                    <label
+                      htmlFor="referido"
+                      className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2"
+                    >
+                      Código de Referido
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowReferido(false);
+                        setReferido('');
+                      }}
+                      className="text-[10px] text-gray-500 hover:text-red-400 transition-colors flex items-center gap-1"
+                    >
                       <X size={12} /> Quitar
                     </button>
                   </div>
                   <div className="relative">
-                    <Tag className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} aria-hidden="true" />
-                    <input id="referido" type="text" placeholder="LACARTA2026" value={referido} onChange={e => setReferido(e.target.value)} className={inputClass} />
+                    <Tag
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                      size={16}
+                      aria-hidden="true"
+                    />
+                    <input
+                      id="referido"
+                      type="text"
+                      placeholder="LACARTA2026"
+                      value={referido}
+                      onChange={(e) => setReferido(e.target.value)}
+                      className={inputClass}
+                    />
                   </div>
                 </motion.div>
               )}
 
               {error && <p className="text-red-400 text-xs text-center">{error}</p>}
 
-              <button type="submit" disabled={sending} className="w-full bg-powerred hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 rounded-2xl shadow-xl shadow-powerred/20 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2">
-                {sending ? <><Loader2 size={20} className="animate-spin" /> Enviando...</> : <>Enviar solicitud <ArrowRight size={20} /></>}
+              <button
+                type="submit"
+                disabled={sending}
+                className="w-full bg-powerred hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 rounded-2xl shadow-xl shadow-powerred/20 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+              >
+                {sending ? (
+                  <>
+                    <Loader2 size={20} className="animate-spin" /> Enviando...
+                  </>
+                ) : (
+                  <>
+                    Enviar solicitud <ArrowRight size={20} />
+                  </>
+                )}
               </button>
-              <p className="text-center text-[10px] text-gray-500 uppercase tracking-widest">Nos pondremos en contacto en menos de 24h</p>
+              <p className="text-center text-[10px] text-gray-500 uppercase tracking-widest">
+                Nos pondremos en contacto en menos de 24h
+              </p>
               <p className="text-center text-[10px] text-gray-400 mt-2 flex items-center justify-center gap-1">
                 🔒 Tus datos están 100% protegidos.
               </p>
@@ -668,7 +875,15 @@ const PricingSection = () => {
       cta: 'Empezar gratis',
       highlighted: false,
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-5 h-5"
+        >
           <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
           <rect x="9" y="3" width="6" height="4" rx="1" />
           <path d="M9 12h6M9 16h4" />
@@ -694,7 +909,15 @@ const PricingSection = () => {
       cta: 'Mejorar mi carta',
       highlighted: false,
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-5 h-5"
+        >
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
         </svg>
       ),
@@ -719,7 +942,15 @@ const PricingSection = () => {
       highlighted: true,
       badge: 'Más popular',
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-5 h-5"
+        >
           <rect x="3" y="3" width="7" height="7" rx="1" />
           <rect x="14" y="3" width="7" height="7" rx="1" />
           <rect x="3" y="14" width="7" height="7" rx="1" />
@@ -770,7 +1001,8 @@ const PricingSection = () => {
             transition={{ delay: 0.1 }}
             className="font-serif text-3xl md:text-5xl text-white mb-4 leading-tight"
           >
-            El plan que necesita<br />
+            El plan que necesita
+            <br />
             <span className="text-powerred">tu restaurante</span>
           </motion.h2>
           <motion.p
@@ -822,13 +1054,21 @@ const PricingSection = () => {
                 {/* Plan header */}
                 <div className="flex items-start justify-between mb-6">
                   <div>
-                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center mb-3 ${
-                      plan.highlighted ? 'bg-powerred/20 text-powerred' : 'bg-white/8 text-gray-400'
-                    }`}>
+                    <div
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center mb-3 ${
+                        plan.highlighted
+                          ? 'bg-powerred/20 text-powerred'
+                          : 'bg-white/8 text-gray-400'
+                      }`}
+                    >
                       {plan.icon}
                     </div>
-                    <p className="text-gray-500 text-[10px] uppercase tracking-[0.25em] font-semibold mb-0.5">{plan.label}</p>
-                    <h3 className={`font-serif text-xl leading-tight ${plan.highlighted ? 'text-white' : 'text-white/90'}`}>
+                    <p className="text-gray-500 text-[10px] uppercase tracking-[0.25em] font-semibold mb-0.5">
+                      {plan.label}
+                    </p>
+                    <h3
+                      className={`font-serif text-xl leading-tight ${plan.highlighted ? 'text-white' : 'text-white/90'}`}
+                    >
                       {plan.name}
                     </h3>
                   </div>
@@ -837,7 +1077,9 @@ const PricingSection = () => {
                 {/* Price */}
                 <div className="mb-6 pb-6 border-b border-white/[0.08]">
                   <div className="flex items-baseline gap-2">
-                    <span className={`font-serif text-5xl font-bold tracking-tight ${plan.highlighted ? 'text-white' : 'text-white/80'}`}>
+                    <span
+                      className={`font-serif text-5xl font-bold tracking-tight ${plan.highlighted ? 'text-white' : 'text-white/80'}`}
+                    >
                       {plan.priceLabel}
                     </span>
                   </div>
@@ -848,21 +1090,30 @@ const PricingSection = () => {
                 <ul className="space-y-3 flex-1 mb-8">
                   {plan.features.map((f, fi) => (
                     <li key={fi} className="flex items-center gap-3">
-                      <span className={`flex-shrink-0 w-[18px] h-[18px] rounded-full flex items-center justify-center ${
-                        f.ok
-                          ? plan.highlighted ? 'bg-powerred/20 text-powerred' : 'bg-white/10 text-gray-300'
-                          : 'bg-white/[0.04] text-gray-700'
-                      }`}>
-                        {f.ok
-                          ? <Check size={10} strokeWidth={3} />
-                          : <X size={10} strokeWidth={2.5} />
-                        }
+                      <span
+                        className={`flex-shrink-0 w-[18px] h-[18px] rounded-full flex items-center justify-center ${
+                          f.ok
+                            ? plan.highlighted
+                              ? 'bg-powerred/20 text-powerred'
+                              : 'bg-white/10 text-gray-300'
+                            : 'bg-white/[0.04] text-gray-700'
+                        }`}
+                      >
+                        {f.ok ? (
+                          <Check size={10} strokeWidth={3} />
+                        ) : (
+                          <X size={10} strokeWidth={2.5} />
+                        )}
                       </span>
-                      <span className={`text-[13px] leading-tight ${
-                        f.ok
-                          ? plan.highlighted ? 'text-gray-200' : 'text-gray-400'
-                          : 'text-gray-700 line-through decoration-gray-800'
-                      }`}>
+                      <span
+                        className={`text-[13px] leading-tight ${
+                          f.ok
+                            ? plan.highlighted
+                              ? 'text-gray-200'
+                              : 'text-gray-400'
+                            : 'text-gray-700 line-through decoration-gray-800'
+                        }`}
+                      >
                         {f.text}
                       </span>
                     </li>
@@ -908,50 +1159,53 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
 
   return (
     <div className="min-h-screen bg-offwhite font-sans selection:bg-powerred selection:text-white overflow-x-hidden">
-      <Navbar onEnterApp={onEnterApp} />
-      
+      <Navbar _onEnterApp={onEnterApp} />
+
       {/* 1. Hero Section (3D Dynamic) */}
       <section className="relative w-full h-screen flex items-center justify-center pt-28 pb-16 px-6 overflow-visible">
         {/* Background Grid */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-        
+
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center z-10">
           {/* Text Content */}
           <div className="text-center lg:text-left order-1 lg:order-1">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
               <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium leading-[1.05] mb-5 text-richblack tracking-tight">
-                Convierte tu carta en una <span className="text-powerred italic relative">
+                Convierte tu carta en una{' '}
+                <span className="text-powerred italic relative">
                   experiencia digital
                   <span className="absolute bottom-1 left-0 w-full h-1.5 bg-powerred/10 -z-10"></span>
-                </span> con QR.
+                </span>{' '}
+                con QR.
               </h1>
               <p className="text-sm sm:text-base text-gray-600 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                La mejor forma de visualizar y explorar un menú. Actualiza en segundos, muestra fotos profesionales y ofrece una experiencia moderna a tus clientes.
+                La mejor forma de visualizar y explorar un menú. Actualiza en segundos, muestra
+                fotos profesionales y ofrece una experiencia moderna a tus clientes.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-                <MagneticButton 
+                <MagneticButton
                   onClick={() => {
                     const el = document.getElementById('fundadores');
                     el?.scrollIntoView({ behavior: 'smooth' });
-                  }} 
+                  }}
                   className="shadow-2xl shadow-powerred/20 w-full sm:w-auto"
                 >
-                   Unirme como Fundador
+                  Unirme como Fundador
                 </MagneticButton>
-                <MagneticButton 
-                  variant="ghost" 
+                <MagneticButton
+                  variant="ghost"
                   onClick={() => {
                     const el = document.getElementById('fundadores');
                     el?.scrollIntoView({ behavior: 'smooth' });
-                  }} 
+                  }}
                   className="border border-richblack/10 w-full sm:w-auto"
                 >
-                   Solicitar Acceso
+                  Solicitar Acceso
                 </MagneticButton>
               </div>
             </motion.div>
@@ -959,88 +1213,121 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
 
           {/* 3D Visuals */}
           <div className="relative order-2 lg:order-2 flex justify-center perspective-1000 mt-8 lg:mt-0">
-             {/* Parallax Phone */}
-             <motion.div style={{ y: y2, rotateY: -10, rotateX: 5 }} className="relative z-20">
-                <PhoneMockup />
-             </motion.div>
+            {/* Parallax Phone */}
+            <motion.div style={{ y: y2, rotateY: -10, rotateX: 5 }} className="relative z-20">
+              <PhoneMockup />
+            </motion.div>
 
-             {/* Floating Elements (Food Holograms) */}
-             <motion.img 
-               style={{ y: y1 }}
-               src="/img/ceviche-peruano-carta-digital.webp" 
-               width="96" 
-               height="96"
-               fetchPriority="low"
-               loading="lazy"
-               className="absolute top-20 -right-4 md:-right-12 w-20 h-20 md:w-24 md:h-24 rounded-full shadow-2xl border-3 border-white z-30 hidden sm:block object-cover"
-               animate={{ y: [0, 20, 0] }}
-               transition={{ repeat: Infinity, duration: 6 }}
-               alt="Ceviche peruano - carta digital para restaurantes"
-             />
-             <motion.img 
-               src="/img/leche-de-tigre-carta-digital.webp" 
-               width="80" 
-               height="80"
-               fetchPriority="low"
-               loading="lazy"
-               className="absolute bottom-40 -left-4 md:-left-12 w-16 h-16 md:w-20 md:h-20 rounded-full shadow-2xl border-3 border-white z-30 hidden sm:block grayscale hover:grayscale-0 transition-all object-cover"
-               animate={{ y: [0, -15, 0] }}
-               transition={{ repeat: Infinity, duration: 5, delay: 1 }}
-               alt="Leche de tigre - menú digital para restaurantes peruanos"
-             />
+            {/* Floating Elements (Food Holograms) */}
+            <motion.img
+              style={{ y: y1 }}
+              src="/img/ceviche-peruano-carta-digital.webp"
+              width="96"
+              height="96"
+              fetchPriority="low"
+              loading="lazy"
+              className="absolute top-20 -right-4 md:-right-12 w-20 h-20 md:w-24 md:h-24 rounded-full shadow-2xl border-3 border-white z-30 hidden sm:block object-cover"
+              animate={{ y: [0, 20, 0] }}
+              transition={{ repeat: Infinity, duration: 6 }}
+              alt="Ceviche peruano - carta digital para restaurantes"
+            />
+            <motion.img
+              src="/img/leche-de-tigre-carta-digital.webp"
+              width="80"
+              height="80"
+              fetchPriority="low"
+              loading="lazy"
+              className="absolute bottom-40 -left-4 md:-left-12 w-16 h-16 md:w-20 md:h-20 rounded-full shadow-2xl border-3 border-white z-30 hidden sm:block grayscale hover:grayscale-0 transition-all object-cover"
+              animate={{ y: [0, -15, 0] }}
+              transition={{ repeat: Infinity, duration: 5, delay: 1 }}
+              alt="Leche de tigre - menú digital para restaurantes peruanos"
+            />
 
-             {/* Holographic QR */}
-             <motion.div 
-               style={{ y: y1 }}
-               className="absolute top-1/2 -right-12 md:-right-16 z-10 hidden xl:block"
-             >
-               <HolographicQR />
-             </motion.div>
+            {/* Holographic QR */}
+            <motion.div
+              style={{ y: y1 }}
+              className="absolute top-1/2 -right-12 md:-right-16 z-10 hidden xl:block"
+            >
+              <HolographicQR />
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* 2. Problema - Pain Points del Restaurante */}
-      <section id="beneficios" className="py-14 md:py-20 px-6 bg-white border-y border-gray-100 relative">
+      <section
+        id="beneficios"
+        className="py-14 md:py-20 px-6 bg-white border-y border-gray-100 relative"
+      >
         <div className="max-w-6xl mx-auto">
-           <div className="text-center mb-10 md:mb-12">
-             <h2 className="font-serif text-2xl md:text-4xl mb-3 text-richblack">Lo que pierdes <span className="text-powerred italic">HOY</span> en tu restaurante</h2>
-             <p className="text-gray-600 text-base">Cada día sin modernizar tu carta es una oportunidad perdida.</p>
-           </div>
-           
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { t: "Cartas Físicas Obsoletas", d: "PDFs imposibles de leer en móviles, cartas sucias o rotas.", icon: <X className="text-red-500" /> },
-                { t: "Stock Desactualizado", d: "Platos que se acaban pero siguen en la carta física.", icon: <RefreshCw className="text-orange-500" /> },
-                { t: "Tiempo Perdido", d: "Clientes preguntando por cada plato, fotos y precios.", icon: <Zap className="text-yellow-500" /> },
-                { t: "Mala Primera Impresión", d: "Una carta vieja da imagen de local anticuado.", icon: <BarChart3 className="text-gray-400" /> }
-              ].map((item, i) => (
-                <div key={i} className="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:bg-white hover:shadow-xl transition-all duration-300">
-                   <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm">{item.icon}</div>
-                   <h3 className="font-bold text-richblack mb-2 text-sm">{item.t}</h3>
-                   <p className="text-gray-600 text-xs leading-relaxed">{item.d}</p>
-                </div>
-              ))}
-           </div>
+          <div className="text-center mb-10 md:mb-12">
+            <h2 className="font-serif text-2xl md:text-4xl mb-3 text-richblack">
+              Lo que pierdes <span className="text-powerred italic">HOY</span> en tu restaurante
+            </h2>
+            <p className="text-gray-600 text-base">
+              Cada día sin modernizar tu carta es una oportunidad perdida.
+            </p>
+          </div>
 
-           <div className="mt-10 bg-richblack text-white rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-powerred/20 blur-[120px]"></div>
-              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div className="max-w-xl">
-                  <h3 className="font-serif text-2xl md:text-3xl mb-3">LaCarta es la solución a <span className="text-powerred italic">TODO</span> eso.</h3>
-                  <p className="text-gray-400 text-sm">Digitaliza tu menú, actualízalo en segundos y ofrece la mejor experiencia de visualización. Tus clientes explorarán tu oferta de forma moderna y sin fricción.</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                t: 'Cartas Físicas Obsoletas',
+                d: 'PDFs imposibles de leer en móviles, cartas sucias o rotas.',
+                icon: <X className="text-red-500" />,
+              },
+              {
+                t: 'Stock Desactualizado',
+                d: 'Platos que se acaban pero siguen en la carta física.',
+                icon: <RefreshCw className="text-orange-500" />,
+              },
+              {
+                t: 'Tiempo Perdido',
+                d: 'Clientes preguntando por cada plato, fotos y precios.',
+                icon: <Zap className="text-yellow-500" />,
+              },
+              {
+                t: 'Mala Primera Impresión',
+                d: 'Una carta vieja da imagen de local anticuado.',
+                icon: <BarChart3 className="text-gray-400" />,
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:bg-white hover:shadow-xl transition-all duration-300"
+              >
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm">
+                  {item.icon}
                 </div>
-                <Button 
-                  onClick={() => {
-                    const el = document.getElementById('fundadores');
-                    el?.scrollIntoView({ behavior: 'smooth' });
-                  }} 
-                  className="bg-powerred hover:bg-red-600 border-none px-8 py-4 text-lg"
-                >
-                  Modernizar mi carta
-                </Button>
+                <h3 className="font-bold text-richblack mb-2 text-sm">{item.t}</h3>
+                <p className="text-gray-600 text-xs leading-relaxed">{item.d}</p>
               </div>
-           </div>
+            ))}
+          </div>
+
+          <div className="mt-10 bg-richblack text-white rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-powerred/20 blur-[120px]"></div>
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="max-w-xl">
+                <h3 className="font-serif text-2xl md:text-3xl mb-3">
+                  LaCarta es la solución a <span className="text-powerred italic">TODO</span> eso.
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  Digitaliza tu menú, actualízalo en segundos y ofrece la mejor experiencia de
+                  visualización. Tus clientes explorarán tu oferta de forma moderna y sin fricción.
+                </p>
+              </div>
+              <Button
+                onClick={() => {
+                  const el = document.getElementById('fundadores');
+                  el?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="bg-powerred hover:bg-red-600 border-none px-8 py-4 text-lg"
+              >
+                Modernizar mi carta
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1051,7 +1338,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
             <div className="absolute -top-20 -left-20 w-64 h-64 bg-powerred/10 rounded-full blur-[100px]"></div>
             <PhoneMockup />
             {/* Floating Experience Card */}
-            <motion.div 
+            <motion.div
               initial={{ x: 50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               className="absolute top-1/4 right-0 md:-right-4 bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 z-30 max-w-[180px] hidden lg:block"
@@ -1078,16 +1365,22 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
               Experiencia Digital
             </div>
             <h2 className="font-serif text-2xl md:text-4xl mb-6 leading-tight text-richblack">
-              La mejor forma de <br/>
+              La mejor forma de <br />
               <span className="text-powerred italic">explorar un menú</span>.
             </h2>
-            
+
             <div className="space-y-6">
               {[
-                { t: "Escanean el QR", d: "Un código único en cada mesa. Acceso instantáneo." },
-                { t: "Exploran tu oferta", d: "Fotos HD, descripciones completas, filtros por preferencias." },
-                { t: "Toman su decisión", d: "Ven todo el menú antes de elegir, sin prisas." },
-                { t: "Experiencia memorable", d: "Una carta digital moderna eleva la percepción de tu marca." }
+                { t: 'Escanean el QR', d: 'Un código único en cada mesa. Acceso instantáneo.' },
+                {
+                  t: 'Exploran tu oferta',
+                  d: 'Fotos HD, descripciones completas, filtros por preferencias.',
+                },
+                { t: 'Toman su decisión', d: 'Ven todo el menú antes de elegir, sin prisas.' },
+                {
+                  t: 'Experiencia memorable',
+                  d: 'Una carta digital moderna eleva la percepción de tu marca.',
+                },
               ].map((step, i) => (
                 <div key={i} className="flex gap-4 group">
                   <div className="w-9 h-9 rounded-full bg-richblack text-white flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-powerred transition-colors text-sm">
@@ -1102,7 +1395,9 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
             </div>
 
             <div className="mt-8 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
-              <p className="text-richblack font-medium italic text-sm">"Sin apps, sin cartas sucias, sin confusiones."</p>
+              <p className="text-richblack font-medium italic text-sm">
+                "Sin apps, sin cartas sucias, sin confusiones."
+              </p>
             </div>
           </div>
         </div>
@@ -1111,17 +1406,30 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
       {/* 4. Cómo Funciona - Pasos Simples */}
       <section className="py-16 px-6 bg-white">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="font-serif text-2xl md:text-3xl mb-8 text-richblack">Empieza en menos de <span className="text-powerred">5 minutos</span></h2>
+          <h2 className="font-serif text-2xl md:text-3xl mb-8 text-richblack">
+            Empieza en menos de <span className="text-powerred">5 minutos</span>
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             {/* Connecting Line */}
             <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-100 -translate-y-1/2 -z-10"></div>
-            
+
             {[
-              { t: "Creas tu carta", d: "Sube tus platos, fotos y precios en segundos.", icon: <Newspaper /> },
-              { t: "Generas tu QR", d: "Descarga e imprime tus códigos únicos.", icon: <QrCode /> },
-              { t: "Tus clientes exploran", d: "Escanean, descubren y disfrutan.", icon: <MousePointer2 /> }
+              {
+                t: 'Creas tu carta',
+                d: 'Sube tus platos, fotos y precios en segundos.',
+                icon: <Newspaper />,
+              },
+              { t: 'Generas tu QR', d: 'Descarga e imprime tus códigos únicos.', icon: <QrCode /> },
+              {
+                t: 'Tus clientes exploran',
+                d: 'Escanean, descubren y disfrutan.',
+                icon: <MousePointer2 />,
+              },
             ].map((step, i) => (
-              <div key={i} className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm relative">
+              <div
+                key={i}
+                className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm relative"
+              >
                 <div className="w-12 h-12 mx-auto bg-richblack text-white rounded-xl flex items-center justify-center mb-5 shadow-xl shadow-richblack/20">
                   {step.icon}
                 </div>
@@ -1137,31 +1445,55 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
       <section className="py-16 px-6 bg-offwhite">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="font-serif text-2xl md:text-3xl mb-3 text-richblack">Tecnología que <span className="text-powerred">impresiona</span></h2>
-            <p className="text-gray-600 text-sm">Diseñado para que tu única preocupación sea cocinar.</p>
+            <h2 className="font-serif text-2xl md:text-3xl mb-3 text-richblack">
+              Tecnología que <span className="text-powerred">impresiona</span>
+            </h2>
+            <p className="text-gray-600 text-sm">
+              Diseñado para que tu única preocupación sea cocinar.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-             <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-10 h-10 bg-powerred/10 text-powerred rounded-xl flex items-center justify-center mb-4"><LayoutDashboard size={20} /></div>
-                <h3 className="font-bold text-base mb-3 text-richblack">Actualización Instantánea</h3>
-                <p className="text-gray-600 leading-relaxed text-sm">Marca platos como agotados en un click desde tu celular. Los cambios se reflejan en tiempo real para todos.</p>
-             </div>
-             <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-10 h-10 bg-powerred/10 text-powerred rounded-xl flex items-center justify-center mb-4"><Smartphone size={20} /></div>
-                <h3 className="font-bold text-base mb-3 text-richblack">Diseño Premium</h3>
-                <p className="text-gray-600 leading-relaxed text-sm">Cartas digitales con fotos de alta calidad que hacen justicia a tus platos. Primera impresión inolvidable.</p>
-             </div>
-             <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-10 h-10 bg-powerred/10 text-powerred rounded-xl flex items-center justify-center mb-4"><BarChart3 size={20} /></div>
-                <h3 className="font-bold text-base mb-3 text-richblack">Menús Adaptables</h3>
-                <p className="text-gray-600 leading-relaxed text-sm">Crea menús diferentes para desayuno, almuerzo, cena o días especiales. Control total de tu oferta.</p>
-             </div>
-             <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-10 h-10 bg-powerred/10 text-powerred rounded-xl flex items-center justify-center mb-4"><Brain size={20} /></div>
-                <h3 className="font-bold text-base mb-3 text-richblack">Mensajes en Secciones</h3>
-                <p className="text-gray-600 leading-relaxed text-sm">Añade descripciones o mensajes personalizados en cada categoría. Cuenta la historia de cada sección de tu menú.</p>
-             </div>
+            <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-10 h-10 bg-powerred/10 text-powerred rounded-xl flex items-center justify-center mb-4">
+                <LayoutDashboard size={20} />
+              </div>
+              <h3 className="font-bold text-base mb-3 text-richblack">Actualización Instantánea</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
+                Marca platos como agotados en un click desde tu celular. Los cambios se reflejan en
+                tiempo real para todos.
+              </p>
+            </div>
+            <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-10 h-10 bg-powerred/10 text-powerred rounded-xl flex items-center justify-center mb-4">
+                <Smartphone size={20} />
+              </div>
+              <h3 className="font-bold text-base mb-3 text-richblack">Diseño Premium</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
+                Cartas digitales con fotos de alta calidad que hacen justicia a tus platos. Primera
+                impresión inolvidable.
+              </p>
+            </div>
+            <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-10 h-10 bg-powerred/10 text-powerred rounded-xl flex items-center justify-center mb-4">
+                <BarChart3 size={20} />
+              </div>
+              <h3 className="font-bold text-base mb-3 text-richblack">Menús Adaptables</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
+                Crea menús diferentes para desayuno, almuerzo, cena o días especiales. Control total
+                de tu oferta.
+              </p>
+            </div>
+            <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-10 h-10 bg-powerred/10 text-powerred rounded-xl flex items-center justify-center mb-4">
+                <Brain size={20} />
+              </div>
+              <h3 className="font-bold text-base mb-3 text-richblack">Mensajes en Secciones</h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
+                Añade descripciones o mensajes personalizados en cada categoría. Cuenta la historia
+                de cada sección de tu menú.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -1177,46 +1509,103 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
 
       {/* 9. Footer */}
       <footer className="py-16 px-6 bg-richblack text-white text-center relative overflow-hidden">
-         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#E6002610_0%,transparent_70%)]"></div>
-         <div className="max-w-4xl mx-auto relative z-10">
-            <h2 className="font-serif text-2xl md:text-3xl mb-6">Es hora de que tu carta trabaje para ti.</h2>
-            <div className="flex justify-center mb-10">
-               <Button 
-                onClick={() => {
-                  const el = document.getElementById('fundadores');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }} 
-                className="bg-powerred text-white hover:bg-red-600 border-none px-8 py-4 text-base shadow-2xl shadow-powerred/40 hover:scale-110 transition-transform"
-               >
-                  Unirme como Fundador
-               </Button>
-            </div>
-            
-            <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500 mb-10">
-               <a href="/terminos" className="hover:text-white transition-colors">Términos</a>
-               <a href="/privacidad" className="hover:text-white transition-colors">Privacidad</a>
-               <a href="/#fundadores" className="hover:text-white transition-colors">Contacto</a>
-            </div>
-            
-            {/* Cities Grid */}
-            <div className="mb-8 pb-8 border-b border-white/10">
-               <p className="text-xs text-gray-500 mb-4">Cartas digitales por ciudad:</p>
-               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-2xl mx-auto">
-                  <a href="/carta-digital-lima" className="text-xs text-gray-600 hover:text-white transition-colors">Lima</a>
-                  <a href="/carta-digital-arequipa" className="text-xs text-gray-600 hover:text-white transition-colors">Arequipa</a>
-                  <a href="/carta-digital-cusco" className="text-xs text-gray-600 hover:text-white transition-colors">Cusco</a>
-                  <a href="/carta-digital-trujillo" className="text-xs text-gray-600 hover:text-white transition-colors">Trujillo</a>
-                  <a href="/carta-digital-chiclayo" className="text-xs text-gray-600 hover:text-white transition-colors">Chiclayo</a>
-                  <a href="/carta-digital-piura" className="text-xs text-gray-600 hover:text-white transition-colors">Piura</a>
-                  <a href="/carta-digital-huancayo" className="text-xs text-gray-600 hover:text-white transition-colors">Huancayo</a>
-                  <a href="/carta-digital-ica" className="text-xs text-gray-600 hover:text-white transition-colors">Ica</a>
-               </div>
-            </div>
-            
-            <p className="text-gray-600 text-xs">© 2026 LaCarta Technology. Powered by <a href="https://luminari.agency" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Luminari</a></p>
-         </div>
-      </footer>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#E6002610_0%,transparent_70%)]"></div>
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h2 className="font-serif text-2xl md:text-3xl mb-6">
+            Es hora de que tu carta trabaje para ti.
+          </h2>
+          <div className="flex justify-center mb-10">
+            <Button
+              onClick={() => {
+                const el = document.getElementById('fundadores');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="bg-powerred text-white hover:bg-red-600 border-none px-8 py-4 text-base shadow-2xl shadow-powerred/40 hover:scale-110 transition-transform"
+            >
+              Unirme como Fundador
+            </Button>
+          </div>
 
+          <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500 mb-10">
+            <a href="/terminos" className="hover:text-white transition-colors">
+              Términos
+            </a>
+            <a href="/privacidad" className="hover:text-white transition-colors">
+              Privacidad
+            </a>
+            <a href="/#fundadores" className="hover:text-white transition-colors">
+              Contacto
+            </a>
+          </div>
+
+          {/* Cities Grid */}
+          <div className="mb-8 pb-8 border-b border-white/10">
+            <p className="text-xs text-gray-500 mb-4">Cartas digitales por ciudad:</p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-2xl mx-auto">
+              <a
+                href="/carta-digital-lima"
+                className="text-xs text-gray-600 hover:text-white transition-colors"
+              >
+                Lima
+              </a>
+              <a
+                href="/carta-digital-arequipa"
+                className="text-xs text-gray-600 hover:text-white transition-colors"
+              >
+                Arequipa
+              </a>
+              <a
+                href="/carta-digital-cusco"
+                className="text-xs text-gray-600 hover:text-white transition-colors"
+              >
+                Cusco
+              </a>
+              <a
+                href="/carta-digital-trujillo"
+                className="text-xs text-gray-600 hover:text-white transition-colors"
+              >
+                Trujillo
+              </a>
+              <a
+                href="/carta-digital-chiclayo"
+                className="text-xs text-gray-600 hover:text-white transition-colors"
+              >
+                Chiclayo
+              </a>
+              <a
+                href="/carta-digital-piura"
+                className="text-xs text-gray-600 hover:text-white transition-colors"
+              >
+                Piura
+              </a>
+              <a
+                href="/carta-digital-huancayo"
+                className="text-xs text-gray-600 hover:text-white transition-colors"
+              >
+                Huancayo
+              </a>
+              <a
+                href="/carta-digital-ica"
+                className="text-xs text-gray-600 hover:text-white transition-colors"
+              >
+                Ica
+              </a>
+            </div>
+          </div>
+
+          <p className="text-gray-600 text-xs">
+            © 2026 LaCarta Technology. Powered by{' '}
+            <a
+              href="https://luminari.agency"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Luminari
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };

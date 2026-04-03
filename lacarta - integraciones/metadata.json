@@ -1,8 +1,5 @@
 {
   "name": "LaCarta",
   "description": "A tech-luxury restaurant menu platform transforming static PDFs into intelligent, interactive experiences.",
-  "requestFramePermissions": [
-    "camera",
-    "geolocation"
-  ]
+  "requestFramePermissions": ["camera", "geolocation"]
 }

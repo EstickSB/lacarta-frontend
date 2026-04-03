@@ -21,8 +21,8 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, 
           lg:max-h-[260px] lg:pr-4 scroll-primary [scrollbar-width:none] lg:[scrollbar-width:auto]
         "
         style={{
-          // @ts-ignore
-          '--scrollbar-color': primaryColor
+          // @ts-expect-error - custom scrollbar property
+          '--scrollbar-color': primaryColor,
         }}
       >
         {categories.map((category) => {
@@ -38,7 +38,7 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, 
                   className="hidden lg:block shrink-0 w-6 h-[1px] bg-white/20 transition-all duration-300 group-hover:w-10"
                   animate={{
                     backgroundColor: isActive ? primaryColor : 'rgba(255, 255, 255, 0.33)',
-                    width: isActive ? 40 : 24
+                    width: isActive ? 40 : 24,
                   }}
                 />
 
@@ -51,7 +51,7 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories, activeId, 
                   style={{
                     color: isActive ? primaryColor : '#656363ff',
                     fontFamily,
-                    whiteSpace: 'pre-wrap'
+                    whiteSpace: 'pre-wrap',
                   }}
                 >
                   {category.title?.replace(/\\n/g, '\n')}

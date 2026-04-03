@@ -16,7 +16,9 @@ export function useRestaurant(slug: string, shiftId?: number | string | null) {
         setLoading(true);
         setError(null);
 
-        const url = shiftId ? `${API_URL}/restaurants/${slug}?shift=${shiftId}` : `${API_URL}/restaurants/${slug}`;
+        const url = shiftId
+          ? `${API_URL}/restaurants/${slug}?shift=${shiftId}`
+          : `${API_URL}/restaurants/${slug}`;
         const response = await fetch(url);
 
         if (!response.ok) {
