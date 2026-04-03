@@ -1,3 +1,4 @@
 dist
 node_modules
 lacarta - integraciones
+docker-compose.yaml
