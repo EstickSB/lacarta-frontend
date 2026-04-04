@@ -557,16 +557,40 @@ const SocialProof = () => {
 const DISCORD_WEBHOOK =
   'https://discord.com/api/webhooks/1488244228000710747/1cnY0oH-C7lN7JlQjPKrgsKzzTsdpag86YrMnIBobQzsSEyldXUPNjwLZSiSEzzXd16b';
 
-const FoundingLocalsForm = () => {
+const FoundingLocalsForm = ({
+  targetPlan,
+  setTargetPlan,
+}: {
+  targetPlan: string;
+  setTargetPlan: (val: string) => void;
+}) => {
   const [nombre, setNombre] = useState('');
   const [local, setLocal] = useState('');
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
+  const [planInteres, setPlanInteres] = useState(targetPlan || '');
   const [showReferido, setShowReferido] = useState(false);
   const [referido, setReferido] = useState('');
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
+
+  const plansOptions = [
+    { value: 'Plan Gratis', label: 'Plan Gratis' },
+    { value: 'Plan Pro', label: 'Plan Pro' },
+    {
+      value: 'Plan Mesas Inteligentes - Próximamente',
+      label: 'Plan Mesas Inteligentes - Próximamente',
+    },
+  ];
+
+  // Sync state if prop changes
+  React.useEffect(() => {
+    if (targetPlan) {
+      setPlanInteres(targetPlan);
+    }
+  }, [targetPlan]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -583,6 +607,7 @@ const FoundingLocalsForm = () => {
         { name: '🏪 Local', value: local, inline: true },
         { name: '📧 Email', value: email, inline: false },
         { name: '📱 Teléfono', value: telefono, inline: true },
+        { name: '📋 Plan de Interés', value: planInteres || 'No especificado', inline: true },
       ];
       if (referido.trim()) {
         fields.push({ name: '🏷️ Código Referido', value: referido, inline: true });
@@ -780,6 +805,75 @@ const FoundingLocalsForm = () => {
                     />
                   </div>
                 </div>
+
+                {/* Plan Interés */}
+                <div className="space-y-1.5 sm:col-span-2 relative">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-600 ml-2">
+                    Plan de Interés
+                  </label>
+                  <div className="relative group">
+                    <button
+                      type="button"
+                      onClick={() => setIsSelectOpen(!isSelectOpen)}
+                      className={`${inputClass} flex items-center justify-between text-left hover:border-white/20 transition-all duration-300 ${isSelectOpen ? 'border-powerred' : ''}`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <LayoutDashboard
+                          className={`${planInteres ? 'text-powerred' : 'text-gray-500'}`}
+                          size={16}
+                          aria-hidden="true"
+                        />
+                        <span className={planInteres ? 'text-white' : 'text-gray-600'}>
+                          {planInteres || 'Selecciona un plan'}
+                        </span>
+                      </div>
+                      <motion.div
+                        animate={{ rotate: isSelectOpen ? 180 : 0 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      >
+                        <ArrowRight size={14} className="rotate-90 text-gray-500" />
+                      </motion.div>
+                    </button>
+
+                    {/* Custom Dropdown List */}
+                    <motion.div
+                      initial={false}
+                      animate={isSelectOpen ? { opacity: 1, y: 0, display: 'block' } : { opacity: 0, y: 10, transitionEnd: { display: 'none' } }}
+                      className="absolute top-[110%] left-0 right-0 bg-[#121212] border border-white/10 rounded-2xl p-2 z-50 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+                    >
+                      {plansOptions.map((opt) => (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          onClick={() => {
+                            setPlanInteres(opt.value);
+                            setIsSelectOpen(false);
+                          }}
+                          className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-sm transition-all duration-200 group/opt ${
+                            planInteres === opt.value
+                              ? 'bg-powerred/10 text-white'
+                              : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                          }`}
+                        >
+                          <span className="font-medium">{opt.label}</span>
+                          {planInteres === opt.value && (
+                            <motion.div layoutId="selected-check">
+                              <Check size={14} className="text-powerred" />
+                            </motion.div>
+                          )}
+                        </button>
+                      ))}
+                    </motion.div>
+                  </div>
+                  
+                  {/* Click outside to close */}
+                  {isSelectOpen && (
+                    <div 
+                      className="fixed inset-0 z-40 transparent" 
+                      onClick={() => setIsSelectOpen(false)} 
+                    />
+                  )}
+                </div>
               </div>
 
               {!showReferido ? (
@@ -863,7 +957,7 @@ const FoundingLocalsForm = () => {
   );
 };
 
-const PricingSection = () => {
+const PricingSection = ({ onSelectPlan }: { onSelectPlan: (name: string) => void }) => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   const plans = [
@@ -873,6 +967,7 @@ const PricingSection = () => {
       priceLabel: 'Gratis',
       priceNote: 'sin límite de tiempo',
       cta: 'Empezar gratis',
+      disabled: false,
       highlighted: false,
       icon: (
         <svg
@@ -907,7 +1002,8 @@ const PricingSection = () => {
       priceLabel: 'S/ 80',
       priceNote: 'por mes',
       cta: 'Mejorar mi carta',
-      highlighted: false,
+      disabled: false,
+      highlighted: true,
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -928,7 +1024,7 @@ const PricingSection = () => {
         { text: 'Cartas por turno (día / noche)', ok: true },
         { text: 'Personalización completa sin branding', ok: true },
         { text: 'Platos agotados en un click', ok: true },
-        { text: 'Vista básica de actividad', ok: true },
+                { text: 'Vista básica de actividad', ok: true },
         { text: 'Sistema de mesas', ok: false },
         { text: 'Pedidos desde el cliente', ok: false },
       ],
@@ -938,9 +1034,9 @@ const PricingSection = () => {
       label: 'Operación completa',
       priceLabel: 'S/ 120',
       priceNote: 'por mes',
-      cta: 'Activar mi restaurante',
-      highlighted: true,
-      badge: 'Más popular',
+      cta: 'Próximamente',
+      disabled: true,
+      highlighted: false,
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -972,8 +1068,9 @@ const PricingSection = () => {
     },
   ];
 
-  const scrollToForm = (e: React.MouseEvent) => {
+  const scrollToForm = (e: React.MouseEvent, planName: string) => {
     e.preventDefault();
+    onSelectPlan(planName);
     document.getElementById('fundadores')?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -1040,17 +1137,7 @@ const PricingSection = () => {
                 <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-powerred/60 to-transparent" />
               )}
 
-              {/* Badge */}
-              {plan.badge && (
-                <div className="flex justify-center pt-4">
-                  <span className="inline-flex items-center gap-1.5 bg-powerred/15 text-powerred border border-powerred/30 text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">
-                    <TrendingUp size={10} />
-                    {plan.badge}
-                  </span>
-                </div>
-              )}
-
-              <div className={`flex flex-col flex-1 p-7 ${plan.badge ? 'pt-4' : ''}`}>
+              <div className={`flex flex-col flex-1 p-7`}>
                 {/* Plan header */}
                 <div className="flex items-start justify-between mb-6">
                   <div>
@@ -1121,17 +1208,42 @@ const PricingSection = () => {
                 </ul>
 
                 {/* CTA */}
-                <a
-                  href="#fundadores"
-                  onClick={scrollToForm}
-                  className={`w-full block text-center py-3.5 px-6 rounded-xl text-sm font-bold transition-all duration-300 ${
-                    plan.highlighted
-                      ? 'bg-powerred hover:bg-red-600 text-white shadow-lg shadow-powerred/25 hover:shadow-powerred/40 hover:scale-[1.02]'
-                      : 'bg-white/[0.07] hover:bg-white/[0.13] text-white border border-white/10 hover:border-white/20'
-                  }`}
-                >
-                  {plan.cta}
-                </a>
+                {plan.disabled ? (
+                  <button
+                    onClick={(e) =>
+                      scrollToForm(
+                        e,
+                        plan.name === 'Mesas Inteligentes'
+                          ? 'Plan Mesas Inteligentes - Próximamente'
+                          : plan.name
+                      )
+                    }
+                    className="w-full text-center py-3.5 px-6 rounded-xl text-sm font-bold bg-white/[0.04] text-gray-400 border border-white/[0.05] hover:bg-white/[0.08] transition-colors"
+                  >
+                    {plan.cta}
+                  </button>
+                ) : (
+                  <a
+                    href="#fundadores"
+                    onClick={(e) =>
+                      scrollToForm(
+                        e,
+                        plan.name === 'Carta Pro'
+                          ? 'Plan Pro'
+                          : plan.name === 'Presencia'
+                            ? 'Plan Gratis'
+                            : plan.name
+                      )
+                    }
+                    className={`w-full block text-center py-3.5 px-6 rounded-xl text-sm font-bold transition-all duration-300 ${
+                      plan.highlighted
+                        ? 'bg-powerred hover:bg-red-600 text-white shadow-lg shadow-powerred/25 hover:shadow-powerred/40 hover:scale-[1.02]'
+                        : 'bg-white/[0.07] hover:bg-white/[0.13] text-white border border-white/10 hover:border-white/20'
+                    }`}
+                  >
+                    {plan.cta}
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}
@@ -1153,6 +1265,7 @@ const PricingSection = () => {
 };
 
 const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
+  const [selectedPlan, setSelectedPlan] = useState('');
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 100]);
   const y2 = useTransform(scrollY, [0, 500], [0, -80]);
@@ -1237,7 +1350,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
               height="80"
               fetchPriority="low"
               loading="lazy"
-              className="absolute bottom-40 -left-4 md:-left-12 w-16 h-16 md:w-20 md:h-20 rounded-full shadow-2xl border-3 border-white z-30 hidden sm:block grayscale hover:grayscale-0 transition-all object-cover"
+              className="absolute bottom-40 -left-4 md:-left-12 w-16 h-16 md:w-20 md:h-20 rounded-full shadow-2xl border-3 border-white z-30 hidden sm:block transition-all object-cover"
               animate={{ y: [0, -15, 0] }}
               transition={{ repeat: Infinity, duration: 5, delay: 1 }}
               alt="Leche de tigre - menú digital para restaurantes peruanos"
@@ -1499,13 +1612,13 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
       </section>
 
       {/* 6. Pricing */}
-      <PricingSection />
+      <PricingSection onSelectPlan={(name) => setSelectedPlan(name)} />
 
       {/* 7. Social Proof & Testimonials */}
       <SocialProof />
 
       {/* 8. Formulario - Únete a los Locales Fundadores */}
-      <FoundingLocalsForm />
+      <FoundingLocalsForm targetPlan={selectedPlan} setTargetPlan={setSelectedPlan} />
 
       {/* 9. Footer */}
       <footer className="py-16 px-6 bg-richblack text-white text-center relative overflow-hidden">
