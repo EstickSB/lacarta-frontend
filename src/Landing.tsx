@@ -27,7 +27,6 @@ import {
   Phone,
   Tag,
   Loader2,
-  TrendingUp,
 } from 'lucide-react';
 import Button from './components/Button';
 
@@ -37,7 +36,17 @@ interface LandingProps {
 
 // --- 3D / Visual Components ---
 
-const MagneticButton = ({ children, onClick, variant = 'primary', className }: any) => {
+const MagneticButton = ({
+  children,
+  onClick,
+  variant = 'primary',
+  className,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+  variant?: 'primary' | 'secondary' | 'ghost';
+  className?: string;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -189,117 +198,6 @@ const PhoneMockup = () => {
             <ArrowRight size={14} />
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
-
-const DNAInteraction = () => {
-  const [filter, setFilter] = useState<'ALL' | 'VEGAN' | 'SPICY' | 'GLUTEN'>('ALL');
-
-  const items = [
-    {
-      id: 1,
-      name: 'Ají de Gallina',
-      type: 'SPICY',
-      img: '/img/thumb-aji-de-gallina-carta-digital.webp',
-    },
-    {
-      id: 2,
-      name: 'Cheesecake Maracuyá',
-      type: 'VEGAN',
-      img: '/img/thumb-cheesecake-maracuya-carta-digital.webp',
-    },
-    {
-      id: 3,
-      name: 'Arroz con Pato',
-      type: 'GLUTEN',
-      img: '/img/thumb-arroz-con-pato-carta-digital.webp',
-    },
-    {
-      id: 4,
-      name: 'Tallarín Saltado',
-      type: 'SPICY',
-      img: '/img/thumb-tallarin-salteado-carta-digital.webp',
-    },
-    {
-      id: 5,
-      name: 'Leche de Tigre',
-      type: 'VEGAN',
-      img: '/img/thumb-leche-de-tigre-carta-digital.webp',
-    },
-  ];
-
-  const filteredItems = filter === 'ALL' ? items : items;
-
-  return (
-    <div className="bg-white rounded-xl p-5 md:p-6 border border-gray-100 shadow-xl relative overflow-hidden h-full">
-      <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-        <Search size={100} />
-      </div>
-      <h3 className="font-serif text-xl mb-5">ADN Gastronómico</h3>
-
-      {/* Interactive Buttons */}
-      <div className="flex gap-2 mb-8 overflow-x-auto no-scrollbar pb-2">
-        {['VEGAN', 'SPICY', 'GLUTEN'].map((f) => (
-          <button
-            key={f}
-            onClick={() => setFilter(filter === f ? 'ALL' : (f as any))}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 transform border flex-shrink-0 ${
-              filter === f
-                ? 'bg-richblack text-white scale-110 shadow-lg border-richblack'
-                : 'bg-gray-50 text-gray-500 hover:bg-gray-100 border-gray-100'
-            }`}
-          >
-            {f === 'VEGAN' && '🌱 '}
-            {f === 'SPICY' && '🌶️ '}
-            {f === 'GLUTEN' && '🌾 '}
-            {f}
-          </button>
-        ))}
-      </div>
-
-      {/* List */}
-      <div className="space-y-3">
-        {filteredItems.map((item) => {
-          const isMatch = filter === 'ALL' || item.type === filter;
-          return (
-            <motion.div
-              layout
-              initial={false}
-              animate={{
-                opacity: isMatch ? 1 : 0.3,
-                scale: isMatch ? 1 : 0.95,
-                x: isMatch ? 0 : 0,
-              }}
-              key={item.id}
-              className={`flex items-center gap-4 p-3 rounded-xl transition-colors ${
-                isMatch ? 'bg-white shadow-sm border border-gray-100' : 'bg-transparent'
-              }`}
-            >
-              <img
-                src={item.img}
-                width="40"
-                height="40"
-                loading="lazy"
-                className="w-10 h-10 rounded-lg bg-gray-200 object-cover"
-                alt={item.name}
-              />
-              <div className="flex-1">
-                <div className="font-medium text-sm text-richblack">{item.name}</div>
-                <div className="h-2 w-16 bg-gray-100 rounded-full mt-1"></div>
-              </div>
-              {filter === item.type && (
-                <motion.div
-                  layoutId="match-badge"
-                  className="text-[10px] font-bold text-powerred bg-powerred/10 px-2 py-1 rounded-full"
-                >
-                  MATCH
-                </motion.div>
-              )}
-            </motion.div>
-          );
-        })}
       </div>
     </div>
   );
@@ -559,10 +457,10 @@ const DISCORD_WEBHOOK =
 
 const FoundingLocalsForm = ({
   targetPlan,
-  setTargetPlan,
+  _setTargetPlan,
 }: {
   targetPlan: string;
-  setTargetPlan: (val: string) => void;
+  _setTargetPlan: (val: string) => void;
 }) => {
   const [nombre, setNombre] = useState('');
   const [local, setLocal] = useState('');
@@ -838,7 +736,11 @@ const FoundingLocalsForm = ({
                     {/* Custom Dropdown List */}
                     <motion.div
                       initial={false}
-                      animate={isSelectOpen ? { opacity: 1, y: 0, display: 'block' } : { opacity: 0, y: 10, transitionEnd: { display: 'none' } }}
+                      animate={
+                        isSelectOpen
+                          ? { opacity: 1, y: 0, display: 'block' }
+                          : { opacity: 0, y: 10, transitionEnd: { display: 'none' } }
+                      }
                       className="absolute top-[110%] left-0 right-0 bg-[#121212] border border-white/10 rounded-2xl p-2 z-50 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl"
                     >
                       {plansOptions.map((opt) => (
@@ -865,12 +767,12 @@ const FoundingLocalsForm = ({
                       ))}
                     </motion.div>
                   </div>
-                  
+
                   {/* Click outside to close */}
                   {isSelectOpen && (
-                    <div 
-                      className="fixed inset-0 z-40 transparent" 
-                      onClick={() => setIsSelectOpen(false)} 
+                    <div
+                      className="fixed inset-0 z-40 transparent"
+                      onClick={() => setIsSelectOpen(false)}
                     />
                   )}
                 </div>
@@ -1024,7 +926,7 @@ const PricingSection = ({ onSelectPlan }: { onSelectPlan: (name: string) => void
         { text: 'Cartas por turno (día / noche)', ok: true },
         { text: 'Personalización completa sin branding', ok: true },
         { text: 'Platos agotados en un click', ok: true },
-                { text: 'Vista básica de actividad', ok: true },
+        { text: 'Vista básica de actividad', ok: true },
         { text: 'Sistema de mesas', ok: false },
         { text: 'Pedidos desde el cliente', ok: false },
       ],
@@ -1215,7 +1117,7 @@ const PricingSection = ({ onSelectPlan }: { onSelectPlan: (name: string) => void
                         e,
                         plan.name === 'Mesas Inteligentes'
                           ? 'Plan Mesas Inteligentes - Próximamente'
-                          : plan.name
+                          : plan.name,
                       )
                     }
                     className="w-full text-center py-3.5 px-6 rounded-xl text-sm font-bold bg-white/[0.04] text-gray-400 border border-white/[0.05] hover:bg-white/[0.08] transition-colors"
@@ -1232,7 +1134,7 @@ const PricingSection = ({ onSelectPlan }: { onSelectPlan: (name: string) => void
                           ? 'Plan Pro'
                           : plan.name === 'Presencia'
                             ? 'Plan Gratis'
-                            : plan.name
+                            : plan.name,
                       )
                     }
                     className={`w-full block text-center py-3.5 px-6 rounded-xl text-sm font-bold transition-all duration-300 ${
@@ -1618,7 +1520,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp }) => {
       <SocialProof />
 
       {/* 8. Formulario - Únete a los Locales Fundadores */}
-      <FoundingLocalsForm targetPlan={selectedPlan} setTargetPlan={setSelectedPlan} />
+      <FoundingLocalsForm targetPlan={selectedPlan} _setTargetPlan={setSelectedPlan} />
 
       {/* 9. Footer */}
       <footer className="py-16 px-6 bg-richblack text-white text-center relative overflow-hidden">

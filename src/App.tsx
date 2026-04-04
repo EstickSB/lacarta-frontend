@@ -34,7 +34,7 @@ function MenuView() {
     if (!activeShiftId && currentDefaultShiftId) {
       setActiveShiftId(currentDefaultShiftId);
     }
-  }, [currentDefaultShiftId]);
+  }, [currentDefaultShiftId, activeShiftId]);
 
   const filteredCategories = useMemo(() => {
     if (!restaurant) return [];
@@ -47,10 +47,10 @@ function MenuView() {
   const mainContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (filteredCategories.length > 0) {
+    if (filteredCategories.length > 0 && activeCategory === null) {
       setActiveCategory(filteredCategories[0].id);
     }
-  }, [filteredCategories]);
+  }, [filteredCategories, activeCategory]);
 
   useEffect(() => {
     if (restaurant) {

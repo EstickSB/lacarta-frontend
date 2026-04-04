@@ -150,7 +150,7 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
               onClick={() => setShowModal(false)}
               className="absolute inset-0 bg-black/80 backdrop-blur-sm"
             />
-            
+
             <m.div
               layoutId={`dish-modal-${dish.id}-${index}`}
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -168,11 +168,7 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
               </button>
 
               <div className="w-full md:w-1/2 aspect-square md:aspect-auto overflow-hidden bg-zinc-800">
-                <img
-                  src={imageSrc}
-                  alt={dish.name}
-                  className="w-full h-full object-cover"
-                />
+                <img src={imageSrc} alt={dish.name} className="w-full h-full object-cover" />
               </div>
 
               <div className="w-full md:w-1/2 p-6 lg:p-8 flex flex-col justify-center bg-gradient-to-br from-white/5 to-transparent">
@@ -181,7 +177,7 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
                     <span className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-bold mb-2 block">
                       Detalle del Plato
                     </span>
-                    <h2 
+                    <h2
                       className="text-2xl lg:text-3xl font-bold leading-tight"
                       style={{ color: titleDishColor }}
                     >
@@ -189,7 +185,7 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
                     </h2>
                   </div>
 
-                  <p 
+                  <p
                     className="text-sm lg:text-base leading-relaxed opacity-80 italic"
                     style={{ color: descriptionDishColor, whiteSpace: 'pre-wrap' }}
                   >
@@ -201,14 +197,14 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
                       <span className="text-gray-500 text-xs font-bold uppercase tracking-widest">
                         Precio
                       </span>
-                      <span 
+                      <span
                         className="text-2xl lg:text-3xl font-black"
                         style={{ color: primaryColor }}
                       >
                         {priceDisplay}
                       </span>
                     </div>
-                    
+
                     {dish.badges && dish.badges.length > 0 && (
                       <div className="flex gap-2 mt-4 pt-4">
                         {dish.badges.map((badge) => (

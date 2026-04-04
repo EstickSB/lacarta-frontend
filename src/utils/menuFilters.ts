@@ -1,4 +1,4 @@
-import { Category, Dish } from '../types';
+import { Category } from '../types';
 
 /**
  * Filtra las categorías y platos basados en el turno activo y la visibilidad global.
