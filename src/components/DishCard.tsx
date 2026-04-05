@@ -103,7 +103,7 @@ export const DishCard: React.FC<DishCardProps> = ({ dish, index }) => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setShowModal(true)}
-          className="absolute bottom-3 right-3 z-20 p-2.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white shadow-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          className="absolute bottom-3 right-3 z-20 p-2.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white shadow-xl flex items-center justify-center opacity-100 transition-all duration-300"
           aria-label={`Ver detalles de ${dish.name}`}
         >
           <Eye size={18} strokeWidth={2} />
